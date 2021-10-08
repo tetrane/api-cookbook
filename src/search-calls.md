@@ -101,6 +101,25 @@ for ctx_name in reven2.util.collate(symbols_name, lambda ctx_name: ctx_name[0]):
     print(f"{ctx_name[1]}: {ctx_name[0]}")
 ```
 
+Sample output:
+
+```
+NtCreateFile: Context before #4468509
+NtCreateFile: Context before #4479526
+NtCreateFile: Context before #6451786
+NtCreateFile: Context before #6852400
+NtCreateFile: Context before #7666717
+NtCreateFile: Context before #8067013
+NtCreateFile: Context before #8298671
+NtCreateFile: Context before #8648240
+NtOpenFile: Context before #26656294
+NtCreateFile: Context before #35251786
+NtOpenFile: Context before #36420358
+NtOpenFile: Context before #43268534
+NtOpenDirectoryObject: Context before #43420816
+NtOpenFile: Context before #43450170
+```
+
 <div class="bulma">
   <div class="message is-link">
      <div class="message-header">

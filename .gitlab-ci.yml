@@ -1,0 +1,27 @@
+stages:
+  - build
+  - pages
+
+build:
+  image: debian
+  stage: build
+  interruptible: true
+  script:
+    - apt update -qq && apt install curl -y
+    - curl -O -L https://github.com/rust-lang/mdBook/releases/download/v0.4.13/mdbook-v0.4.13-x86_64-unknown-linux-gnu.tar.gz
+    - tar xvzf mdbook-v0.4.13-x86_64-unknown-linux-gnu.tar.gz
+    - ./mdbook build
+    - cp -r static/ book/
+  artifacts:
+    paths:
+      - book
+
+pages:
+  stage: pages
+  script:
+    - cp -r book public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
