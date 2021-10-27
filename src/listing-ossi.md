@@ -1,27 +1,15 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Listing the processes, binaries in the trace
 
 ## Listing the processes executed in the trace
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.10.0</span>
-    </div>
-  </div>
-
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">OS</span>
-      <span class="tag is-primary icon-text">
-        <span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
-        <span>Windows 64-bit</span>
-      </span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.10.0"),
+  bulma::windows_tag(),
+]) }}
+{{ bulma::end_bulma() }}
 
 
 ```py
@@ -44,16 +32,12 @@ conhost.exe (2596)
 
 ## Listing the binaries executed in the trace
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-</div>
-</div>
+
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.2.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 
 ```py
@@ -75,16 +59,11 @@ c:/windows/system32/drivers/intelide.sys
 
 ## Finding a single binary in the trace
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.2.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 def find_one_binary(binary_path):
@@ -109,16 +88,11 @@ def find_one_binary(binary_path):
 Because a binary can be loaded multiple times at different addresses in a trace, we recover the base address from a Context where the binary is executed.
 ### Finding the base address of the first instance of a binary in the trace
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.2.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 def find_first_base_address(binary: reven2.ossi.ossi.Binary):
@@ -128,16 +102,11 @@ def find_first_base_address(binary: reven2.ossi.ossi.Binary):
 
 ### Finding all the base addresses of a binary in a specified process
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.10.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.10.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 def find_base_address_in_process(binary: reven2.ossi.ossi.Binary, process: reven2.ossi.process.Process):

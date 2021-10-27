@@ -1,30 +1,21 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Searching for values in memory
 
 ## Searching for values in a range of memory at a single context
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.6.0</span>
-    </div>
-  </div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+bulma::reven_version(version="v2.6.0")
+]) }}
 
-  <div class="message is-link">
-     <div class="message-header">
-         Related examples
-     </div>
-     <div class="message-body content pt-0">
-        <ul>
-            <li><a href="../examples-book/analyze/network/network_packet_tools.html">Network packet tools</a></li>
-            <li><a href="../examples-book/analyze/network/dump_pcap.html">Dump PCAP</a></li>
-            <li><a href="../examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html">Detect use of uninitialized memory</a></li>
-        </ul>
-     </div>
-  </div>
-</div>
+{{ bulma::related_examples(examples=[
+  bulma::link(name="Network packet tools", url="../examples-book/analyze/network/network_packet_tools.html"),
+  bulma::link(name="Dump PCAP", url="../examples-book/analyze/network/dump_pcap.html"),
+  bulma::link(name="Detect use of uninitialized memory", url="../examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html"),
+]) }}
+
+{{ bulma::end_bulma() }}
 
 If the value you are looking for might be in a range of memory at a specific point in the trace, you can search it with the following:
 
@@ -37,16 +28,11 @@ for match_address in ctx.search_in_memory(pattern,
 
 ## Searching for string-like values accessed in the trace
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+bulma::reven_version(version="v2.2.0")
+]) }}
+{{ bulma::end_bulma() }}
 
 If the value you are looking for looks like a string indexed by the strings resource (defaults to strings of printable characters of length 5-128, possibly UTF-16 encoded), then you can use the strings search API, which will be the fastest way:
 
@@ -78,35 +64,25 @@ Sample output:
 [#4653625 mov word ptr [rcx], ax]Write access at @phy:0x18e8254c (virtual address: lin:0x3a254c) of size 2
 ```
 
-<div class="bulma">
-  <div class="message is-info">
-     <div class="message-header">
-         Unaccessed values are not found by this method
-     </div>
-     <div class="message-body content">
-         <p>
-         This method only finds values in memory that are <strong>accessed</strong> (read from, written to) during the portion of the trace where the search takes place.
-         </p>
-         <p>
-         If you don't know if your value is accessed in the trace, you can associate this method with a <a href="#searching-for-values-in-a-range-of-memory-at-a-single-context">search in memory at a context</a>.
-         </p>
-     </div>
-  </div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::begin_message(header="Unaccessed values are not found by this method", class="is-info") }}
+<p>
+    This method only finds values in memory that are <strong>accessed</strong> (read from, written to) during the portion of the trace where the search takes place.
+</p>
+<p>
+    If you don't know if your value is accessed in the trace, you can associate this method with a <a href="#searching-for-values-in-a-range-of-memory-at-a-single-context">search in memory at a context</a>.
+</p>
+{{ bulma::end_message() }}
+{{ bulma::end_bulma() }}
 
 
 ## Searching for other kinds of values accessed in the trace
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.6.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+bulma::reven_version(version="v2.6.0")
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 for match in server.trace.search.memory(b"\xc0\xfc\x75\x02", from_ctx, to_ctx).matches():
@@ -134,18 +110,13 @@ id: 14 | @lin:0x29fe946 (mapped at Context before #6360440) | [Context before #6
 id: 15 | @lin:0x29fe946 (mapped at Context before #6360440) | [Context before #6360440 - Context before #6360458] | 2 access(es)
 ```
 
-<div class="bulma">
-  <div class="message is-info">
-     <div class="message-header">
-         Unaccessed values are not found by this method
-     </div>
-     <div class="message-body content">
-         <p>
-         This method only finds values in memory that are <strong>accessed</strong> (read from, written to) during the portion of the trace where the search takes place.
-         </p>
-         <p>
-         If you don't know if your value is accessed in the trace, you can associate this method with a <a href="#searching-for-values-in-a-range-of-memory-at-a-single-context">search in memory at a context</a>.
-         </p>
-     </div>
-  </div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::begin_message(header="Unaccessed values are not found by this method", class="is-info") }}
+<p>
+    This method only finds values in memory that are <strong>accessed</strong> (read from, written to) during the portion of the trace where the search takes place.
+</p>
+<p>
+    If you don't know if your value is accessed in the trace, you can associate this method with a <a href="#searching-for-values-in-a-range-of-memory-at-a-single-context">search in memory at a context</a>.
+</p>
+{{ bulma::end_message() }}
+{{ bulma::end_bulma() }}

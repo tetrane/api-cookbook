@@ -1,56 +1,22 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Displaying the value of arguments and return value of a call
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.10.0</span>
-    </div>
-  </div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.10.0"),
+  bulma::preview_tag(),
+  bulma::windows_tag(),
+  bulma::linux_tag(),
+]) }}
 
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">API</span>
-      <span class="tag is-warning">preview</span>
-    </div>
-  </div>
-
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">OS</span>
-      <span class="tag is-primary icon-text">
-        <span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
-        <span>Windows 64-bit</span>
-      </span>
-    </div>
-  </div>
-
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">OS</span>
-      <span class="tag is-primary icon-text">
-        <span class="icon"><i class="fa fa-linux" aria-hidden="true"></i></span>
-        <span>Linux 64-bit</span>
-      </span>
-    </div>
-  </div>
-</div>
-
-  <div class="message is-link">
-     <div class="message-header">
-         Related examples
-     </div>
-     <div class="message-body content pt-0">
-        <ul>
-            <li>(GitHub) <a href="https://github.com/tetrane/reven2-ltrace">ltrace</a></li>
-            <li>(GitHub) <a href="https://github.com/tetrane/reven2-file-activity">File activity</a></li>
-        </ul>
-     </div>
-  </div>
-
-</div>
-
+{% set ltrace = bulma::link(name="ltrace", url="https://github.com/tetrane/reven2-ltrace") %}
+{% set file_activity = bulma::link(name="File activity", url="https://github.com/tetrane/reven2-file-activity") %}
+{{ bulma::related_examples(examples=[
+  "(GitHub)" ~ ltrace,
+  "(GitHub)" ~ file_activity,
+]) }}
+{{ bulma::end_bulma() }}
 ## When the prototype is known
 
 ### Windows 64-bit
@@ -126,16 +92,14 @@ Sample output:
 1364968393473
 ```
 
-<div class="bulma">
-  <div class="message is-warning">
-     <div class="message-header">
-         Limitations apply
-     </div>
-     <div class="message-body content">
-       <p>
-       Using a default prototype works as long as the replaced parameters behave as <code>void*</code>.
-       </p><p>
-       This is notably not the case for structs passed by value that are larger than a pointer (in some calling conventions) and for floating-point arguments (in Sysv64).
-      </p></div>
-  </div>
-</div>
+
+{{ bulma::begin_bulma() }}
+{{ bulma::begin_message(header="Limitations apply", class="is-warning") }}
+<p>
+    Using a default prototype works as long as the replaced parameters behave as <code>void*</code>.
+</p>
+<p>
+    This is notably not the case for structs passed by value that are larger than a pointer (in some calling conventions) and for floating-point arguments (in Sysv64).
+</p>
+{{ bulma::end_message() }}
+{{ bulma::end_bulma() }}

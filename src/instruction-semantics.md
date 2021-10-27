@@ -1,32 +1,20 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Finding more about the semantics of an instruction
 
-<div class="bulma">
-  <div class="message is-link">
-     <div class="message-header">
-         Related examples
-     </div>
-     <div class="message-body content pt-0">
-        <ul>
-            <li><a href="../examples-book/analyze/vulnerability_detection/detect_use_after_free.html">Use-after-Free vulnerabilities detection</a></li>
-            <li><a href="../examples-book/analyze/vulnerability_detection/detect_buffer_overflow.html">Searching for Buffer-Overflow vulnerabilities</a></li>
-            <li><a href="../examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html">Searching for Use-of-Uninitialized-Memory vulnerabilities</a></li>
-        </ul>
-     </div>
-  </div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::related_examples(examples=[
+  bulma::link(name="Use-after-Free vulnerabilities detection", url="../examples-book/analyze/vulnerability_detection/detect_use_after_free.html"),
+  bulma::link(name="Searching for Buffer-Overflow vulnerabilities", url="../examples-book/analyze/vulnerability_detection/detect_buffer_overflow.html"),
+  bulma::link(name="Searching for Use-of-Uninitialized-Memory vulnerabilities", url="../examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ## Pre-requisites: install and setup Capstone
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Environment</span>
-      <span class="tag is-info">Jupyter</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::jupyter_tag() }}
+{{ bulma::end_bulma() }}
 
 This example requires the `capstone` Python package:
 
@@ -142,22 +130,12 @@ class Disassembler:
 
 ## Disassembling REVEN instructions
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.10.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Dependency</span>
-      <span class="tag is-info">capstone</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.10.0"),
+  bulma::dependency_tag(name="capstone"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 dsm = Disassembler
@@ -170,22 +148,12 @@ Depending on your use-case you may want to skip disassembling instructions relat
 
 ## Compute dereferenced address
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Dependency</span>
-      <span class="tag is-info">capstone</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.2.0"),
+  bulma::dependency_tag(name="capstone"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 hex(insn.dereferenced_address(0))
@@ -199,22 +167,12 @@ Sample output:
 
 ## Convert capstone flags to REVEN register flags
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Dependency</span>
-      <span class="tag is-info">capstone</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.2.0"),
+  bulma::dependency_tag(name="capstone"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 test_eflags = {

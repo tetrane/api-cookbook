@@ -1,19 +1,14 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Searching for function calls
 
 ## Looking for an exact symbol name
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-</div>
-</div>
-
-
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.2.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 symbol_name = "CreateProcessW"
@@ -26,59 +21,41 @@ for ctx in server.trace.search.symbol(symbol):
     print(ctx)
 ```
 
-<div class="bulma">
-  <div class="bulma message is-warning">
-     <div class="message-header">
-         Handling of the case where the symbol is not in the trace
-     </div>
-     <div class="message-body content">
-         <p>
-         When looking for an <strong>exact</strong> symbol, you need to prepare for the case where the symbol is not available in the trace. Note that a symbol can be available <emph>even if it is never called</emph>.
-         </p>
-         <p>
-         In the example, it manifests with the iterator having no element, which raises a <code>StopIteration</code>, that we catch and then convert to a more specific error.
-         </p>
-     </div>
-  </div>
+{{ bulma::begin_bulma() }}
+{{ bulma::begin_message(header="Handling of the case where the symbol is not in the trace", class="is-warning") }}
+<p>
+    When looking for an <strong>exact</strong> symbol, you need to prepare for the case where the symbol is not available in the trace. Note that a symbol can be available <emph>even if it is never called</emph>.
+</p>
+<p>
+    In the example, it manifests with the iterator having no element, which raises a <code>StopIteration</code>, that we catch and then convert to a more specific error.
+</p>
+{{ bulma::end_message() }}
 
-  <div class="bulma message is-warning">
-     <div class="message-header">
-         Symbol pattern is a regular expression
-     </div>
-     <div class="message-body content">
-         <p>
-         When looking for a <strong>single, exact</strong> symbol, you need to enclose the symbol's name
-         in the pattern with <code>^$</code> because the pattern is actually a
-         regular expression. Failure to do that could result in several matching
-         symbols, with the risk that the rest of your code actually chooses the
-         wrong one.
-         </p>
-     </div>
-  </div>
+{{ bulma::begin_message(header="Symbol pattern is a regular expression", class="is-warning") }}
+<p>
+    When looking for a <strong>single, exact</strong> symbol, you need to enclose the symbol's name
+    in the pattern with <code>^$</code> because the pattern is actually a
+    regular expression. Failure to do that could result in several matching
+    symbols, with the risk that the rest of your code actually chooses the
+    wrong one.
+</p>
+{{ bulma::end_message() }}
 
-  <div class="message is-link">
-     <div class="message-header">
-         Related examples
-     </div>
-     <div class="message-body content pt-0">
-        <ul>
-            <li>(GitHub) <a href="https://github.com/tetrane/reven2-file-activity">File activity</a></li>
-        </ul>
-     </div>
-  </div>
-</div>
+{% set file_activity = bulma::link(name="File activity", url="https://github.com/tetrane/reven2-file-activity") %}
 
+{{ bulma::related_examples(examples=[
+  "(GitHub)" ~ file_activity,
+]) }}
+
+{{ bulma::end_bulma() }}
 
 ## Looking for multiple symbols
 
-<div class="bulma field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.2.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 The example provides an iterator of the tuples where the first element is the context of the call, and the second the name of the called symbol.
 
@@ -120,16 +97,9 @@ NtOpenDirectoryObject: Context before #43420816
 NtOpenFile: Context before #43450170
 ```
 
-<div class="bulma">
-  <div class="message is-link">
-     <div class="message-header">
-         Related examples
-     </div>
-     <div class="message-body content pt-0">
-        <ul>
-            <li><a href="../examples-book/analyze/report/threadsync.html">Thread synchronization</a></li>
-            <li><a href="../examples-book/analyze/vulnerability_detection/detect_data_race.html">Detect data race</a></li>
-        </ul>
-     </div>
-  </div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::related_examples(examples=[
+  bulma::link(name="Thread synchronization", url="../examples-book/analyze/report/threadsync.html"),
+  bulma::link(name="Detect data race", url="../examples-book/analyze/vulnerability_detection/detect_data_race.html")
+]) }}
+{{ bulma::end_bulma() }}

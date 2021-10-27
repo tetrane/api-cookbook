@@ -1,31 +1,23 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Connecting to a server
 
-<div class="bulma">
-  <div class="message is-info">
-     <div class="message-header">
-         Server variable
-     </div>
-     <div class="message-body content">
-         <p>
-         The other examples of this book assume that your Python environment contains a <code>server</code> variable that represents a connection to a REVEN server.
-         </p>
-     </div>
-  </div>
-</div>
+
+{{ bulma::begin_bulma() }}
+{{ bulma::begin_message(header="Server variable", class="is-info") }}
+<p>
+    The other examples of this book assume that your Python environment contains a <code>server</code> variable that represents a connection to a REVEN server.
+</p>
+{{ bulma::end_message() }}
+{{ bulma::end_bulma() }}
 
 ## From its host and port
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.0.0</span>
-    </div>
-  </div>
-
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.0.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 # Connecting to a reven server
@@ -36,31 +28,13 @@ server = reven2.RevenServer(hostname, port)
 
 ## From the scenario's name
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.3.0</span>
-    </div>
-  </div>
-
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Edition</span>
-      <span class="tag is-info">Enterprise</span>
-    </div>
-  </div>
-
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">API</span>
-      <span class="tag is-warning">preview</span>
-    </div>
-  </div>
-
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.3.0"),
+  bulma::info_tag(name="Edition", value="Enterprise"),
+  bulma::preview_tag(),
+]) }}
+{{ bulma::end_bulma() }}
 
 You can use a feature of the Workflow API to get a connection to a server from the scenario's name, rather than by specifying a port.
 

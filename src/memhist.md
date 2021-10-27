@@ -1,17 +1,14 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Finding out when a memory location is accessed
 
 ## Getting all the memory accesses of a range of addresses
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.2.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 for access in server.trace.memory_accesses(0xffff88007fc03000, 4096):
@@ -38,16 +35,11 @@ Sample output:
 
 ## Getting all the memory accesses on a range of transitions
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.9.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.9.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 for access in server.trace.memory_accesses(from_transition=trace.transition(1000),
@@ -70,16 +62,11 @@ Sample output:
 
 ## Finding the memory accesses at a transition
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.2.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 for access in tr.memory_accesses():

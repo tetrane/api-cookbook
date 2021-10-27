@@ -1,15 +1,12 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Moving to the beginning of a function
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.9.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.9.0"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 from reven2.trace import Transition

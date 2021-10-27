@@ -1,25 +1,23 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # REVEN API Cookbook
 
 Welcome to the REVEN API Cookbook.
 
 This book is a collection of examples that demonstrate good practices to accomplish common tasks using the REVEN API.
 
-<div class="bulma">
-  <div class="message is-info">
-     <div class="message-header">
-         Pre-requisites
-     </div>
-     <div class="message-body content">
-         <p>
-         This book assumes that you already read the <a href="../Python-API/Quickstart.html">Python API quick start guide</a>.
-         <p>
-         Furthermore, all the examples of this book assume that you are in an environment where you can <code>import reven2</code> successfully.
-         <br/>
-         If this is not the case, please refer to the <a href="../Python-API/Installation.html">installation documentation</a> of the Python API before starting this guide.
-         </p>
-     </div>
-  </div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::begin_message(header="Pre-requisites", class="is-info") }}
+<p>
+    This book assumes that you already read the <a href="../Python-API/Quickstart.html">Python API quick start guide</a>.
+</p>
+<p>
+    Furthermore, all the examples of this book assume that you are in an environment where you can <code>import reven2</code> successfully.
+    <br/>
+    If this is not the case, please refer to the <a href="../Python-API/Installation.html">installation documentation</a> of the Python API before starting this guide.
+</p>
+{{ bulma::end_message() }}
+{{ bulma::end_bulma() }}
 
 ## Common abbreviations and variable names
 

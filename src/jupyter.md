@@ -1,3 +1,5 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Displaying data nicely in Jupyter notebooks
 
 ## Detecting if the script is executed in a notebook or not
@@ -23,22 +25,12 @@ def in_notebook():
 
 ## Displaying a transition, address as a synchronization link
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.5.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Environment</span>
-      <span class="tag is-info">Jupyter</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+    bulma::reven_version(version="v2.5.0"),
+    bulma::jupyter_tag(),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 display(tr)
@@ -71,23 +63,13 @@ def display_table(title, headers, html_lines):
 ## Pretty printing
 
 ### Basics
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.7.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Environment</span>
-      <span class="tag is-info">Jupyter</span>
-    </div>
-  </div>
-</div>
-</div>
 
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+    bulma::reven_version(version="v2.7.0"),
+    bulma::jupyter_tag(),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 from IPython.display import HTML, display
@@ -100,22 +82,13 @@ Sample output:
 
 ### Transition
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.5.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Environment</span>
-      <span class="tag is-info">Jupyter</span>
-    </div>
-  </div>
-</div>
-</div>
+
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+    bulma::reven_version(version="v2.5.0"),
+    bulma::jupyter_tag(),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 import reven2
@@ -192,26 +165,18 @@ def pretty_print_tr(tr, show_context=False, show_symbol=False):
     display(HTML(get_pretty_print_tr(tr, show_context=show_context, show_symbol=show_symbol)))
 ```
 
+Sample output:
+
 ![Pretty transitions](img/jupyter_pretty_tr.png)
 
 ### Address / Hexdump
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.5.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Environment</span>
-      <span class="tag is-info">Jupyter</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+    bulma::reven_version(version="v2.5.0"),
+    bulma::jupyter_tag(),
+]) }}
+{{ bulma::end_bulma() }}
 
 Pretty print the content of a buffer at a specified address, in 0x10 increments.
 If passed a register, it will be dereferenced.
@@ -290,5 +255,7 @@ def pretty_print_addr(ctx, address, size):
         address = LinearAddress(address)
     print_buffer(ctx.read(address, size), address.offset)
 ```
+
+Sample output:
 
 ![Pretty addresses](img/jupyter_pretty_address.png)

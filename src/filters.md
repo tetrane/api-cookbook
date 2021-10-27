@@ -1,17 +1,13 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Focusing on a portion of the trace
 
 ## Filtering on processes/ring
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.10.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.10.0"),
+]) }}
 
 ```py
 processes = list(server.ossi.executed_processes("chat"))

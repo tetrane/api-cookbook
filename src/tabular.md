@@ -1,23 +1,15 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Exporting tabular data to work with reporting tools
 
 ## Pre-requisites: install pandas
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.5.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Environment</span>
-      <span class="tag is-info">Jupyter</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.9.0"),
+  bulma::jupyter_tag()
+]) }}
+{{ bulma::end_bulma() }}
 
 This example requires the `pandas` Python package:
 
@@ -44,22 +36,13 @@ except ImportError:
 
 ## Building tabular data from filters
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.10.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Dependency</span>
-      <span class="tag is-info">pandas</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.10.0"),
+  bulma::dependency_tag(name="pandas"),
+]) }}
+{{ bulma::end_bulma() }}
+
 
 ```py
 res = []
@@ -78,28 +61,13 @@ df = pandas.DataFrame.from_records(res, columns=header)
 
 ## Displaying tabular data in a Jupyter notebook
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.10.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Environment</span>
-      <span class="tag is-info">Jupyter</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Dependency</span>
-      <span class="tag is-info">pandas</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.9.0"),
+  bulma::jupyter_tag(),
+  bulma::dependency_tag(name="pandas"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 res = []
@@ -125,22 +93,12 @@ Sample output:
 
 ## Exporting tabular data to csv
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.10.0</span>
-    </div>
-  </div>
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">Dependency</span>
-      <span class="tag is-info">pandas</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.10.0"),
+  bulma::dependency_tag(name="pandas"),
+]) }}
+{{ bulma::end_bulma() }}
 
 ```py
 df.to_csv("data.csv")

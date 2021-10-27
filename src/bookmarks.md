@@ -1,28 +1,18 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Managing bookmarks
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.5.0</span>
-    </div>
-  </div>
-</div>
-  <div class="message is-link">
-     <div class="message-header">
-         Related examples
-     </div>
-     <div class="message-body content pt-0">
-        <ul>
-            <li><a href="../examples-book/analyze/report/export_bookmarks.html">Export bookmarks</a></li>
-            <li><a href="../examples-book/analyze/bk2bp.html">Bookmarks to WinDbg breakpoints</a></li>
-            <li><a href="../examples-book/analyze/migration/import_bookmarks.html">Import classic bookmarks</a></li>
-        </ul>
-     </div>
-  </div>
+{{ bulma::begin_bulma() }}
+    {{ bulma::tags(tags=[
+        bulma::reven_version(version="v2.5.0"),
+    ]) }}
 
-</div>
+    {{ bulma::related_examples(examples=[
+        bulma::link(name="Export bookmarks", url="../examples-book/analyze/report/export_bookmarks.html"),
+        bulma::link(name="Bookmarks to WinDbg breakpoints", url="../examples-book/analyze/bk2bp.html"),
+        bulma::link(name="Import classic bookmarks", url="../examples-book/analyze/migration/import_bookmarks.html"),
+    ]) }}
+{{ bulma::end_bulma() }}
 
 ## Working with bookmarks starting with a specific "tag"
 

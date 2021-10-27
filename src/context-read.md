@@ -1,15 +1,10 @@
+{% import "templates/bulma.tera" as bulma %}
+
 # Reading values from registers or memory
 
-<div class="bulma">
-<div class="field is-grouped is-grouped-multiline">
-  <div class="control">
-    <div class="tags has-addons">
-      <span class="tag is-dark">REVEN</span>
-      <span class="tag is-info">v2.2.0</span>
-    </div>
-  </div>
-</div>
-</div>
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[bulma::reven_version(version="v2.2.0")]) }}
+{{ bulma::end_bulma() }}
 
 ## Common imports for easy access
 
