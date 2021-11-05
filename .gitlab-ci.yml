@@ -7,10 +7,10 @@ build:
   stage: build
   interruptible: true
   script:
-    - apt update -qq && apt install curl -y
-    - curl -O -L https://github.com/rust-lang/mdBook/releases/download/v0.4.13/mdbook-v0.4.13-x86_64-unknown-linux-gnu.tar.gz
-    - tar xvzf mdbook-v0.4.13-x86_64-unknown-linux-gnu.tar.gz
-    - ./mdbook build
+    - apt update && apt install -y --no-install-recommends ca-certificates python3 wget && wget "https://github.com/tetrane/dependencies_installer/raw/master/installer.py" && chmod +x installer.py
+    - ./installer.py $(find . -wholename "*dependencies/dev")
+    - source $HOME/.cargo/env
+    - mdbook build
     - cp -r static/ book/
   artifacts:
     paths:

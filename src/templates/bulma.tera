@@ -1,0 +1,116 @@
+{% macro begin_bulma() %}
+<div class="bulma">
+{% endmacro begin_bulma %}
+
+{% macro end_bulma() %}
+</div>
+{% endmacro end_bulma %}
+
+{% macro begin_tags() %}
+<div class="field is-grouped is-grouped-multiline">
+{% endmacro begin_tags %}
+
+{% macro end_tags() %}
+</div>
+{% endmacro end_tags %}
+
+
+{% macro tags(tags) %}
+<div class="field is-grouped is-grouped-multiline">
+    {% for tag in tags %}
+    {{ tag }}
+    {% endfor %}
+</div>
+{% endmacro tags %}
+
+{% macro tag(name, value, name_class, value_class) %}
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag {{ name_class }}">{{ name }}</span>
+        <span class="tag {{ value_class }}">{{ value }}</span>
+    </div>
+</div>
+{% endmacro tag %}
+
+{% macro info_tag(name, value) %}
+{{ self::tag(name=name, value=value, name_class="is-dark", value_class="is-info") }}
+{% endmacro info_tag %}
+
+{% macro reven_version(version) %}
+{{ self::info_tag(name="REVEN", value=version) }}
+{% endmacro reven_version %}
+
+{% macro dependency_tag(name) %}
+{{ self::info_tag(name="Dependency", value=name) }}
+{% endmacro dependency_tag %}
+
+{% macro jupyter_tag() %}
+{{ self::info_tag(name="Environment", value="Jupyter") }}
+{% endmacro jupyter_tag %}
+
+{% macro preview_tag() %}
+{{ self::tag(name="API", value="preview", name_class="is-dark", value_class="is-warning") }}
+{% endmacro preview_tag %}
+
+{% macro windows_tag() %}
+{% set value = '<span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 64-bit</span>' %}
+{{ self::tag(name="OS", value=value, name_class="is-dark", value_class="is-primary") }}
+{% endmacro windows_tag %}
+
+{% macro linux_tag() %}
+{% set value = '<span class="icon"><i class="fa fa-linux" aria-hidden="true"></i></span>
+<span>Linux 64-bit</span>' %}
+{{ self::tag(name="OS", value=value, name_class="is-dark", value_class="is-primary") }}
+{% endmacro linux_tag %}
+
+{% macro begin_message(header, class, suppress_top_padding=false) %}
+<div class="message {{ class }}">
+    <div class="message-header">
+      {{ header }}
+    </div>
+  {% if suppress_top_padding %}
+  <div class="message-body content pt-0">
+  {% else %}
+  <div class="message-body content">
+  {% endif %}
+{% endmacro begin_message %}
+
+{% macro end_message() %}
+  </div>
+</div>
+{% endmacro end_message %}
+
+{% macro message(header, body, class, suppress_top_padding=false) %}
+<div class="message {{ class }}">
+  <div class="message-header">
+    {{ header }}
+  </div>
+{% if suppress_top_padding %}
+  <div class="message-body content pt-0">
+{% else %}
+  <div class="message-body content">
+{% endif %}
+{{ body }}
+  </div>
+</div>
+{% endmacro message %}
+
+{% macro link(name, url) %}
+<a href="{{ url }}">{{ name }}</a>
+{% endmacro link %}
+
+{% macro list(items) %}
+<ul>
+{% for item in items %}
+  <li>{{ item }}</li>
+{% endfor %}
+  </ul>
+{% endmacro list %}
+
+{% macro related_examples(examples) %}
+    {% set body = self::list(items=examples) %}
+    {{ self::begin_message(header="Related examples", class="is-link", suppress_top_padding=true) }}
+{{ body }}
+    {{ self::end_message() }}
+{% endmacro related_examples %}
