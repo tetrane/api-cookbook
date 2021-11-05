@@ -27,6 +27,14 @@ cp -r static/ book/
 mdbook serve
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+## License
+
+[X11](./LICENSE)
+
 ## Using bulma in code
 
 [Bulma 0.9.3](https://bulma.io) is available in md files, and is "bridged" using [Tera](https://tera.netlify.app) [macros](https://tera.netlify.app/docs/#macros).
