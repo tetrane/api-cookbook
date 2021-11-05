@@ -10,7 +10,7 @@ build:
     - apt update && apt install -y --no-install-recommends ca-certificates python3 wget && wget "https://github.com/tetrane/dependencies_installer/raw/master/installer.py" && chmod +x installer.py
     - ./installer.py $(find . -wholename "*dependencies/dev")
     - source $HOME/.cargo/env
-    - mdbook build
+    - MDBOOK_PREPROCESSOR__TERA__COMMAND="mdbook-tera --toml ./contexts/gitlab.toml" mdbook build
     - cp -r static/ book/
   artifacts:
     paths:

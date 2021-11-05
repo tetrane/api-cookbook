@@ -1,7 +1,7 @@
 REVEN API Cookbook
 ==================
 
-[Rendered Cookbook](https://tetrane.gitlab.io/reven/api-cookbook)
+[Rendered Cookbook](https://tetrane.github.io/api-cookbook/)
 
 ## Building the cookbook
 
@@ -18,6 +18,7 @@ Then, the book can be built using:
 
 ```
 mdboook build
+cp -r static/ book/
 ```
 
 ## Serving the cookbook while modifying it
