@@ -99,7 +99,7 @@ NtOpenFile: Context before #43450170
 
 {{ bulma::begin_bulma() }}
 {{ bulma::related_examples(examples=[
-  bulma::link(name="Thread synchronization", url="../examples-book/analyze/report/threadsync.html"),
-  bulma::link(name="Detect data race", url="../examples-book/analyze/vulnerability_detection/detect_data_race.html")
+  bulma::link(name="Thread synchronization", url=user_doc_root ~ "/examples-book/analyze/report/threadsync.html"),
+  bulma::link(name="Detect data race", url=user_doc_root ~ "/examples-book/analyze/vulnerability_detection/detect_data_race.html")
 ]) }}
 {{ bulma::end_bulma() }}

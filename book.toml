@@ -9,3 +9,4 @@ title = "REVEN API Cookbook"
 additional-css = ["bulma.css"]
 
 [preprocessor.tera]
+command = "mdbook-tera --toml ./contexts/default.toml"

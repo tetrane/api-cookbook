@@ -23,7 +23,7 @@ for ctx in server.trace.search.symbol(crash_symbol):
 
 {{ bulma::begin_bulma() }}
 {{ bulma::related_examples(examples=[
-  bulma::link(name="Crash detection", url="../examples-book/analyze/report/crash_detection.html")
+  bulma::link(name="Crash detection", url=user_doc_root ~ "/examples-book/analyze/report/crash_detection.html")
 ]) }}
 {{ bulma::end_bulma() }}
 
@@ -48,6 +48,6 @@ for ctx in server.trace.search.symbol(crash_symbol):
 
 {{ bulma::begin_bulma() }}
 {{ bulma::related_examples(examples=[
-  bulma::link(name="Crash detection", url="../examples-book/analyze/report/crash_detection.html")
+  bulma::link(name="Crash detection", url=user_doc_root ~ "/examples-book/analyze/report/crash_detection.html")
 ]) }}
 {{ bulma::end_bulma() }}

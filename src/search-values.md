@@ -10,9 +10,9 @@ bulma::reven_version(version="v2.6.0")
 ]) }}
 
 {{ bulma::related_examples(examples=[
-  bulma::link(name="Network packet tools", url="../examples-book/analyze/network/network_packet_tools.html"),
-  bulma::link(name="Dump PCAP", url="../examples-book/analyze/network/dump_pcap.html"),
-  bulma::link(name="Detect use of uninitialized memory", url="../examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html"),
+  bulma::link(name="Network packet tools", url=user_doc_root ~ "/examples-book/analyze/network/network_packet_tools.html"),
+  bulma::link(name="Dump PCAP", url=user_doc_root ~ "/examples-book/analyze/network/dump_pcap.html"),
+  bulma::link(name="Detect use of uninitialized memory", url=user_doc_root ~ "/examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html"),
 ]) }}
 
 {{ bulma::end_bulma() }}

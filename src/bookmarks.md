@@ -8,9 +8,9 @@
     ]) }}
 
     {{ bulma::related_examples(examples=[
-        bulma::link(name="Export bookmarks", url="../examples-book/analyze/report/export_bookmarks.html"),
-        bulma::link(name="Bookmarks to WinDbg breakpoints", url="../examples-book/analyze/bk2bp.html"),
-        bulma::link(name="Import classic bookmarks", url="../examples-book/analyze/migration/import_bookmarks.html"),
+        bulma::link(name="Export bookmarks", url=user_doc_root ~ "/examples-book/analyze/report/export_bookmarks.html"),
+        bulma::link(name="Bookmarks to WinDbg breakpoints", url=user_doc_root ~ "/examples-book/analyze/bk2bp.html"),
+        bulma::link(name="Import classic bookmarks", url=user_doc_root ~ "/examples-book/analyze/migration/import_bookmarks.html"),
     ]) }}
 {{ bulma::end_bulma() }}
 

@@ -9,12 +9,12 @@ This book is a collection of examples that demonstrate good practices to accompl
 {{ bulma::begin_bulma() }}
 {{ bulma::begin_message(header="Pre-requisites", class="is-info") }}
 <p>
-    This book assumes that you already read the <a href="../Python-API/Quickstart.html">Python API quick start guide</a>.
+    This book assumes that you already read the <a href="{{ user_doc_root }}/Python-API/Quickstart.html">Python API quick start guide</a>.
 </p>
 <p>
     Furthermore, all the examples of this book assume that you are in an environment where you can <code>import reven2</code> successfully.
     <br/>
-    If this is not the case, please refer to the <a href="../Python-API/Installation.html">installation documentation</a> of the Python API before starting this guide.
+    If this is not the case, please refer to the <a href="{{ user_doc_root }}/Python-API/Installation.html">installation documentation</a> of the Python API before starting this guide.
 </p>
 {{ bulma::end_message() }}
 {{ bulma::end_bulma() }}

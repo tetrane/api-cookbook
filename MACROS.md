@@ -44,10 +44,10 @@ To do so, enclose bulma macros invocations (and raw usages of bulma classes in H
 ]) }}
 
 {{ bulma::related_examples(examples=[
-  bulma::link(name="Use-after-Free vulnerabilities detection", url="../examples-book/analyze/vulnerability_detection/detect_use_after_free.html"),
-  bulma::link(name="Searching for Buffer-Overflow vulnerabilities", url="../examples-book/analyze/vulnerability_detection/detect_buffer_overflow.html"),
-  bulma::link(name="Searching for Use-of-Uninitialized-Memory vulnerabilities", url="../examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html"),
+  bulma::link(name="Use-after-Free vulnerabilities detection", url=user_doc_root ~ "/examples-book/analyze/vulnerability_detection/detect_use_after_free.html"),
+  bulma::link(name="Searching for Buffer-Overflow vulnerabilities", url=user_doc_root ~ "/examples-book/analyze/vulnerability_detection/detect_buffer_overflow.html"),
+  bulma::link(name="Searching for Use-of-Uninitialized-Memory vulnerabilities", url=user_doc_root ~ "/examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html"),
 ]) }}
 
 {{ bulma::end_bulma() }}
-``` 
+```
