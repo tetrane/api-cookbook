@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Searching for function calls - REVEN API Cookbook</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+	<link rel="stylesheet" href="bulma.css">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="bulma.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="server.html"><strong aria-hidden="true">2.</strong> Connecting to a server</a></li><li class="chapter-item expanded "><a href="iterating.html"><strong aria-hidden="true">3.</strong> Manipulating transitions and contexts</a></li><li class="chapter-item expanded "><a href="context-read.html"><strong aria-hidden="true">4.</strong> Reading values from registers or memory</a></li><li class="chapter-item expanded "><a href="start-end.html"><strong aria-hidden="true">5.</strong> Moving to the beginning, end of a function</a></li><li class="chapter-item expanded "><a href="search-calls.html" class="active"><strong aria-hidden="true">6.</strong> Searching for function calls</a></li><li class="chapter-item expanded "><a href="crash.html"><strong aria-hidden="true">7.</strong> Looking for a crash</a></li><li class="chapter-item expanded "><a href="memhist.html"><strong aria-hidden="true">8.</strong> Finding out when a memory location is accessed</a></li><li class="chapter-item expanded "><a href="call-values.html"><strong aria-hidden="true">9.</strong> Displaying the value of arguments and return value of a call</a></li><li class="chapter-item expanded "><a href="search-values.html"><strong aria-hidden="true">10.</strong> Searching for values in memory</a></li><li class="chapter-item expanded "><a href="listing-ossi.html"><strong aria-hidden="true">11.</strong> Listing the processes, binaries in the trace</a></li><li class="chapter-item expanded "><a href="filters.html"><strong aria-hidden="true">12.</strong> Focusing on a portion of the trace</a></li><li class="chapter-item expanded "><a href="taint.html"><strong aria-hidden="true">13.</strong> Following the dataflow</a></li><li class="chapter-item expanded "><a href="jupyter.html"><strong aria-hidden="true">14.</strong> Displaying data nicely in Jupyter notebooks</a></li><li class="chapter-item expanded "><a href="tabular.html"><strong aria-hidden="true">15.</strong> Exporting tabular data to work with reporting tools</a></li><li class="chapter-item expanded "><a href="bookmarks.html"><strong aria-hidden="true">16.</strong> Managing bookmarks</a></li><li class="chapter-item expanded "><a href="instruction-semantics.html"><strong aria-hidden="true">17.</strong> Finding more about the semantics of an instruction</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">REVEN API Cookbook</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://www.tetrane.com" title="Go to main site" aria-label="Go to main site">
+                            <img src=".//static/logo.png" alt="Tetrane logo" style="width:28px;height:28px;vertical-align:middle"></i>
+                        </a>
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="searching-for-function-calls"><a class="header" href="#searching-for-function-calls">Searching for function calls</a></h1>
+<h2 id="looking-for-an-exact-symbol-name"><a class="header" href="#looking-for-an-exact-symbol-name">Looking for an exact symbol name</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">symbol_name = &quot;CreateProcessW&quot;
+try:
+    symbol = next(server.ossi.symbols(f&quot;^{symbol_name}$&quot;,
+                                      binary_hint='kernelbase\.dll'))
+except StopIteration:
+    raise RuntimeError(f&quot;Could not find symbol '{symbol_name}'&quot;)
+for ctx in server.trace.search.symbol(symbol):
+    print(ctx)
+</code></pre>
+<div class="bulma">
+<div class="message is-warning">
+    <div class="message-header">
+      Handling of the case where the symbol is not in the trace
+    </div>
+<div class="message-body content">
+<p>
+    When looking for an <strong>exact</strong> symbol, you need to prepare for the case where the symbol is not available in the trace. Note that a symbol can be available <emph>even if it is never called</emph>.
+</p>
+<p>
+    In the example, it manifests with the iterator having no element, which raises a <code>StopIteration</code>, that we catch and then convert to a more specific error.
+</p>
+</div>
+</div>
+<div class="message is-warning">
+    <div class="message-header">
+      Symbol pattern is a regular expression
+    </div>
+<div class="message-body content">
+<p>
+    When looking for a <strong>single, exact</strong> symbol, you need to enclose the symbol's name
+    in the pattern with <code>^$</code> because the pattern is actually a
+    regular expression. Failure to do that could result in several matching
+    symbols, with the risk that the rest of your code actually chooses the
+    wrong one.
+</p>
+</div>
+</div>
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>(GitHub)
+<a href="https://github.com/tetrane/reven2-file-activity">File activity</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="looking-for-multiple-symbols"><a class="header" href="#looking-for-multiple-symbols">Looking for multiple symbols</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<p>The example provides an iterator of the tuples where the first element is the context of the call, and the second the name of the called symbol.</p>
+<pre><code class="language-py">from itertools import repeat
+
+def first_symbol(symbol_name):
+    return next(server.ossi.symbols(f&quot;^{symbol_name}$&quot;, binary_hint=binary))
+
+
+binary = &quot;c:/windows/system32/ntoskrnl.exe&quot;
+symbols = ['NtCreateFile', 'NtOpenFile', 'NtOpenDirectoryObject']
+
+symbols_name = [(first_symbol(symbol), symbol) for symbol in symbols]
+
+symbols_name = [zip(server.trace.search.symbol(symbol[0]),
+                    repeat(symbol[1])) for symbol in symbols_name]
+
+for ctx_name in reven2.util.collate(symbols_name, lambda ctx_name: ctx_name[0]):
+    print(f&quot;{ctx_name[1]}: {ctx_name[0]}&quot;)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>NtCreateFile: Context before #4468509
+NtCreateFile: Context before #4479526
+NtCreateFile: Context before #6451786
+NtCreateFile: Context before #6852400
+NtCreateFile: Context before #7666717
+NtCreateFile: Context before #8067013
+NtCreateFile: Context before #8298671
+NtCreateFile: Context before #8648240
+NtOpenFile: Context before #26656294
+NtCreateFile: Context before #35251786
+NtOpenFile: Context before #36420358
+NtOpenFile: Context before #43268534
+NtOpenDirectoryObject: Context before #43420816
+NtOpenFile: Context before #43450170
+</code></pre>
+<div class="bulma">
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/report/threadsync.html">Thread synchronization</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_data_race.html">Detect data race</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="start-end.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="crash.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="start-end.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="crash.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

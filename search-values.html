@@ -1,0 +1,332 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Searching for values in memory - REVEN API Cookbook</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+	<link rel="stylesheet" href="bulma.css">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="bulma.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="server.html"><strong aria-hidden="true">2.</strong> Connecting to a server</a></li><li class="chapter-item expanded "><a href="iterating.html"><strong aria-hidden="true">3.</strong> Manipulating transitions and contexts</a></li><li class="chapter-item expanded "><a href="context-read.html"><strong aria-hidden="true">4.</strong> Reading values from registers or memory</a></li><li class="chapter-item expanded "><a href="start-end.html"><strong aria-hidden="true">5.</strong> Moving to the beginning, end of a function</a></li><li class="chapter-item expanded "><a href="search-calls.html"><strong aria-hidden="true">6.</strong> Searching for function calls</a></li><li class="chapter-item expanded "><a href="crash.html"><strong aria-hidden="true">7.</strong> Looking for a crash</a></li><li class="chapter-item expanded "><a href="memhist.html"><strong aria-hidden="true">8.</strong> Finding out when a memory location is accessed</a></li><li class="chapter-item expanded "><a href="call-values.html"><strong aria-hidden="true">9.</strong> Displaying the value of arguments and return value of a call</a></li><li class="chapter-item expanded "><a href="search-values.html" class="active"><strong aria-hidden="true">10.</strong> Searching for values in memory</a></li><li class="chapter-item expanded "><a href="listing-ossi.html"><strong aria-hidden="true">11.</strong> Listing the processes, binaries in the trace</a></li><li class="chapter-item expanded "><a href="filters.html"><strong aria-hidden="true">12.</strong> Focusing on a portion of the trace</a></li><li class="chapter-item expanded "><a href="taint.html"><strong aria-hidden="true">13.</strong> Following the dataflow</a></li><li class="chapter-item expanded "><a href="jupyter.html"><strong aria-hidden="true">14.</strong> Displaying data nicely in Jupyter notebooks</a></li><li class="chapter-item expanded "><a href="tabular.html"><strong aria-hidden="true">15.</strong> Exporting tabular data to work with reporting tools</a></li><li class="chapter-item expanded "><a href="bookmarks.html"><strong aria-hidden="true">16.</strong> Managing bookmarks</a></li><li class="chapter-item expanded "><a href="instruction-semantics.html"><strong aria-hidden="true">17.</strong> Finding more about the semantics of an instruction</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">REVEN API Cookbook</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://www.tetrane.com" title="Go to main site" aria-label="Go to main site">
+                            <img src=".//static/logo.png" alt="Tetrane logo" style="width:28px;height:28px;vertical-align:middle"></i>
+                        </a>
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="searching-for-values-in-memory"><a class="header" href="#searching-for-values-in-memory">Searching for values in memory</a></h1>
+<h2 id="searching-for-values-in-a-range-of-memory-at-a-single-context"><a class="header" href="#searching-for-values-in-a-range-of-memory-at-a-single-context">Searching for values in a range of memory at a single context</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.6.0</span>
+    </div>
+</div>
+</div>
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/network/network_packet_tools.html">Network packet tools</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/network/dump_pcap.html">Dump PCAP</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html">Detect use of uninitialized memory</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<p>If the value you are looking for might be in a range of memory at a specific point in the trace, you can search it with the following:</p>
+<pre><code class="language-py">pattern = bytearray([0x77, 0x43])
+for match_address in ctx.search_in_memory(pattern,
+                                          ctx.read(regs.rsp), 0x1000000):
+     print(f&quot;'{pattern}' is found starting at @{match_address}&quot;)
+</code></pre>
+<h2 id="searching-for-string-like-values-accessed-in-the-trace"><a class="header" href="#searching-for-string-like-values-accessed-in-the-trace">Searching for string-like values accessed in the trace</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<p>If the value you are looking for looks like a string indexed by the strings resource (defaults to strings of printable characters of length 5-128, possibly UTF-16 encoded), then you can use the strings search API, which will be the fastest way:</p>
+<pre><code class="language-py">for string in server.trace.strings(&quot;Network&quot;):
+    for access in string.memory_accesses(from_tr, to_tr):
+        print(access)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[#4653465 mov word ptr [rcx], ax]Write access at @phy:0x18e8252c (virtual address: lin:0x3a252c) of size 2
+[#4653475 mov word ptr [rcx], ax]Write access at @phy:0x18e8252e (virtual address: lin:0x3a252e) of size 2
+[#4653485 mov word ptr [rcx], ax]Write access at @phy:0x18e82530 (virtual address: lin:0x3a2530) of size 2
+[#4653495 mov word ptr [rcx], ax]Write access at @phy:0x18e82532 (virtual address: lin:0x3a2532) of size 2
+[#4653505 mov word ptr [rcx], ax]Write access at @phy:0x18e82534 (virtual address: lin:0x3a2534) of size 2
+[#4653515 mov word ptr [rcx], ax]Write access at @phy:0x18e82536 (virtual address: lin:0x3a2536) of size 2
+[#4653525 mov word ptr [rcx], ax]Write access at @phy:0x18e82538 (virtual address: lin:0x3a2538) of size 2
+[#4653535 mov word ptr [rcx], ax]Write access at @phy:0x18e8253a (virtual address: lin:0x3a253a) of size 2
+[#4653545 mov word ptr [rcx], ax]Write access at @phy:0x18e8253c (virtual address: lin:0x3a253c) of size 2
+[#4653555 mov word ptr [rcx], ax]Write access at @phy:0x18e8253e (virtual address: lin:0x3a253e) of size 2
+[#4653565 mov word ptr [rcx], ax]Write access at @phy:0x18e82540 (virtual address: lin:0x3a2540) of size 2
+[#4653575 mov word ptr [rcx], ax]Write access at @phy:0x18e82542 (virtual address: lin:0x3a2542) of size 2
+[#4653585 mov word ptr [rcx], ax]Write access at @phy:0x18e82544 (virtual address: lin:0x3a2544) of size 2
+[#4653595 mov word ptr [rcx], ax]Write access at @phy:0x18e82546 (virtual address: lin:0x3a2546) of size 2
+[#4653605 mov word ptr [rcx], ax]Write access at @phy:0x18e82548 (virtual address: lin:0x3a2548) of size 2
+[#4653615 mov word ptr [rcx], ax]Write access at @phy:0x18e8254a (virtual address: lin:0x3a254a) of size 2
+[#4653625 mov word ptr [rcx], ax]Write access at @phy:0x18e8254c (virtual address: lin:0x3a254c) of size 2
+</code></pre>
+<div class="bulma">
+<div class="message is-info">
+    <div class="message-header">
+      Unaccessed values are not found by this method
+    </div>
+<div class="message-body content">
+<p>
+    This method only finds values in memory that are <strong>accessed</strong> (read from, written to) during the portion of the trace where the search takes place.
+</p>
+<p>
+    If you don't know if your value is accessed in the trace, you can associate this method with a <a href="#searching-for-values-in-a-range-of-memory-at-a-single-context">search in memory at a context</a>.
+</p>
+</div>
+</div>
+</div>
+<h2 id="searching-for-other-kinds-of-values-accessed-in-the-trace"><a class="header" href="#searching-for-other-kinds-of-values-accessed-in-the-trace">Searching for other kinds of values accessed in the trace</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.6.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">for match in server.trace.search.memory(b&quot;\xc0\xfc\x75\x02&quot;, from_ctx, to_ctx).matches():
+    print(match)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>id: 0 | @lin:0xab600 (mapped at Context before #5665813) | [Context before #5665813 - Context after #16899165] | 1 access(es)
+id: 1 | @lin:0xbadf0 (mapped at Context before #5666826) | [Context before #5666826 - Context after #16899165] | 1 access(es)
+id: 2 | @lin:0xac810 (mapped at Context before #5666966) | [Context before #5666966 - Context before #6141251] | 1 access(es)
+id: 3 | @lin:0xb0935 (mapped at Context before #6140550) | [Context before #6140550 - Context after #16899165] | 1 access(es)
+id: 4 | @lin:0xab790 (mapped at Context before #6143172) | [Context before #6143172 - Context after #16899165] | 1 access(es)
+id: 5 | @lin:0xffffe0016aec9800 (mapped at Context before #6144279) | [Context before #6144279 - Context before #6379441] | 2 access(es)
+id: 6 | @lin:0xffffe0016a7accc0 (mapped at Context before #6152909) | [Context before #6152909 - Context before #6372050] | 1 access(es)
+id: 7 | @lin:0xc7e605 (mapped at Context before #6218204) | [Context before #6218204 - Context after #16899165] | 15 access(es)
+id: 8 | @lin:0xc67780 (mapped at Context before #6235773) | [Context before #6235773 - Context after #16899165] | 10 access(es)
+id: 9 | @lin:0x29feb26 (mapped at Context before #6360085) | [Context before #6360085 - Context before #6360107] | 2 access(es)
+id: 10 | @lin:0x29feb26 (mapped at Context before #6360108) | [Context before #6360108 - Context before #6360254] | 3 access(es)
+id: 11 | @lin:0x29feb26 (mapped at Context before #6360255) | [Context before #6360255 - Context after #16899165] | 2 access(es)
+id: 12 | @lin:0x29feb06 (mapped at Context before #6360265) | [Context before #6360265 - Context before #6360264] | 0 access(es)
+id: 13 | @lin:0x29feb06 (mapped at Context before #6360265) | [Context before #6360265 - Context after #16899165] | 2 access(es)
+id: 14 | @lin:0x29fe946 (mapped at Context before #6360440) | [Context before #6360440 - Context before #6360439] | 0 access(es)
+id: 15 | @lin:0x29fe946 (mapped at Context before #6360440) | [Context before #6360440 - Context before #6360458] | 2 access(es)
+</code></pre>
+<div class="bulma">
+<div class="message is-info">
+    <div class="message-header">
+      Unaccessed values are not found by this method
+    </div>
+<div class="message-body content">
+<p>
+    This method only finds values in memory that are <strong>accessed</strong> (read from, written to) during the portion of the trace where the search takes place.
+</p>
+<p>
+    If you don't know if your value is accessed in the trace, you can associate this method with a <a href="#searching-for-values-in-a-range-of-memory-at-a-single-context">search in memory at a context</a>.
+</p>
+</div>
+</div>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="call-values.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="listing-ossi.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="call-values.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="listing-ossi.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

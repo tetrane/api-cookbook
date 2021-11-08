@@ -1,0 +1,434 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Following the dataflow - REVEN API Cookbook</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+	<link rel="stylesheet" href="bulma.css">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="bulma.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="server.html"><strong aria-hidden="true">2.</strong> Connecting to a server</a></li><li class="chapter-item expanded "><a href="iterating.html"><strong aria-hidden="true">3.</strong> Manipulating transitions and contexts</a></li><li class="chapter-item expanded "><a href="context-read.html"><strong aria-hidden="true">4.</strong> Reading values from registers or memory</a></li><li class="chapter-item expanded "><a href="start-end.html"><strong aria-hidden="true">5.</strong> Moving to the beginning, end of a function</a></li><li class="chapter-item expanded "><a href="search-calls.html"><strong aria-hidden="true">6.</strong> Searching for function calls</a></li><li class="chapter-item expanded "><a href="crash.html"><strong aria-hidden="true">7.</strong> Looking for a crash</a></li><li class="chapter-item expanded "><a href="memhist.html"><strong aria-hidden="true">8.</strong> Finding out when a memory location is accessed</a></li><li class="chapter-item expanded "><a href="call-values.html"><strong aria-hidden="true">9.</strong> Displaying the value of arguments and return value of a call</a></li><li class="chapter-item expanded "><a href="search-values.html"><strong aria-hidden="true">10.</strong> Searching for values in memory</a></li><li class="chapter-item expanded "><a href="listing-ossi.html"><strong aria-hidden="true">11.</strong> Listing the processes, binaries in the trace</a></li><li class="chapter-item expanded "><a href="filters.html"><strong aria-hidden="true">12.</strong> Focusing on a portion of the trace</a></li><li class="chapter-item expanded "><a href="taint.html" class="active"><strong aria-hidden="true">13.</strong> Following the dataflow</a></li><li class="chapter-item expanded "><a href="jupyter.html"><strong aria-hidden="true">14.</strong> Displaying data nicely in Jupyter notebooks</a></li><li class="chapter-item expanded "><a href="tabular.html"><strong aria-hidden="true">15.</strong> Exporting tabular data to work with reporting tools</a></li><li class="chapter-item expanded "><a href="bookmarks.html"><strong aria-hidden="true">16.</strong> Managing bookmarks</a></li><li class="chapter-item expanded "><a href="instruction-semantics.html"><strong aria-hidden="true">17.</strong> Finding more about the semantics of an instruction</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">REVEN API Cookbook</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://www.tetrane.com" title="Go to main site" aria-label="Go to main site">
+                            <img src=".//static/logo.png" alt="Tetrane logo" style="width:28px;height:28px;vertical-align:middle"></i>
+                        </a>
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="following-the-dataflow"><a class="header" href="#following-the-dataflow">Following the dataflow</a></h1>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.6.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">API</span>
+        <span class="tag is-warning">preview</span>
+    </div>
+</div>
+</div>
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_use_after_free.html">Use-after-Free vulnerabilities detection</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_buffer_overflow.html">Searching for Buffer-Overflow vulnerabilities</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html">Searching for Use-of-Uninitialized-Memory vulnerabilities</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="finding-out-from-where-data-comes"><a class="header" href="#finding-out-from-where-data-comes">Finding out from where data comes</a></h2>
+<p>The below displays all processes and functions that some tainted buffer goes through:</p>
+<pre><code class="language-py">import reven2.preview.taint as tainting
+
+tainter = tainting.Tainter(server.trace)
+
+taint = tainter.simple_taint(&quot;rax&quot;, to_context=tr.context_before(), is_forward=False)
+
+last_symbol = None
+last_process = None
+for access in taint.accesses().all():
+    ctx_after = access.transition.context_after()
+    new_process = ctx_after.ossi.process()
+    new_symbol = ctx_after.ossi.location().symbol
+    if new_symbol is None:
+        if last_symbol is not None:
+            print(f&quot;{new_process}: ???&quot;)
+        last_symbol = None
+        last_process = new_process
+        continue
+    if (last_symbol is not None and last_process is not None
+        and new_symbol == last_symbol
+        and new_process.pid == last_process.pid
+       ):
+        continue
+
+    last_symbol = new_symbol
+    last_process = new_process
+
+    print(f&quot;{new_process}: {new_symbol}&quot;)
+
+</code></pre>
+<p>Sample output:</p>
+<pre><code>conhost.exe (2704): win32kfull!memcpy
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): ???
+chat_client.exe (2832): ntdll!memcpy
+chat_client.exe (2832): chat_client!&lt;alloc::vec::Vec&lt;T&gt; as alloc::vec::SpecExtend&lt;T, I&gt;&gt;::from_iter
+chat_client.exe (2832): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2832): ntdll!memcpy
+chat_client.exe (2832): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2832): chat_client!&lt;alloc::vec::Vec&lt;T&gt; as alloc::vec::SpecExtend&lt;T, I&gt;&gt;::from_iter
+chat_client.exe (2832): ntdll!RtlpAllocateHeapInternal
+chat_client.exe (2832): chat_client!&lt;alloc::vec::Vec&lt;T&gt; as alloc::vec::SpecExtend&lt;T, I&gt;&gt;::from_iter
+chat_client.exe (2832): msvcrt!memcpy
+chat_client.exe (2832): netio!memcpy
+chat_server.exe (648): netio!memcpy
+chat_server.exe (648): ???
+chat_server.exe (648): msvcrt!memcpy
+chat_server.exe (648): chat_server!bytes::buf::buf_mut::BufMut::put
+chat_server.exe (648): msvcrt!memcpy
+chat_server.exe (648): chat_server!bytes::buf::buf_mut::BufMut::put
+chat_server.exe (648): chat_server!&lt;&amp;'a str as bytes::buf::into_buf::IntoBuf&gt;::into_buf
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!bytes::bytes::Inner::reserve
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;futures::sync::mpsc::UnboundedReceiver&lt;T&gt; as futures::stream::Stream&gt;::poll
+chat_server.exe (648): chat_server!&lt;futures::sync::mpsc::Receiver&lt;T&gt;&gt;::next_message
+chat_server.exe (648): chat_server!&lt;futures::sync::mpsc::queue::Queue&lt;T&gt;&gt;::pop
+chat_server.exe (648): chat_server!&lt;futures::sync::mpsc::Sender&lt;T&gt;&gt;::queue_push_and_signal
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::Bytes as core::clone::Clone&gt;::clone
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as bytes::buf::buf_mut::BufMut&gt;::put_slice
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!bytes::bytes::Inner::reserve
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as bytes::buf::buf_mut::BufMut&gt;::put_slice
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!bytes::bytes::Inner::reserve
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as bytes::buf::buf_mut::BufMut&gt;::put_slice
+chat_server.exe (648): msvcrt!memcpy
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as bytes::buf::buf_mut::BufMut&gt;::put_slice
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!bytes::bytes::Inner::reserve
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as core::clone::Clone&gt;::clone
+chat_server.exe (648): msvcrt!memcpy
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as core::clone::Clone&gt;::clone
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;chat_server::Lines as futures::stream::Stream&gt;::poll
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::split_off
+chat_server.exe (648): chat_server!bytes::bytes::Inner::set_start
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::split_off
+chat_server.exe (648): chat_server!&lt;chat_server::Lines as futures::stream::Stream&gt;::poll
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::split_to
+chat_server.exe (648): chat_server!bytes::bytes::Inner::shallow_clone_sync
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::split_to
+chat_server.exe (648): chat_server!&lt;chat_server::Lines as futures::stream::Stream&gt;::poll
+chat_server.exe (648): chat_server!&lt;tokio_tcp::stream::TcpStream as tokio_io::async_read::AsyncRead&gt;::read_buf
+chat_server.exe (648): chat_server!mio::sys::windows::tcp::TcpStream::readv
+chat_server.exe (648): chat_server!&lt;&amp;'a std::net::tcp::TcpStream as std::io::Read&gt;::read
+chat_server.exe (648): ws2_32!recv
+chat_server.exe (648): mswsock!WSPRecv
+chat_server.exe (648): ntoskrnl!IopXxxControlFile
+chat_server.exe (648): ???
+chat_server.exe (648): ntoskrnl!IopXxxControlFile
+chat_server.exe (648): ntoskrnl!NtDeviceIoControlFile
+chat_server.exe (648): ntoskrnl!KiSystemCall64
+chat_server.exe (648): mswsock!WSPRecv
+chat_server.exe (648): ws2_32!recv
+chat_server.exe (648): chat_server!mio::sys::windows::tcp::TcpStream::readv
+chat_client.exe (2816): ???
+chat_client.exe (2816): netio!RtlCopyMdlToBuffer
+chat_client.exe (2816): ???
+chat_client.exe (2816): tcpip!TcpIndicateData
+chat_client.exe (2816): ndis!NdisAdvanceNetBufferDataStart
+chat_client.exe (2816): tcpip!IppPrevalidateLoopbackReceive
+chat_client.exe (2816): tcpip!IpNlpFastContinueSendDatagram
+chat_client.exe (2816): tcpip!IppSendDatagramsCommon
+chat_client.exe (2816): tcpip!IppPreparePacketChecksum
+chat_client.exe (2816): tcpip!IppSendDatagramsCommon
+chat_client.exe (2816): tcpip!TcpTcbSend
+chat_client.exe (2816): netio!NetioExtendNetBuffer
+chat_client.exe (2816): tcpip!TcpSegmentTcbSend
+chat_client.exe (2816): tcpip!TcpBeginTcbSend
+chat_client.exe (2816): netio!NetioAllocateAndReferenceNetBufferListNetBufferMdlAndData
+chat_client.exe (2816): ndis!NdisAllocateNetBufferList
+chat_client.exe (2816): netio!NetioAllocateAndReferenceNetBufferListNetBufferMdlAndData
+chat_client.exe (2816): tcpip!TcpBeginTcbSend
+chat_client.exe (2816): tcpip!TcpTcbSend
+chat_client.exe (2816): tcpip!TcpEnqueueTcbSend
+chat_client.exe (2816): ???
+chat_client.exe (2816): chat_client!&lt;std::net::tcp::TcpStream as miow::net::TcpStreamExt&gt;::write_overlapped
+chat_client.exe (2816): chat_client!mio::sys::windows::tcp::StreamImp::schedule_write
+chat_client.exe (2816): chat_client!mio::poll::SetReadiness::set_readiness
+chat_client.exe (2816): chat_client!mio::sys::windows::tcp::StreamImp::schedule_write
+chat_client.exe (2816): chat_client!mio::sys::windows::tcp::TcpStream::writev
+chat_client.exe (2816): chat_client!&lt;iovec::IoVec as core::ops::deref::Deref&gt;::deref
+chat_client.exe (2816): chat_client!mio::sys::windows::tcp::TcpStream::writev
+chat_client.exe (2816): chat_client!mio::sys::windows::selector::ReadyBinding::get_buffer
+chat_client.exe (2816): chat_client!&lt;mio::net::tcp::TcpStream as std::io::Write&gt;::write
+chat_client.exe (2816): chat_client!iovec::IoVec::from_bytes
+chat_client.exe (2816): chat_client!&lt;mio::net::tcp::TcpStream as std::io::Write&gt;::write
+chat_client.exe (2816): chat_client!&lt;tokio_reactor::poll_evented::PollEvented&lt;E&gt; as std::io::Write&gt;::write
+chat_client.exe (2816): chat_client!&lt;tokio_reactor::poll_evented::PollEvented&lt;E&gt;&gt;::poll_write_ready
+chat_client.exe (2816): chat_client!&lt;tokio_reactor::poll_evented::PollEvented&lt;E&gt; as std::io::Write&gt;::write
+chat_client.exe (2816): chat_client!_ZN99_$LT$tokio_io.._tokio_codec..framed_write..FramedWrite2$LT$T$GT$$u20$as$u20$futures..sink..Sink$GT$13poll_complete17h99e4d
+chat_client.exe (2816): chat_client!bytes::buf::buf_mut::BufMut::put
+chat_client.exe (2816): chat_client!&lt;&amp;'a str as bytes::buf::into_buf::IntoBuf&gt;::into_buf
+chat_client.exe (2816): chat_client!_ZN99_$LT$tokio_io.._tokio_codec..framed_write..FramedWrite2$LT$T$GT$$u20$as$u20$futures..sink..Sink$GT$10start_send17h590abca8
+chat_client.exe (2816): chat_client!&lt;futures::stream::split::SplitSink&lt;S&gt; as futures::sink::Sink&gt;::start_send
+chat_client.exe (2816): chat_client!&lt;futures::stream::forward::Forward&lt;T, U&gt;&gt;::try_start_send
+chat_client.exe (2816): chat_client!&lt;futures::stream::forward::Forward&lt;T, U&gt; as futures::future::Future&gt;::poll
+chat_client.exe (2816): chat_client!&lt;futures::stream::map_err::MapErr&lt;S, F&gt; as futures::stream::Stream&gt;::poll
+chat_client.exe (2816): chat_client!&lt;futures::sync::mpsc::Receiver&lt;T&gt; as futures::stream::Stream&gt;::poll
+chat_client.exe (2816): chat_client!&lt;futures::sync::mpsc::Receiver&lt;T&gt;&gt;::next_message
+chat_client.exe (2816): chat_client!&lt;futures::sync::mpsc::queue::Queue&lt;T&gt;&gt;::pop
+chat_client.exe (2816): chat_client!&lt;futures::sync::mpsc::Sender&lt;T&gt;&gt;::do_send
+chat_client.exe (2816): chat_client!&lt;futures::sink::send::Send&lt;S&gt; as futures::future::Future&gt;::poll
+chat_client.exe (2816): chat_client!futures::future::Future::wait
+chat_client.exe (2816): chat_client!chat_client::read_stdin
+chat_client.exe (2816): chat_client!&lt;std::io::stdio::Stdin as std::io::Read&gt;::read
+chat_client.exe (2816): chat_client!&lt;std::io::buffered::BufReader&lt;R&gt; as std::io::Read&gt;::read
+chat_client.exe (2816): chat_client!&lt;std::io::buffered::BufReader&lt;R&gt; as std::io::BufRead&gt;::fill_buf
+chat_client.exe (2816): chat_client!std::sys::windows::stdio::Stdin::read
+chat_client.exe (2816): chat_client!&lt;std::io::cursor::Cursor&lt;T&gt; as std::io::Read&gt;::read
+chat_client.exe (2816): chat_client!std::sys::windows::stdio::Stdin::read
+chat_client.exe (2816): ntdll!RtlpFreeHeap
+chat_client.exe (2816): chat_client!std::sys::windows::stdio::Stdin::read
+chat_client.exe (2816): chat_client!alloc::string::String::from_utf16
+chat_client.exe (2816): chat_client!alloc::string::String::push
+chat_client.exe (2816): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2816): chat_client!alloc::string::String::push
+chat_client.exe (2816): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2816): chat_client!alloc::string::String::push
+chat_client.exe (2816): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2816): chat_client!alloc::string::String::push
+chat_client.exe (2816): ntdll!RtlpAllocateHeapInternal
+chat_client.exe (2816): chat_client!alloc::string::String::from_utf16
+chat_client.exe (2816): kernelbase!StrRetToStrW
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="filters.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="jupyter.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="filters.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="jupyter.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

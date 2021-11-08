@@ -1,0 +1,2078 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>REVEN API Cookbook</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+	<link rel="stylesheet" href="bulma.css">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="bulma.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="server.html"><strong aria-hidden="true">2.</strong> Connecting to a server</a></li><li class="chapter-item expanded "><a href="iterating.html"><strong aria-hidden="true">3.</strong> Manipulating transitions and contexts</a></li><li class="chapter-item expanded "><a href="context-read.html"><strong aria-hidden="true">4.</strong> Reading values from registers or memory</a></li><li class="chapter-item expanded "><a href="start-end.html"><strong aria-hidden="true">5.</strong> Moving to the beginning, end of a function</a></li><li class="chapter-item expanded "><a href="search-calls.html"><strong aria-hidden="true">6.</strong> Searching for function calls</a></li><li class="chapter-item expanded "><a href="crash.html"><strong aria-hidden="true">7.</strong> Looking for a crash</a></li><li class="chapter-item expanded "><a href="memhist.html"><strong aria-hidden="true">8.</strong> Finding out when a memory location is accessed</a></li><li class="chapter-item expanded "><a href="call-values.html"><strong aria-hidden="true">9.</strong> Displaying the value of arguments and return value of a call</a></li><li class="chapter-item expanded "><a href="search-values.html"><strong aria-hidden="true">10.</strong> Searching for values in memory</a></li><li class="chapter-item expanded "><a href="listing-ossi.html"><strong aria-hidden="true">11.</strong> Listing the processes, binaries in the trace</a></li><li class="chapter-item expanded "><a href="filters.html"><strong aria-hidden="true">12.</strong> Focusing on a portion of the trace</a></li><li class="chapter-item expanded "><a href="taint.html"><strong aria-hidden="true">13.</strong> Following the dataflow</a></li><li class="chapter-item expanded "><a href="jupyter.html"><strong aria-hidden="true">14.</strong> Displaying data nicely in Jupyter notebooks</a></li><li class="chapter-item expanded "><a href="tabular.html"><strong aria-hidden="true">15.</strong> Exporting tabular data to work with reporting tools</a></li><li class="chapter-item expanded "><a href="bookmarks.html"><strong aria-hidden="true">16.</strong> Managing bookmarks</a></li><li class="chapter-item expanded "><a href="instruction-semantics.html"><strong aria-hidden="true">17.</strong> Finding more about the semantics of an instruction</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">REVEN API Cookbook</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://www.tetrane.com" title="Go to main site" aria-label="Go to main site">
+                            <img src=".//static/logo.png" alt="Tetrane logo" style="width:28px;height:28px;vertical-align:middle"></i>
+                        </a>
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="reven-api-cookbook"><a class="header" href="#reven-api-cookbook">REVEN API Cookbook</a></h1>
+<p>Welcome to the REVEN API Cookbook.</p>
+<p>This book is a collection of examples that demonstrate good practices to accomplish common tasks using the REVEN API.</p>
+<div class="bulma">
+<div class="message is-info">
+    <div class="message-header">
+      Pre-requisites
+    </div>
+<div class="message-body content">
+<p>
+    This book assumes that you already read the <a href="https://doc.tetrane.com/latest/Python-API/Quickstart.html">Python API quick start guide</a>.
+</p>
+<p>
+    Furthermore, all the examples of this book assume that you are in an environment where you can <code>import reven2</code> successfully.
+    <br/>
+    If this is not the case, please refer to the <a href="https://doc.tetrane.com/latest/Python-API/Installation.html">installation documentation</a> of the Python API before starting this guide.
+</p>
+</div>
+</div>
+</div>
+<h2 id="common-abbreviations-and-variable-names"><a class="header" href="#common-abbreviations-and-variable-names">Common abbreviations and variable names</a></h2>
+<p>REVEN scripts tend to re-use the same abbreviations and variable names for common objects.</p>
+<table><thead><tr><th>Abbreviation</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>server</code></td><td>A <code>reven2.RevenServer</code> instance representing a connection to a REVEN server</td></tr>
+<tr><td><code>pm</code></td><td>A <code>reven2.preview.project_manager.ProjectManager</code> instance representing a connection to the Project Manager</td></tr>
+<tr><td><code>trace</code></td><td>A <code>reven2.trace.Trace</code> instance, usually obtained from <code>server.trace</code></td></tr>
+<tr><td><code>tr</code></td><td>A <code>reven2.trace.Transition</code> instance, usually obtained from <code>trace.transition(tr_id)</code></td></tr>
+<tr><td><code>ctx</code></td><td>A <code>reven2.trace.Context</code> instance, usually obtained from e.g. <code>trace.context_before(tr_id)</code></td></tr>
+</tbody></table>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="connecting-to-a-server"><a class="header" href="#connecting-to-a-server">Connecting to a server</a></h1>
+<div class="bulma">
+<div class="message is-info">
+    <div class="message-header">
+      Server variable
+    </div>
+<div class="message-body content">
+<p>
+    The other examples of this book assume that your Python environment contains a <code>server</code> variable that represents a connection to a REVEN server.
+</p>
+</div>
+</div>
+</div>
+<h2 id="from-its-host-and-port"><a class="header" href="#from-its-host-and-port">From its host and port</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.0.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py"># Connecting to a reven server
+hostname = &quot;localhost&quot;
+port = 13370
+server = reven2.RevenServer(hostname, port)
+</code></pre>
+<h2 id="from-the-scenarios-name"><a class="header" href="#from-the-scenarios-name">From the scenario's name</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.3.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Edition</span>
+        <span class="tag is-info">Enterprise</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">API</span>
+        <span class="tag is-warning">preview</span>
+    </div>
+</div>
+</div>
+</div>
+<p>You can use a feature of the Workflow API to get a connection to a server from the scenario's name, rather than by specifying a port.</p>
+<p>From the CLI:</p>
+<pre><code class="language-py">from reven2.preview.project_manager import ProjectManager
+pm = ProjectManager(&quot;http://localhost:8880&quot;)  # URL to the REVEN Project Manager
+connection = pm.connect(&quot;cve-2016-7255&quot;)  # No need to specify &quot;13370&quot;
+server = connection.server
+</code></pre>
+<p>From a script:</p>
+<pre><code class="language-py">with pm.connect(&quot;cve-2016-7255&quot;) as server:
+    # TODO: use the server
+    pass
+</code></pre>
+<p>This is useful, as the server port will typically change at each reopening of the scenario, while the scenario name remains the same.</p>
+<p>If no server is open for that particular scenario when executing the <code>ProjectManager.connect</code> method call, then a new one will be started.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="manipulating-transitions-and-contexts"><a class="header" href="#manipulating-transitions-and-contexts">Manipulating transitions and contexts</a></h1>
+<h2 id="getting-a-transition-or-context-from-a-transition-id"><a class="header" href="#getting-a-transition-or-context-from-a-transition-id">Getting a transition or context from a transition id</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">tr = server.trace.transition(1234)
+ctx_before = server.trace.context_before(1234)
+ctx_after = server.trace.context_after(1234)
+</code></pre>
+<h2 id="context---transition"><a class="header" href="#context---transition">Context &lt;-&gt; Transition</a></h2>
+<h3 id="transition---context"><a class="header" href="#transition---context">Transition -&gt; Context</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">ctx_before = tr.context_before()
+ctx_after = tr.context_after()
+</code></pre>
+<h3 id="context---transition-1"><a class="header" href="#context---transition-1">Context -&gt; Transition</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.6.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">if ctx != server.trace.first_context:
+    tr_before = ctx.transition_before()
+if ctx != server.trace.last_context:
+    tr_after = ctx.transition_after()
+</code></pre>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">if ctx != server.trace.context_before(0):
+    tr_before = ctx.transition_before()
+if ctx != server.trace.context_after(server.trace.transition_count - 1):
+    tr_after = ctx.transition_after()
+</code></pre>
+<div class="bulma">
+<div class="message is-warning">
+    <div class="message-header">
+      There are not always transitions around a context
+    </div>
+<div class="message-body content">
+<p>
+  While <code>transition.context_before/context_after()</code> always works, one must handle the case where a context is the first/last of the trace, in which case no transition before/after it can be accessed.
+</p>
+<p>
+  Trying to access the transition before the first context/after the last, will trigger an <code>IndexError</code>.
+</p>
+</div>
+</div>
+</div>
+<h2 id="getting-the-nextprevious-context-and-transition"><a class="header" href="#getting-the-nextprevious-context-and-transition">Getting the next/previous context and transition</a></h2>
+<pre><code class="language-py">next_tr = tr + 1
+prev_tr = tr - 1
+next_ctx = ctx + 1
+prev_ctx = ctx - 1
+next_next_tr = tr + 2
+# ...
+</code></pre>
+<div class="bulma">
+<div class="message is-warning">
+    <div class="message-header">
+      There is not always a next/previous transition/context
+    </div>
+<div class="message-body content">
+<p>
+  Make sure that the resulting transition/context is in range when adding/subtracting an offset to generate a new transition/context.
+</p>
+<p>
+  Trying to access a transition/context out-of-range will trigger an <code>IndexError</code>.
+</p>
+</div>
+</div>
+</div>
+<h2 id="iterating-on-a-range-of-transitionscontexts"><a class="header" href="#iterating-on-a-range-of-transitionscontexts">Iterating on a range of transitions/contexts</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">for tr in server.trace.transitions(0, 1000):
+    print(tr)
+
+for ctx in server.trace.contexts():
+    print(ctx)
+</code></pre>
+<h1 id="getting-the-firstlast-contexttransition-in-the-trace"><a class="header" href="#getting-the-firstlast-contexttransition-in-the-trace">Getting the first/last context/transition in the trace</a></h1>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.6.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">first_tr = server.trace.first_transition
+last_tr = server.trace.last_transition
+first_ctx = server.trace.first_context
+last_ctx = server.trace.last_context
+</code></pre>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">first_tr = server.trace.transition(0)
+last_tr = server.trace.transition(server.trace.transition_count - 1)
+first_ctx = server.trace.context_before(0)
+last_ctx = server.trace.context_after(server.trace.transition_count - 1)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reading-values-from-registers-or-memory"><a class="header" href="#reading-values-from-registers-or-memory">Reading values from registers or memory</a></h1>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<h2 id="common-imports-for-easy-access"><a class="header" href="#common-imports-for-easy-access">Common imports for easy access</a></h2>
+<pre><code class="language-py">from reven2.address import LinearAddress, LogicalAddress, LogicalAddressSegmentIndex, PhysicalAddress
+from reven2.arch import x64 as regs
+from reven2.types import *
+</code></pre>
+<h2 id="getting-the-current-ring"><a class="header" href="#getting-the-current-ring">Getting the current ring</a></h2>
+<pre><code class="language-py">def current_ring(ctx):
+    return ctx.read(regs.cs) &amp; 3
+</code></pre>
+<h2 id="reading-as-a-type"><a class="header" href="#reading-as-a-type">Reading as a type</a></h2>
+<h3 id="integer-types"><a class="header" href="#integer-types">Integer types</a></h3>
+<pre><code class="language-py">ctx.read(regs.rax, U8)
+ctx.read(regs.rax, U16)
+ctx.read(regs.rax, I16)
+ctx.read(regs.rax, BigEndian(U16))
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">96
+35680
+-29856
+24715
+</code></pre>
+<h3 id="string"><a class="header" href="#string">String</a></h3>
+<pre><code class="language-py">ctx.read(LogicalAddress(0xffffe00041cac2ea), CString(encoding=Encoding.Utf16,
+                                                     max_character_count=1000))
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">u'Network Store Interface Service'
+</code></pre>
+<h3 id="array"><a class="header" href="#array">Array</a></h3>
+<pre><code class="language-py">ctx.read(LogicalAddress(0xffffe00041cac2ea), Array(U8, 4))
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">[78, 0, 101, 0]
+</code></pre>
+<h3 id="dereferencing-pointers-reading-the-stack"><a class="header" href="#dereferencing-pointers-reading-the-stack">Dereferencing pointers, reading the stack</a></h3>
+<p>Reading <code>[rsp+0x20]</code> manually:</p>
+<pre><code class="language-py">addr = LogicalAddress(0x20) + ctx.read(regs.rsp, USize)
+ctx.read(addr, U64)
+</code></pre>
+<p>Reading <code>[rsp+0x20]</code> using <code>deref</code>:</p>
+<pre><code class="language-py">ctx.deref(regs.rsp, Pointer(U64, base_address=LogicalAddress(0x20)))
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">10738
+</code></pre>
+<h3 id="parsing-a-raw-buffer-as-a-type"><a class="header" href="#parsing-a-raw-buffer-as-a-type">Parsing a raw buffer as a type</a></h3>
+<pre><code class="language-py">U16.parse(b&quot;\x10\x20&quot;)
+BigEndian(U16).parse(b&quot;\x10\x20&quot;)
+Array(U8, 2).parse(b&quot;\x10\x20&quot;)
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">8208
+4128
+[16, 32]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="moving-to-the-beginning-of-a-function"><a class="header" href="#moving-to-the-beginning-of-a-function">Moving to the beginning of a function</a></h1>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.9.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">from reven2.trace import Transition
+from typing import Tuple, Optional
+
+def call_bounds(tr: Transition) -&gt; Tuple[Optional[Transition], Optional[Transition]]:
+    &quot;&quot;&quot;
+    Given a transition anywhere inside of a function, this function returns
+    the transition at the beginning of the function call and the transition at
+    the end of the function call.
+    &quot;&quot;&quot;
+    return (tr.step_out(is_forward=False), tr.step_out(is_forward=True))
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="searching-for-function-calls"><a class="header" href="#searching-for-function-calls">Searching for function calls</a></h1>
+<h2 id="looking-for-an-exact-symbol-name"><a class="header" href="#looking-for-an-exact-symbol-name">Looking for an exact symbol name</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">symbol_name = &quot;CreateProcessW&quot;
+try:
+    symbol = next(server.ossi.symbols(f&quot;^{symbol_name}$&quot;,
+                                      binary_hint='kernelbase\.dll'))
+except StopIteration:
+    raise RuntimeError(f&quot;Could not find symbol '{symbol_name}'&quot;)
+for ctx in server.trace.search.symbol(symbol):
+    print(ctx)
+</code></pre>
+<div class="bulma">
+<div class="message is-warning">
+    <div class="message-header">
+      Handling of the case where the symbol is not in the trace
+    </div>
+<div class="message-body content">
+<p>
+    When looking for an <strong>exact</strong> symbol, you need to prepare for the case where the symbol is not available in the trace. Note that a symbol can be available <emph>even if it is never called</emph>.
+</p>
+<p>
+    In the example, it manifests with the iterator having no element, which raises a <code>StopIteration</code>, that we catch and then convert to a more specific error.
+</p>
+</div>
+</div>
+<div class="message is-warning">
+    <div class="message-header">
+      Symbol pattern is a regular expression
+    </div>
+<div class="message-body content">
+<p>
+    When looking for a <strong>single, exact</strong> symbol, you need to enclose the symbol's name
+    in the pattern with <code>^$</code> because the pattern is actually a
+    regular expression. Failure to do that could result in several matching
+    symbols, with the risk that the rest of your code actually chooses the
+    wrong one.
+</p>
+</div>
+</div>
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>(GitHub)
+<a href="https://github.com/tetrane/reven2-file-activity">File activity</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="looking-for-multiple-symbols"><a class="header" href="#looking-for-multiple-symbols">Looking for multiple symbols</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<p>The example provides an iterator of the tuples where the first element is the context of the call, and the second the name of the called symbol.</p>
+<pre><code class="language-py">from itertools import repeat
+
+def first_symbol(symbol_name):
+    return next(server.ossi.symbols(f&quot;^{symbol_name}$&quot;, binary_hint=binary))
+
+
+binary = &quot;c:/windows/system32/ntoskrnl.exe&quot;
+symbols = ['NtCreateFile', 'NtOpenFile', 'NtOpenDirectoryObject']
+
+symbols_name = [(first_symbol(symbol), symbol) for symbol in symbols]
+
+symbols_name = [zip(server.trace.search.symbol(symbol[0]),
+                    repeat(symbol[1])) for symbol in symbols_name]
+
+for ctx_name in reven2.util.collate(symbols_name, lambda ctx_name: ctx_name[0]):
+    print(f&quot;{ctx_name[1]}: {ctx_name[0]}&quot;)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>NtCreateFile: Context before #4468509
+NtCreateFile: Context before #4479526
+NtCreateFile: Context before #6451786
+NtCreateFile: Context before #6852400
+NtCreateFile: Context before #7666717
+NtCreateFile: Context before #8067013
+NtCreateFile: Context before #8298671
+NtCreateFile: Context before #8648240
+NtOpenFile: Context before #26656294
+NtCreateFile: Context before #35251786
+NtOpenFile: Context before #36420358
+NtOpenFile: Context before #43268534
+NtOpenDirectoryObject: Context before #43420816
+NtOpenFile: Context before #43450170
+</code></pre>
+<div class="bulma">
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/report/threadsync.html">Thread synchronization</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_data_race.html">Detect data race</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="looking-for-a-crash"><a class="header" href="#looking-for-a-crash">Looking for a crash</a></h1>
+<h2 id="system-crashes"><a class="header" href="#system-crashes">System crashes</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 64-bit</span></span>
+    </div>
+</div>
+</div>
+</div>
+<p><a href="./search-calls.html#looking-for-an-exact-symbol-name">Look for the symbol</a> <code>KeBugCheckEx</code> in <code>ntoskrnl</code>:</p>
+<pre><code class="language-py">crash_symbol = next(server.ossi.symbols(&quot;^KeBugCheckEx$&quot;,
+                                        binary_hint=&quot;ntoskrnl&quot;))
+for ctx in server.trace.search.symbol(crash_symbol):
+    print(f&quot;System crash at {ctx}&quot;)
+</code></pre>
+<div class="bulma">
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/report/crash_detection.html">Crash detection</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="process-crashes"><a class="header" href="#process-crashes">Process crashes</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.3.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 64-bit</span></span>
+    </div>
+</div>
+</div>
+</div>
+<p><a href="./search-calls.html#looking-for-an-exact-symbol-name">Look for the symbol</a> <code>KiUserExceptionDispatch</code> in <code>ntdll</code>:</p>
+<pre><code class="language-py">crash_symbol = next(server.ossi.symbols(&quot;^KiUserExceptionDispatch$&quot;,
+                                        binary_hint=&quot;ntdll&quot;))
+for ctx in server.trace.search.symbol(crash_symbol):
+    process = ctx.ossi.process()
+    print(f&quot;{process.name} crashed at {ctx}&quot;)
+</code></pre>
+<div class="bulma">
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/report/crash_detection.html">Crash detection</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="finding-out-when-a-memory-location-is-accessed"><a class="header" href="#finding-out-when-a-memory-location-is-accessed">Finding out when a memory location is accessed</a></h1>
+<h2 id="getting-all-the-memory-accesses-of-a-range-of-addresses"><a class="header" href="#getting-all-the-memory-accesses-of-a-range-of-addresses">Getting all the memory accesses of a range of addresses</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">for access in server.trace.memory_accesses(0xffff88007fc03000, 4096):
+    print(access)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[#39 call 0xffffffff81611fe0 ($+0x165133)]Write access at @phy:0x7fc03ec8 (virtual address:
+        lin:0xffff88007fc03ec8) of size 8
+[#41 call qword ptr [0xffffffff81c24448]]Write access at @phy:0x7fc03ec0 (virtual address:
+        lin:0xffff88007fc03ec0) of size 8
+[#42 push rdx]Write access at @phy:0x7fc03eb8 (virtual address: lin:0xffff88007fc03eb8) of size 8
+[#48 pop rdx]Read access at @phy:0x7fc03eb8 (virtual address: lin:0xffff88007fc03eb8) of size 8
+[#49 ret ]Read access at @phy:0x7fc03ec0 (virtual address: lin:0xffff88007fc03ec0) of size 8
+[#51 push rdi]Write access at @phy:0x7fc03ec0 (virtual address: lin:0xffff88007fc03ec0) of size 8
+[#52 popfq ]Read access at @phy:0x7fc03ec0 (virtual address: lin:0xffff88007fc03ec0) of size 8
+[#54 ret ]Read access at @phy:0x7fc03ec8 (virtual address: lin:0xffff88007fc03ec8) of size 8
+[#60 call 0xffffffff814abe30 ($-0x108f)]Write access at @phy:0x7fc03ec8 (virtual address:
+        lin:0xffff88007fc03ec8) of size 8
+[#62 push r14]Write access at @phy:0x7fc03ec0 (virtual address: lin:0xffff88007fc03ec0) of size 8
+</code></pre>
+<h2 id="getting-all-the-memory-accesses-on-a-range-of-transitions"><a class="header" href="#getting-all-the-memory-accesses-on-a-range-of-transitions">Getting all the memory accesses on a range of transitions</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.9.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">for access in server.trace.memory_accesses(from_transition=trace.transition(1000),
+                                    to_transition=trace.transition(1010)):
+    print(access)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[#1005 mov qword ptr [rsp+0x40], r14]Write access at @phy:0x6645a9b0
+        (virtual address: lin:0xfffffe0ff31db9b0) of size 8
+[#1007 mov qword ptr [rsp+0x98], r14]Write access at @phy:0x6645aa08
+        (virtual address: lin:0xfffffe0ff31dba08) of size 8
+[#1008 or dword ptr [rsp+0x90], 0x2]Read access at @phy:0x6645aa00
+        (virtual address: lin:0xfffffe0ff31dba00) of size 4
+[#1008 or dword ptr [rsp+0x90], 0x2]Write access at @phy:0x6645aa00
+        (virtual address: lin:0xfffffe0ff31dba00) of size 4
+</code></pre>
+<h2 id="finding-the-memory-accesses-at-a-transition"><a class="header" href="#finding-the-memory-accesses-at-a-transition">Finding the memory accesses at a transition</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">for access in tr.memory_accesses():
+    print(access)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[MemoryAccess(transition=Transition(id=42), physical_address=PhysicalAddress(offset=0x7fc03eb8), size=8,
+    operation=MemoryAccessOperation.Write, virtual_address=LinearAddress(offset=0xffff88007fc03eb8))]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="displaying-the-value-of-arguments-and-return-value-of-a-call"><a class="header" href="#displaying-the-value-of-arguments-and-return-value-of-a-call">Displaying the value of arguments and return value of a call</a></h1>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.10.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">API</span>
+        <span class="tag is-warning">preview</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 64-bit</span></span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-linux" aria-hidden="true"></i></span>
+<span>Linux 64-bit</span></span>
+    </div>
+</div>
+</div>
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>(GitHub)
+<a href="https://github.com/tetrane/reven2-ltrace">ltrace</a>
+</li>
+<li>(GitHub)
+<a href="https://github.com/tetrane/reven2-file-activity">File activity</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="when-the-prototype-is-known"><a class="header" href="#when-the-prototype-is-known">When the prototype is known</a></h2>
+<h3 id="windows-64-bit"><a class="header" href="#windows-64-bit">Windows 64-bit</a></h3>
+<p>Use the <code>Ms64</code> calling convention.</p>
+<pre><code class="language-py">call_tr = tr.step_out(is_forward=False)
+import reven2.preview.prototypes
+prototypes = reven2.preview.prototypes.RevenPrototypes(server)
+call_conv = prototypes.calling_conventions.Ms64
+prototype = &quot;char * __cdecl OaGetEnv(char const *)&quot;
+f = prototypes.parse_one_function(prototype, call_conv)
+call = f.call_site_values(call_tr)
+call.arg_n(0)
+call.ret()
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">'OACACHEPARAMS'
+0
+</code></pre>
+<h3 id="linux-64-bit"><a class="header" href="#linux-64-bit">Linux 64-bit</a></h3>
+<p>Use the <code>Sysv64</code> calling convention.</p>
+<pre><code class="language-py">call_tr = tr.step_out(is_forward=False)
+import reven2.preview.prototypes
+prototypes = reven2.preview.prototypes.RevenPrototypes(server)
+call_conv = prototypes.calling_conventions.Sysv64
+prototype = &quot;struct FILE; FILE* fopen64(const char *filename, const char *mode);&quot;
+f = prototypes.parse_one_function(prototype, call_conv)
+call = f.call_site_values(call_tr)
+call.args()
+call.ret()
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">{'filename': '/proc/spl/kstat/zfs/arcstats', 'mode': 'r'}
+0
+</code></pre>
+<h2 id="using-a-default-prototype"><a class="header" href="#using-a-default-prototype">Using a default prototype</a></h2>
+<p>Example with 5 parameters.</p>
+<pre><code class="language-py">call_tr = tr.step_out(is_forward=False)
+import reven2.preview.prototypes
+prototypes = reven2.preview.prototypes.RevenPrototypes(server)
+call_conv = prototypes.calling_conventions.Ms64
+prototype = &quot;void* f(void* p0, void* p1, void* p2, void* p3, void* p4);&quot;
+f = prototypes.parse_one_function(prototype, call_conv)
+call = f.call_site_values(call_tr)
+call.args()
+call.ret()
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">{'p0': 18446735287469384880,
+ 'p1': 0,
+ 'p2': 18446735287473289024,
+ 'p3': 0,
+ 'p4': 0}
+1364968393473
+</code></pre>
+<div class="bulma">
+<div class="message is-warning">
+    <div class="message-header">
+      Limitations apply
+    </div>
+<div class="message-body content">
+<p>
+    Using a default prototype works as long as the replaced parameters behave as <code>void*</code>.
+</p>
+<p>
+    This is notably not the case for structs passed by value that are larger than a pointer (in some calling conventions) and for floating-point arguments (in Sysv64).
+</p>
+</div>
+</div>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="searching-for-values-in-memory"><a class="header" href="#searching-for-values-in-memory">Searching for values in memory</a></h1>
+<h2 id="searching-for-values-in-a-range-of-memory-at-a-single-context"><a class="header" href="#searching-for-values-in-a-range-of-memory-at-a-single-context">Searching for values in a range of memory at a single context</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.6.0</span>
+    </div>
+</div>
+</div>
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/network/network_packet_tools.html">Network packet tools</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/network/dump_pcap.html">Dump PCAP</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html">Detect use of uninitialized memory</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<p>If the value you are looking for might be in a range of memory at a specific point in the trace, you can search it with the following:</p>
+<pre><code class="language-py">pattern = bytearray([0x77, 0x43])
+for match_address in ctx.search_in_memory(pattern,
+                                          ctx.read(regs.rsp), 0x1000000):
+     print(f&quot;'{pattern}' is found starting at @{match_address}&quot;)
+</code></pre>
+<h2 id="searching-for-string-like-values-accessed-in-the-trace"><a class="header" href="#searching-for-string-like-values-accessed-in-the-trace">Searching for string-like values accessed in the trace</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<p>If the value you are looking for looks like a string indexed by the strings resource (defaults to strings of printable characters of length 5-128, possibly UTF-16 encoded), then you can use the strings search API, which will be the fastest way:</p>
+<pre><code class="language-py">for string in server.trace.strings(&quot;Network&quot;):
+    for access in string.memory_accesses(from_tr, to_tr):
+        print(access)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[#4653465 mov word ptr [rcx], ax]Write access at @phy:0x18e8252c (virtual address: lin:0x3a252c) of size 2
+[#4653475 mov word ptr [rcx], ax]Write access at @phy:0x18e8252e (virtual address: lin:0x3a252e) of size 2
+[#4653485 mov word ptr [rcx], ax]Write access at @phy:0x18e82530 (virtual address: lin:0x3a2530) of size 2
+[#4653495 mov word ptr [rcx], ax]Write access at @phy:0x18e82532 (virtual address: lin:0x3a2532) of size 2
+[#4653505 mov word ptr [rcx], ax]Write access at @phy:0x18e82534 (virtual address: lin:0x3a2534) of size 2
+[#4653515 mov word ptr [rcx], ax]Write access at @phy:0x18e82536 (virtual address: lin:0x3a2536) of size 2
+[#4653525 mov word ptr [rcx], ax]Write access at @phy:0x18e82538 (virtual address: lin:0x3a2538) of size 2
+[#4653535 mov word ptr [rcx], ax]Write access at @phy:0x18e8253a (virtual address: lin:0x3a253a) of size 2
+[#4653545 mov word ptr [rcx], ax]Write access at @phy:0x18e8253c (virtual address: lin:0x3a253c) of size 2
+[#4653555 mov word ptr [rcx], ax]Write access at @phy:0x18e8253e (virtual address: lin:0x3a253e) of size 2
+[#4653565 mov word ptr [rcx], ax]Write access at @phy:0x18e82540 (virtual address: lin:0x3a2540) of size 2
+[#4653575 mov word ptr [rcx], ax]Write access at @phy:0x18e82542 (virtual address: lin:0x3a2542) of size 2
+[#4653585 mov word ptr [rcx], ax]Write access at @phy:0x18e82544 (virtual address: lin:0x3a2544) of size 2
+[#4653595 mov word ptr [rcx], ax]Write access at @phy:0x18e82546 (virtual address: lin:0x3a2546) of size 2
+[#4653605 mov word ptr [rcx], ax]Write access at @phy:0x18e82548 (virtual address: lin:0x3a2548) of size 2
+[#4653615 mov word ptr [rcx], ax]Write access at @phy:0x18e8254a (virtual address: lin:0x3a254a) of size 2
+[#4653625 mov word ptr [rcx], ax]Write access at @phy:0x18e8254c (virtual address: lin:0x3a254c) of size 2
+</code></pre>
+<div class="bulma">
+<div class="message is-info">
+    <div class="message-header">
+      Unaccessed values are not found by this method
+    </div>
+<div class="message-body content">
+<p>
+    This method only finds values in memory that are <strong>accessed</strong> (read from, written to) during the portion of the trace where the search takes place.
+</p>
+<p>
+    If you don't know if your value is accessed in the trace, you can associate this method with a <a href="search-values.html#searching-for-values-in-a-range-of-memory-at-a-single-context">search in memory at a context</a>.
+</p>
+</div>
+</div>
+</div>
+<h2 id="searching-for-other-kinds-of-values-accessed-in-the-trace"><a class="header" href="#searching-for-other-kinds-of-values-accessed-in-the-trace">Searching for other kinds of values accessed in the trace</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.6.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">for match in server.trace.search.memory(b&quot;\xc0\xfc\x75\x02&quot;, from_ctx, to_ctx).matches():
+    print(match)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>id: 0 | @lin:0xab600 (mapped at Context before #5665813) | [Context before #5665813 - Context after #16899165] | 1 access(es)
+id: 1 | @lin:0xbadf0 (mapped at Context before #5666826) | [Context before #5666826 - Context after #16899165] | 1 access(es)
+id: 2 | @lin:0xac810 (mapped at Context before #5666966) | [Context before #5666966 - Context before #6141251] | 1 access(es)
+id: 3 | @lin:0xb0935 (mapped at Context before #6140550) | [Context before #6140550 - Context after #16899165] | 1 access(es)
+id: 4 | @lin:0xab790 (mapped at Context before #6143172) | [Context before #6143172 - Context after #16899165] | 1 access(es)
+id: 5 | @lin:0xffffe0016aec9800 (mapped at Context before #6144279) | [Context before #6144279 - Context before #6379441] | 2 access(es)
+id: 6 | @lin:0xffffe0016a7accc0 (mapped at Context before #6152909) | [Context before #6152909 - Context before #6372050] | 1 access(es)
+id: 7 | @lin:0xc7e605 (mapped at Context before #6218204) | [Context before #6218204 - Context after #16899165] | 15 access(es)
+id: 8 | @lin:0xc67780 (mapped at Context before #6235773) | [Context before #6235773 - Context after #16899165] | 10 access(es)
+id: 9 | @lin:0x29feb26 (mapped at Context before #6360085) | [Context before #6360085 - Context before #6360107] | 2 access(es)
+id: 10 | @lin:0x29feb26 (mapped at Context before #6360108) | [Context before #6360108 - Context before #6360254] | 3 access(es)
+id: 11 | @lin:0x29feb26 (mapped at Context before #6360255) | [Context before #6360255 - Context after #16899165] | 2 access(es)
+id: 12 | @lin:0x29feb06 (mapped at Context before #6360265) | [Context before #6360265 - Context before #6360264] | 0 access(es)
+id: 13 | @lin:0x29feb06 (mapped at Context before #6360265) | [Context before #6360265 - Context after #16899165] | 2 access(es)
+id: 14 | @lin:0x29fe946 (mapped at Context before #6360440) | [Context before #6360440 - Context before #6360439] | 0 access(es)
+id: 15 | @lin:0x29fe946 (mapped at Context before #6360440) | [Context before #6360440 - Context before #6360458] | 2 access(es)
+</code></pre>
+<div class="bulma">
+<div class="message is-info">
+    <div class="message-header">
+      Unaccessed values are not found by this method
+    </div>
+<div class="message-body content">
+<p>
+    This method only finds values in memory that are <strong>accessed</strong> (read from, written to) during the portion of the trace where the search takes place.
+</p>
+<p>
+    If you don't know if your value is accessed in the trace, you can associate this method with a <a href="search-values.html#searching-for-values-in-a-range-of-memory-at-a-single-context">search in memory at a context</a>.
+</p>
+</div>
+</div>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="listing-the-processes-binaries-in-the-trace"><a class="header" href="#listing-the-processes-binaries-in-the-trace">Listing the processes, binaries in the trace</a></h1>
+<h2 id="listing-the-processes-executed-in-the-trace"><a class="header" href="#listing-the-processes-executed-in-the-trace">Listing the processes executed in the trace</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.10.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 64-bit</span></span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">for process in server.ossi.executed_processes():
+    print(process)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>cmd.exe (2320)
+chat_client.exe (2832)
+conhost.exe (2704)
+cmd.exe (2716)
+ShellExperienceHost.exe (2044)
+svchost.exe (876)
+conhost.exe (2596)
+...
+</code></pre>
+<h2 id="listing-the-binaries-executed-in-the-trace"><a class="header" href="#listing-the-binaries-executed-in-the-trace">Listing the binaries executed in the trace</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">for binary in server.ossi.executed_binaries():
+   print(binary)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>c:/windows/system32/wevtsvc.dll
+c:/windows/system32/oleacc.dll
+c:/windows/system32/inputswitch.dll
+c:/windows/explorer.exe
+c:/windows/system32/ci.dll
+c:/windows/system32/drivers/pciidex.sys
+c:/windows/system32/drivers/intelide.sys
+</code></pre>
+<h2 id="finding-a-single-binary-in-the-trace"><a class="header" href="#finding-a-single-binary-in-the-trace">Finding a single binary in the trace</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">def find_one_binary(binary_path):
+    &quot;&quot;&quot;
+    Return the binary corresponding to the passed portion of its path if any,
+    None if there isn't one, and throws if there would be two matches or more.
+    &quot;&quot;&quot;
+    query = server.ossi.executed_binaries(binary_path)
+    try:
+        first = next(query)
+    except StopIteration:
+        return None
+    try:
+        second = next(query)
+        raise ValueError(f&quot;Found multiple binaries '{first}' and '{second}' for query '{binary_path}'&quot;)
+    except StopIteration:
+        return first
+</code></pre>
+<h2 id="finding-the-base-address-where-a-binary-has-been-loaded"><a class="header" href="#finding-the-base-address-where-a-binary-has-been-loaded">Finding the base address where a binary has been loaded</a></h2>
+<p>Because a binary can be loaded multiple times at different addresses in a trace, we recover the base address from a Context where the binary is executed.</p>
+<h3 id="finding-the-base-address-of-the-first-instance-of-a-binary-in-the-trace"><a class="header" href="#finding-the-base-address-of-the-first-instance-of-a-binary-in-the-trace">Finding the base address of the first instance of a binary in the trace</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">def find_first_base_address(binary: reven2.ossi.ossi.Binary):
+    for ctx in server.trace.search.binary(binary):
+        return ctx.ossi.location().base_address
+</code></pre>
+<h3 id="finding-all-the-base-addresses-of-a-binary-in-a-specified-process"><a class="header" href="#finding-all-the-base-addresses-of-a-binary-in-a-specified-process">Finding all the base addresses of a binary in a specified process</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.10.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">def find_base_address_in_process(binary: reven2.ossi.ossi.Binary, process: reven2.ossi.process.Process):
+    for ctx_range in server.trace.filter(processes=(process,):
+        for ctx in server.trace.search.binary(binary, ctx_range.begin, ctx_range.end):
+            return ctx.ossi.location().base_address
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="focusing-on-a-portion-of-the-trace"><a class="header" href="#focusing-on-a-portion-of-the-trace">Focusing on a portion of the trace</a></h1>
+<h2 id="filtering-on-processesring"><a class="header" href="#filtering-on-processesring">Filtering on processes/ring</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.10.0</span>
+    </div>
+</div>
+</div>
+<pre><code class="language-py">processes = list(server.ossi.executed_processes(&quot;chat&quot;))
+for ctx_range in server.trace.filter(processes, reven2.filter.RingPolicy.R3Only):
+    first_context = next(iter(ctx_range))
+    print(f&quot;{ctx_range}: {first_context.ossi.process()}\t| {first_context.ossi.location()}&quot;)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[Context before #5662909, Context before #5669296]: chat_client.exe (2816)	| ntdll!ZwDeviceIoControlFile+0x14
+[Context before #5670173, Context before #5671124]: chat_client.exe (2816)	| ntdll!NtSetIoCompletion+0x14
+[Context before #5672523, Context before #5673027]: chat_client.exe (2816)	| ntdll!NtRemoveIoCompletionEx+0x14
+[Context before #5678502, Context before #5678522]: chat_client.exe (2816)	| chat_client!&lt;tokio_timer::clock::clock::Clock as tokio_timer::timer::now::Now&gt;::now+0x24
+[Context before #5678723, Context before #5679392]: chat_client.exe (2816)	| ntdll!ZwQueryPerformanceCounter+0x14
+...
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="following-the-dataflow"><a class="header" href="#following-the-dataflow">Following the dataflow</a></h1>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.6.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">API</span>
+        <span class="tag is-warning">preview</span>
+    </div>
+</div>
+</div>
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_use_after_free.html">Use-after-Free vulnerabilities detection</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_buffer_overflow.html">Searching for Buffer-Overflow vulnerabilities</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html">Searching for Use-of-Uninitialized-Memory vulnerabilities</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="finding-out-from-where-data-comes"><a class="header" href="#finding-out-from-where-data-comes">Finding out from where data comes</a></h2>
+<p>The below displays all processes and functions that some tainted buffer goes through:</p>
+<pre><code class="language-py">import reven2.preview.taint as tainting
+
+tainter = tainting.Tainter(server.trace)
+
+taint = tainter.simple_taint(&quot;rax&quot;, to_context=tr.context_before(), is_forward=False)
+
+last_symbol = None
+last_process = None
+for access in taint.accesses().all():
+    ctx_after = access.transition.context_after()
+    new_process = ctx_after.ossi.process()
+    new_symbol = ctx_after.ossi.location().symbol
+    if new_symbol is None:
+        if last_symbol is not None:
+            print(f&quot;{new_process}: ???&quot;)
+        last_symbol = None
+        last_process = new_process
+        continue
+    if (last_symbol is not None and last_process is not None
+        and new_symbol == last_symbol
+        and new_process.pid == last_process.pid
+       ):
+        continue
+
+    last_symbol = new_symbol
+    last_process = new_process
+
+    print(f&quot;{new_process}: {new_symbol}&quot;)
+
+</code></pre>
+<p>Sample output:</p>
+<pre><code>conhost.exe (2704): win32kfull!memcpy
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): msvcrt!memcpy
+conhost.exe (2704): conhostv2!WriteCharsLegacy
+conhost.exe (2704): conhostv2!WriteBuffer::Print
+conhost.exe (2704): conhostv2!Microsoft::Console::VirtualTerminal::AdaptDispatch::Print
+conhost.exe (2704): conhostv2!WriteChars
+conhost.exe (2704): ???
+chat_client.exe (2832): ntdll!memcpy
+chat_client.exe (2832): chat_client!&lt;alloc::vec::Vec&lt;T&gt; as alloc::vec::SpecExtend&lt;T, I&gt;&gt;::from_iter
+chat_client.exe (2832): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2832): ntdll!memcpy
+chat_client.exe (2832): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2832): chat_client!&lt;alloc::vec::Vec&lt;T&gt; as alloc::vec::SpecExtend&lt;T, I&gt;&gt;::from_iter
+chat_client.exe (2832): ntdll!RtlpAllocateHeapInternal
+chat_client.exe (2832): chat_client!&lt;alloc::vec::Vec&lt;T&gt; as alloc::vec::SpecExtend&lt;T, I&gt;&gt;::from_iter
+chat_client.exe (2832): msvcrt!memcpy
+chat_client.exe (2832): netio!memcpy
+chat_server.exe (648): netio!memcpy
+chat_server.exe (648): ???
+chat_server.exe (648): msvcrt!memcpy
+chat_server.exe (648): chat_server!bytes::buf::buf_mut::BufMut::put
+chat_server.exe (648): msvcrt!memcpy
+chat_server.exe (648): chat_server!bytes::buf::buf_mut::BufMut::put
+chat_server.exe (648): chat_server!&lt;&amp;'a str as bytes::buf::into_buf::IntoBuf&gt;::into_buf
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!bytes::bytes::Inner::reserve
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;futures::sync::mpsc::UnboundedReceiver&lt;T&gt; as futures::stream::Stream&gt;::poll
+chat_server.exe (648): chat_server!&lt;futures::sync::mpsc::Receiver&lt;T&gt;&gt;::next_message
+chat_server.exe (648): chat_server!&lt;futures::sync::mpsc::queue::Queue&lt;T&gt;&gt;::pop
+chat_server.exe (648): chat_server!&lt;futures::sync::mpsc::Sender&lt;T&gt;&gt;::queue_push_and_signal
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::Bytes as core::clone::Clone&gt;::clone
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as bytes::buf::buf_mut::BufMut&gt;::put_slice
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!bytes::bytes::Inner::reserve
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as bytes::buf::buf_mut::BufMut&gt;::put_slice
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!bytes::bytes::Inner::reserve
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as bytes::buf::buf_mut::BufMut&gt;::put_slice
+chat_server.exe (648): msvcrt!memcpy
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as bytes::buf::buf_mut::BufMut&gt;::put_slice
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!bytes::bytes::Inner::reserve
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::extend_from_slice
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as core::clone::Clone&gt;::clone
+chat_server.exe (648): msvcrt!memcpy
+chat_server.exe (648): chat_server!&lt;bytes::bytes::BytesMut as core::clone::Clone&gt;::clone
+chat_server.exe (648): chat_server!&lt;chat_server::Peer as futures::future::Future&gt;::poll
+chat_server.exe (648): chat_server!&lt;chat_server::Lines as futures::stream::Stream&gt;::poll
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::split_off
+chat_server.exe (648): chat_server!bytes::bytes::Inner::set_start
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::split_off
+chat_server.exe (648): chat_server!&lt;chat_server::Lines as futures::stream::Stream&gt;::poll
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::split_to
+chat_server.exe (648): chat_server!bytes::bytes::Inner::shallow_clone_sync
+chat_server.exe (648): chat_server!bytes::bytes::BytesMut::split_to
+chat_server.exe (648): chat_server!&lt;chat_server::Lines as futures::stream::Stream&gt;::poll
+chat_server.exe (648): chat_server!&lt;tokio_tcp::stream::TcpStream as tokio_io::async_read::AsyncRead&gt;::read_buf
+chat_server.exe (648): chat_server!mio::sys::windows::tcp::TcpStream::readv
+chat_server.exe (648): chat_server!&lt;&amp;'a std::net::tcp::TcpStream as std::io::Read&gt;::read
+chat_server.exe (648): ws2_32!recv
+chat_server.exe (648): mswsock!WSPRecv
+chat_server.exe (648): ntoskrnl!IopXxxControlFile
+chat_server.exe (648): ???
+chat_server.exe (648): ntoskrnl!IopXxxControlFile
+chat_server.exe (648): ntoskrnl!NtDeviceIoControlFile
+chat_server.exe (648): ntoskrnl!KiSystemCall64
+chat_server.exe (648): mswsock!WSPRecv
+chat_server.exe (648): ws2_32!recv
+chat_server.exe (648): chat_server!mio::sys::windows::tcp::TcpStream::readv
+chat_client.exe (2816): ???
+chat_client.exe (2816): netio!RtlCopyMdlToBuffer
+chat_client.exe (2816): ???
+chat_client.exe (2816): tcpip!TcpIndicateData
+chat_client.exe (2816): ndis!NdisAdvanceNetBufferDataStart
+chat_client.exe (2816): tcpip!IppPrevalidateLoopbackReceive
+chat_client.exe (2816): tcpip!IpNlpFastContinueSendDatagram
+chat_client.exe (2816): tcpip!IppSendDatagramsCommon
+chat_client.exe (2816): tcpip!IppPreparePacketChecksum
+chat_client.exe (2816): tcpip!IppSendDatagramsCommon
+chat_client.exe (2816): tcpip!TcpTcbSend
+chat_client.exe (2816): netio!NetioExtendNetBuffer
+chat_client.exe (2816): tcpip!TcpSegmentTcbSend
+chat_client.exe (2816): tcpip!TcpBeginTcbSend
+chat_client.exe (2816): netio!NetioAllocateAndReferenceNetBufferListNetBufferMdlAndData
+chat_client.exe (2816): ndis!NdisAllocateNetBufferList
+chat_client.exe (2816): netio!NetioAllocateAndReferenceNetBufferListNetBufferMdlAndData
+chat_client.exe (2816): tcpip!TcpBeginTcbSend
+chat_client.exe (2816): tcpip!TcpTcbSend
+chat_client.exe (2816): tcpip!TcpEnqueueTcbSend
+chat_client.exe (2816): ???
+chat_client.exe (2816): chat_client!&lt;std::net::tcp::TcpStream as miow::net::TcpStreamExt&gt;::write_overlapped
+chat_client.exe (2816): chat_client!mio::sys::windows::tcp::StreamImp::schedule_write
+chat_client.exe (2816): chat_client!mio::poll::SetReadiness::set_readiness
+chat_client.exe (2816): chat_client!mio::sys::windows::tcp::StreamImp::schedule_write
+chat_client.exe (2816): chat_client!mio::sys::windows::tcp::TcpStream::writev
+chat_client.exe (2816): chat_client!&lt;iovec::IoVec as core::ops::deref::Deref&gt;::deref
+chat_client.exe (2816): chat_client!mio::sys::windows::tcp::TcpStream::writev
+chat_client.exe (2816): chat_client!mio::sys::windows::selector::ReadyBinding::get_buffer
+chat_client.exe (2816): chat_client!&lt;mio::net::tcp::TcpStream as std::io::Write&gt;::write
+chat_client.exe (2816): chat_client!iovec::IoVec::from_bytes
+chat_client.exe (2816): chat_client!&lt;mio::net::tcp::TcpStream as std::io::Write&gt;::write
+chat_client.exe (2816): chat_client!&lt;tokio_reactor::poll_evented::PollEvented&lt;E&gt; as std::io::Write&gt;::write
+chat_client.exe (2816): chat_client!&lt;tokio_reactor::poll_evented::PollEvented&lt;E&gt;&gt;::poll_write_ready
+chat_client.exe (2816): chat_client!&lt;tokio_reactor::poll_evented::PollEvented&lt;E&gt; as std::io::Write&gt;::write
+chat_client.exe (2816): chat_client!_ZN99_$LT$tokio_io.._tokio_codec..framed_write..FramedWrite2$LT$T$GT$$u20$as$u20$futures..sink..Sink$GT$13poll_complete17h99e4d
+chat_client.exe (2816): chat_client!bytes::buf::buf_mut::BufMut::put
+chat_client.exe (2816): chat_client!&lt;&amp;'a str as bytes::buf::into_buf::IntoBuf&gt;::into_buf
+chat_client.exe (2816): chat_client!_ZN99_$LT$tokio_io.._tokio_codec..framed_write..FramedWrite2$LT$T$GT$$u20$as$u20$futures..sink..Sink$GT$10start_send17h590abca8
+chat_client.exe (2816): chat_client!&lt;futures::stream::split::SplitSink&lt;S&gt; as futures::sink::Sink&gt;::start_send
+chat_client.exe (2816): chat_client!&lt;futures::stream::forward::Forward&lt;T, U&gt;&gt;::try_start_send
+chat_client.exe (2816): chat_client!&lt;futures::stream::forward::Forward&lt;T, U&gt; as futures::future::Future&gt;::poll
+chat_client.exe (2816): chat_client!&lt;futures::stream::map_err::MapErr&lt;S, F&gt; as futures::stream::Stream&gt;::poll
+chat_client.exe (2816): chat_client!&lt;futures::sync::mpsc::Receiver&lt;T&gt; as futures::stream::Stream&gt;::poll
+chat_client.exe (2816): chat_client!&lt;futures::sync::mpsc::Receiver&lt;T&gt;&gt;::next_message
+chat_client.exe (2816): chat_client!&lt;futures::sync::mpsc::queue::Queue&lt;T&gt;&gt;::pop
+chat_client.exe (2816): chat_client!&lt;futures::sync::mpsc::Sender&lt;T&gt;&gt;::do_send
+chat_client.exe (2816): chat_client!&lt;futures::sink::send::Send&lt;S&gt; as futures::future::Future&gt;::poll
+chat_client.exe (2816): chat_client!futures::future::Future::wait
+chat_client.exe (2816): chat_client!chat_client::read_stdin
+chat_client.exe (2816): chat_client!&lt;std::io::stdio::Stdin as std::io::Read&gt;::read
+chat_client.exe (2816): chat_client!&lt;std::io::buffered::BufReader&lt;R&gt; as std::io::Read&gt;::read
+chat_client.exe (2816): chat_client!&lt;std::io::buffered::BufReader&lt;R&gt; as std::io::BufRead&gt;::fill_buf
+chat_client.exe (2816): chat_client!std::sys::windows::stdio::Stdin::read
+chat_client.exe (2816): chat_client!&lt;std::io::cursor::Cursor&lt;T&gt; as std::io::Read&gt;::read
+chat_client.exe (2816): chat_client!std::sys::windows::stdio::Stdin::read
+chat_client.exe (2816): ntdll!RtlpFreeHeap
+chat_client.exe (2816): chat_client!std::sys::windows::stdio::Stdin::read
+chat_client.exe (2816): chat_client!alloc::string::String::from_utf16
+chat_client.exe (2816): chat_client!alloc::string::String::push
+chat_client.exe (2816): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2816): chat_client!alloc::string::String::push
+chat_client.exe (2816): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2816): chat_client!alloc::string::String::push
+chat_client.exe (2816): ntdll!RtlpReAllocateHeapInternal
+chat_client.exe (2816): chat_client!alloc::string::String::push
+chat_client.exe (2816): ntdll!RtlpAllocateHeapInternal
+chat_client.exe (2816): chat_client!alloc::string::String::from_utf16
+chat_client.exe (2816): kernelbase!StrRetToStrW
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="displaying-data-nicely-in-jupyter-notebooks"><a class="header" href="#displaying-data-nicely-in-jupyter-notebooks">Displaying data nicely in Jupyter notebooks</a></h1>
+<h2 id="detecting-if-the-script-is-executed-in-a-notebook-or-not"><a class="header" href="#detecting-if-the-script-is-executed-in-a-notebook-or-not">Detecting if the script is executed in a notebook or not</a></h2>
+<pre><code class="language-py">def in_notebook():
+    &quot;&quot;&quot;
+    Detect if we are currently running a Jupyter notebook.
+
+    This is used to display rendered results inline in Jupyter when we are
+    executing in the context of a Jupyter notebook, or to display raw results
+    on the standard output when we are executing in the context of a script.
+    &quot;&quot;&quot;
+    try:
+        from IPython import get_ipython  # type: ignore
+
+        if get_ipython() is None or (&quot;IPKernelApp&quot; not in get_ipython().config):
+            return False
+    except ImportError:
+        return False
+    return True
+</code></pre>
+<h2 id="displaying-a-transition-address-as-a-synchronization-link"><a class="header" href="#displaying-a-transition-address-as-a-synchronization-link">Displaying a transition, address as a synchronization link</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.5.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Environment</span>
+        <span class="tag is-info">Jupyter</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">display(tr)
+display(address)
+display(bookmark)
+</code></pre>
+<p>Sample output:</p>
+<p><img src="img/jupyter_display.png" alt="Synchronization links" /></p>
+<h2 id="displaying-in-tables"><a class="header" href="#displaying-in-tables">Displaying in tables</a></h2>
+<pre><code class="language-py"># helper functions to output html tables
+def table_line(cells):
+    line = &quot;&quot;
+    for cell in cells:
+        line += &quot;&lt;td&gt;{}&lt;/td&gt;&quot;.format(cell)
+    return &quot;&lt;tr&gt;{}&lt;/tr&gt;&quot;.format(line)
+
+def display_table(title, headers, html_lines):
+    header_line = &quot;&quot;
+    for header in headers:
+        header_line += &quot;&lt;th&gt;{}&lt;/th&gt;&quot;.format(header)
+    header_line = &quot;&lt;tr&gt;{}&lt;/tr&gt;&quot;.format(header_line)
+    display(HTML(&quot;&quot;&quot;&lt;h2&gt;{}&lt;/h2&gt;&lt;table&gt;{} {}&lt;/table&gt;&quot;&quot;&quot;.format(title, header_line, html_lines)))
+</code></pre>
+<h2 id="pretty-printing"><a class="header" href="#pretty-printing">Pretty printing</a></h2>
+<h3 id="basics"><a class="header" href="#basics">Basics</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.7.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Environment</span>
+        <span class="tag is-info">Jupyter</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">from IPython.display import HTML, display
+display(HTML(f&quot;&lt;strong&gt;{tr.format_as_html()}&lt;/strong&gt;&quot;))
+</code></pre>
+<p>Sample output:</p>
+<p><img src="img/jupyter_basic_pretty.png" alt="Transition displayed strong" /></p>
+<h3 id="transition"><a class="header" href="#transition">Transition</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.5.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Environment</span>
+        <span class="tag is-info">Jupyter</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">import reven2
+from IPython.display import HTML, display
+import re
+import itertools
+import html
+
+all_regs = {}
+for reg in reven2.arch.helpers.x64_registers():
+    all_regs[reg.name] = reg
+
+def tokenize_string(string):
+    return re.split(&quot; |dword|ptr|\\[|\\]|\\+|\\*|,&quot;, string)
+
+def tokenize_instruction(transition):
+    if transition.instruction is None:
+        return []
+    return tokenize_string(str(transition.instruction))
+
+def get_pretty_print_tr(tr, show_context=False, show_symbol=False):
+    output = &quot;&quot;
+    if show_symbol:
+        output += &quot;&lt;span&gt;{}&lt;/span&gt;&lt;br/&gt;&quot;.format(html.escape(str(tr.context_before().ossi.location())))
+
+    output += tr._repr_html_()
+    output += &quot; &lt;code&gt;{}&lt;/code&gt;&quot;.format(str(tr).split(&quot; &quot;, 1)[1])
+    output += &quot;&lt;br/&gt;&quot;
+
+    if not show_context:
+        return '&lt;p style=&quot;font-family:monospace&quot; class=&quot;tex2jax_ignore&quot;&gt;' + output + &quot;&lt;/p&gt;&quot;
+
+    instr_elements = tokenize_instruction(tr)
+    done_already = []
+    print_data = []
+    for elem in instr_elements:
+        if elem in done_already:
+            continue
+        done_already.append(elem)
+        if elem in all_regs:
+            before = tr.context_before().read(all_regs[elem])
+            after = tr.context_after().read(all_regs[elem])
+            if before == after or elem in [&quot;rip&quot;]:
+                print_data.append(&quot;{} = {:x}&quot;.format(elem, before))
+            else:
+                print_data.append(&quot;{} = {:x} to {:x}&quot;.format(elem, before, after))
+
+    output += &quot;, &quot;.join(print_data) + &quot;&lt;br/&gt;&quot;
+    print_data = []
+
+    max_items = 4
+    accesses = list(itertools.islice(tr.memory_accesses(), max_items))
+    for acc in accesses:
+        elem = &quot;{}[{:#x}]:{}&quot;.format(&quot;R&quot; if acc.operation == reven2.memhist.MemoryAccessOperation.Read else &quot;W&quot;,
+                                     acc.virtual_address.offset,
+                                     acc.size)
+        try:
+            before = tr.context_before().read(acc.virtual_address, acc.size)
+            after = tr.context_after().read(acc.virtual_address, acc.size)
+            if before == after:
+                print_data.append(&quot;{} = {:x}&quot;.format(elem, before))
+            else:
+                print_data.append(&quot;{} = {:x} to {:x}&quot;.format(elem, before, after))
+        except:
+            print_data.append(elem + &quot; = ?&quot;)
+
+    if len(accesses) &gt; max_items:
+        print_data.append(&quot;...&quot;)
+    output += &quot;, &quot;.join(print_data)
+
+    return '&lt;p style=&quot;font-family:monospace&quot; class=&quot;tex2jax_ignore&quot;&gt;' + output + &quot;&lt;/p&gt;&quot;
+
+def pretty_print_tr(tr, show_context=False, show_symbol=False):
+    display(HTML(get_pretty_print_tr(tr, show_context=show_context, show_symbol=show_symbol)))
+</code></pre>
+<p>Sample output:</p>
+<p><img src="img/jupyter_pretty_tr.png" alt="Pretty transitions" /></p>
+<h3 id="address--hexdump"><a class="header" href="#address--hexdump">Address / Hexdump</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.5.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Environment</span>
+        <span class="tag is-info">Jupyter</span>
+    </div>
+</div>
+</div>
+</div>
+<p>Pretty print the content of a buffer at a specified address, in 0x10 increments.
+If passed a register, it will be dereferenced.</p>
+<pre><code class="language-py">import reven2
+from reven2.address import LinearAddress  # shortcut when reading addresses
+from IPython.display import HTML, display
+
+def print_buffer(b, addr=0, col=16, highlights = []):
+    style_highlight = '&lt;span style=&quot;background-color:yellow&quot;&gt;'
+    style_highlight_off = '&lt;/span&gt;'
+    output = '&lt;code style=&quot;background-color:white&quot;&gt;\n'
+
+    prev_all_zeros = 0
+    for i in range(int(len(b) / col)):
+
+        total_sum = sum(b[i*col:(i+1)*col])
+        for h in highlights:
+            if h in range(i*col,col):
+                total_sum = 0
+
+        total_sum_next = sum(b[(i+1)*col:(i+2)*col])
+        if total_sum == 0:
+            prev_all_zeros += 1
+        else:
+            prev_all_zeros == 0
+        if prev_all_zeros &gt; 0 and total_sum_next == 0 and len(b) &gt;= (i+2)*col:
+            if prev_all_zeros == 1:
+                output += &quot;...\n&quot;
+            continue
+
+        output += &quot;{:016x}:&quot;.format(i*col + addr)
+
+        for j in range(col):
+            offset = j + i*col
+
+            if offset &gt;= len(b):
+                break
+            if j % 8 == 0:
+                output += &quot; &quot;
+
+            total_sum += b[offset]
+            if offset in highlights:
+                output += style_highlight
+            output += &quot;{:02x}&quot;.format(b[offset])
+            if offset in highlights:
+                output += style_highlight_off
+            output += &quot; &quot;
+
+        output += &quot;- &quot;
+        for j in range(col):
+            offset = j + i*col
+            if offset &gt;= len(b):
+                break
+            c = b[offset]
+
+            if offset in highlights:
+                output += style_highlight
+
+            if c &gt;= 32 and c &lt;= 126:
+                output += &quot;{}&quot;.format(chr(c))
+            else:
+                output += &quot;.&quot;
+
+            if offset in highlights:
+                output += style_highlight_off
+        output += &quot;\n&quot;
+    output += &quot;&lt;/code&gt;&quot;
+    display(HTML(output))
+
+def pretty_print_addr(ctx, address, size):
+    if isinstance(address, reven2.arch.register.Register):
+        address = ctx.read(address)
+    if isinstance(address, int):
+        address = LinearAddress(address)
+    print_buffer(ctx.read(address, size), address.offset)
+</code></pre>
+<p>Sample output:</p>
+<p><img src="img/jupyter_pretty_address.png" alt="Pretty addresses" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="exporting-tabular-data-to-work-with-reporting-tools"><a class="header" href="#exporting-tabular-data-to-work-with-reporting-tools">Exporting tabular data to work with reporting tools</a></h1>
+<h2 id="pre-requisites-install-pandas"><a class="header" href="#pre-requisites-install-pandas">Pre-requisites: install pandas</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.9.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Environment</span>
+        <span class="tag is-info">Jupyter</span>
+    </div>
+</div>
+</div>
+</div>
+<p>This example requires the <code>pandas</code> Python package:</p>
+<pre><code class="language-py"># From a code cell of a Jupyter notebook
+try:
+    import pandas
+    print(&quot;pandas already installed&quot;)
+except ImportError:
+    print(&quot;Could not find pandas, attempting to install it from pip&quot;)
+    import sys
+
+    output = !{sys.executable} -m pip install pandas; echo $?  # noqa
+    success = output[-1]
+
+    for line in output[0:-1]:
+        print(line)
+
+    if int(success) != 0:
+        raise RuntimeError(&quot;Error installing pandas&quot;)
+    import pandas
+    print(&quot;Successfully installed pandas&quot;)
+</code></pre>
+<h2 id="building-tabular-data-from-filters"><a class="header" href="#building-tabular-data-from-filters">Building tabular data from filters</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.10.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Dependency</span>
+        <span class="tag is-info">pandas</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">res = []
+
+header = [&quot;Context range&quot;, &quot;Process&quot;, &quot;Location&quot;]
+
+processes = list(server.ossi.executed_processes(&quot;chat&quot;))
+for ctx_range in server.trace.filter(processes, reven2.filter.RingPolicy.R3Only):
+    first_context = next(iter(ctx_range))
+    res.append((ctx_range,
+                first_context.ossi.process(),
+                first_context.ossi.location()))
+
+df = pandas.DataFrame.from_records(res, columns=header)
+</code></pre>
+<h2 id="displaying-tabular-data-in-a-jupyter-notebook"><a class="header" href="#displaying-tabular-data-in-a-jupyter-notebook">Displaying tabular data in a Jupyter notebook</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.9.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Environment</span>
+        <span class="tag is-info">Jupyter</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Dependency</span>
+        <span class="tag is-info">pandas</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">res = []
+
+header = [&quot;Context range&quot;, &quot;Process&quot;, &quot;Location&quot;]
+
+processes = list(server.ossi.executed_processes(&quot;chat&quot;))
+for ctx_range in server.trace.filter(processes, reven2.filter.RingPolicy.R3Only):
+    first_context = next(iter(ctx_range))
+    res.append((ctx_range,
+                first_context.ossi.process(),
+                first_context.ossi.location()))
+
+df = pandas.DataFrame.from_records(res, columns=header)
+
+# display table truncated in the middle
+display(df)
+</code></pre>
+<p>Sample output:</p>
+<p><img src="img/jupyter_pandas.png" alt="Jupyter rendered table" /></p>
+<h2 id="exporting-tabular-data-to-csv"><a class="header" href="#exporting-tabular-data-to-csv">Exporting tabular data to csv</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.10.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Dependency</span>
+        <span class="tag is-info">pandas</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">df.to_csv(&quot;data.csv&quot;)
+</code></pre>
+<p>This can then be opened in e.g. spreadsheet software:</p>
+<p><img src="img/calc_pandas.png" alt="Spreadsheet" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="managing-bookmarks"><a class="header" href="#managing-bookmarks">Managing bookmarks</a></h1>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.5.0</span>
+    </div>
+</div>
+</div>
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/report/export_bookmarks.html">Export bookmarks</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/bk2bp.html">Bookmarks to WinDbg breakpoints</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/migration/import_bookmarks.html">Import classic bookmarks</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="working-with-bookmarks-starting-with-a-specific-tag"><a class="header" href="#working-with-bookmarks-starting-with-a-specific-tag">Working with bookmarks starting with a specific &quot;tag&quot;</a></h2>
+<p>Let's consider only bookmarks whose description starts with <code>&quot;auto&quot;</code>.</p>
+<h3 id="adding"><a class="header" href="#adding">Adding</a></h3>
+<pre><code class="language-py">for i in range(0, 100):
+    server.bookmarks.add(server.trace.transition(i), f&quot;auto: {i}&quot;)
+</code></pre>
+<h3 id="listing"><a class="header" href="#listing">Listing</a></h3>
+<pre><code class="language-py">for bookmark in server.bookmarks.all():
+    if not bookmark.description.startswith(&quot;auto&quot;):
+        continue
+    print(bookmark)
+</code></pre>
+<h3 id="removing"><a class="header" href="#removing">Removing</a></h3>
+<pre><code class="language-py">server.bookmarks.remove_if(lambda bookmark: bookmark.description.startswith(&quot;auto:&quot;))
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="finding-more-about-the-semantics-of-an-instruction"><a class="header" href="#finding-more-about-the-semantics-of-an-instruction">Finding more about the semantics of an instruction</a></h1>
+<div class="bulma">
+<div class="message is-link">
+    <div class="message-header">
+      Related examples
+    </div>
+<div class="message-body content pt-0">
+<ul>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_use_after_free.html">Use-after-Free vulnerabilities detection</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_buffer_overflow.html">Searching for Buffer-Overflow vulnerabilities</a>
+</li>
+<li>
+<a href="https://doc.tetrane.com/latest/examples-book/analyze/vulnerability_detection/detect_use_of_uninitialized_memory.html">Searching for Use-of-Uninitialized-Memory vulnerabilities</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="pre-requisites-install-and-setup-capstone"><a class="header" href="#pre-requisites-install-and-setup-capstone">Pre-requisites: install and setup Capstone</a></h2>
+<div class="bulma">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Environment</span>
+        <span class="tag is-info">Jupyter</span>
+    </div>
+</div>
+</div>
+<p>This example requires the <code>capstone</code> Python package:</p>
+<pre><code class="language-py"># From a code cell of a Jupyter notebook
+try:
+    import capstone
+    print(&quot;capstone already installed&quot;)
+except ImportError:
+    print(&quot;Could not find capstone, attempting to install it from pip&quot;)
+    import sys
+
+    output = !{sys.executable} -m pip install capstone; echo $?  # noqa
+    success = output[-1]
+
+    for line in output[0:-1]:
+        print(line)
+
+    if int(success) != 0:
+        raise RuntimeError(&quot;Error installing capstone&quot;)
+    import capstone
+    print(&quot;Successfully installed capstone&quot;)
+</code></pre>
+<h2 id="using-capstone"><a class="header" href="#using-capstone">Using Capstone</a></h2>
+<p>Since we need to maintain several objects that we would need to pass to the various functions, the easiest way is to use classes:</p>
+<pre><code class="language-py">class DisassembledInstruction:
+    def __init__(self, _tr : reven2.trace.Transition, _cs_insn):
+        self._tr = _tr
+        self._cs_insn = _cs_insn
+
+    def _read_transition_reg(self, reg: reven2.arch.register.Register):
+        &quot;&quot;&quot;
+        Read the value of a register during computations performed by the instruction.
+
+        For PC, it is the value after the instruction.
+        For other registers, it is the value before the instruction.
+        &quot;&quot;&quot;
+        if reg in [reven2.arch.x64.rip, reven2.arch.x64.eip]:
+            return self._tr.pc + self._cs_insn.size
+        else:
+            return self._tr.context_before().read(reg)
+
+    def dereferenced_address(self, op_index: int):
+        from reven2.arch.register import Register
+
+        cs_op = self._cs_insn.operands[op_index]
+
+        if cs_op.type != capstone.CS_OP_MEM:
+            raise IndexError(&quot;The selected operand is not a memory operand&quot;)
+
+        dereferenced_address = 0
+
+        if cs_op.value.mem.base != 0:
+            base_reg = Register.from_name(self._cs_insn.reg_name(cs_op.value.mem.base))
+            dereferenced_address += self._read_transition_reg(base_reg)
+
+        if cs_op.value.mem.index != 0:
+            index_reg = Register.from_name(self._cs_insn.reg_name(cs_op.value.mem.index))
+            index = self._read_transition_reg(index_reg)
+            dereferenced_address += (cs_op.value.mem.scale * index)
+
+        dereferenced_address += cs_op.value.mem.disp
+
+        # mask instruction depending on mode
+        mask = 0xFFFF_FFFF_FFFF_FFFF if self._tr.mode == reven2.trace.Mode.X86_64 else 0xFFFF_FFFF
+
+        return dereferenced_address &amp; mask
+
+    @property
+    def capstone_instruction(self):
+        return self._cs_insn
+
+    @property
+    def transition(self):
+        return self._tr
+
+
+class Disassembler:
+    def __init__(self):
+        self._md_64 = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
+        self._md_64.detail = True
+
+        self._md_32 = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+        self._md_32.detail = True
+
+    def disassemble(self, tr: reven2.trace.Trace):
+        &quot;&quot;&quot;
+        Attempt to disassemble with Capstone the instruction associated to the passed transition.
+
+        Returns None if there is no instruction to disassemble.
+        &quot;&quot;&quot;
+        if tr.instruction is not None:
+            instruction = tr.instruction
+        elif tr.exception is not None and tr.exception.related_instruction is not None:
+           instruction = tr.exception.related_instruction
+        else:
+            return None
+
+        if tr.mode == reven2.trace.Mode.X86_64:
+            md = self._md_64
+        elif tr.mode == reven2.trace.Mode.X86_32:
+            md = self._md_32
+        else:
+            raise ValueError(&quot;Unsupported mode '{tr.mode}'&quot;)
+        cs_insn = next(md.disasm(instruction.raw, instruction.size))
+
+        return DisassembledInstruction(tr, cs_insn)
+</code></pre>
+<h2 id="disassembling-reven-instructions"><a class="header" href="#disassembling-reven-instructions">Disassembling REVEN instructions</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.10.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Dependency</span>
+        <span class="tag is-info">capstone</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">dsm = Disassembler
+insn = dsm.disassemble(tr)
+# Access the capstone instruction
+insn.capstone_instruction
+</code></pre>
+<p>Depending on your use-case you may want to skip disassembling instructions related to exceptions, as these are not always (fully) executed.</p>
+<h2 id="compute-dereferenced-address"><a class="header" href="#compute-dereferenced-address">Compute dereferenced address</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Dependency</span>
+        <span class="tag is-info">capstone</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">hex(insn.dereferenced_address(0))
+</code></pre>
+<p>Sample output:</p>
+<pre><code>'0xfffff8024cfacfb0'
+</code></pre>
+<h2 id="convert-capstone-flags-to-reven-register-flags"><a class="header" href="#convert-capstone-flags-to-reven-register-flags">Convert capstone flags to REVEN register flags</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-info">v2.2.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Dependency</span>
+        <span class="tag is-info">capstone</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">test_eflags = {
+    capstone.x86.X86_EFLAGS_TEST_OF: reven2.arch.x64.of,
+    capstone.x86.X86_EFLAGS_TEST_SF: reven2.arch.x64.sf,
+    capstone.x86.X86_EFLAGS_TEST_ZF: reven2.arch.x64.zf,
+    capstone.x86.X86_EFLAGS_TEST_PF: reven2.arch.x64.pf,
+    capstone.x86.X86_EFLAGS_TEST_CF: reven2.arch.x64.cf,
+    capstone.x86.X86_EFLAGS_TEST_NT: reven2.arch.x64.nt,
+    capstone.x86.X86_EFLAGS_TEST_DF: reven2.arch.x64.df,
+    capstone.x86.X86_EFLAGS_TEST_RF: reven2.arch.x64.rf,
+    capstone.x86.X86_EFLAGS_TEST_IF: reven2.arch.x64.if_,
+    capstone.x86.X86_EFLAGS_TEST_TF: reven2.arch.x64.tf,
+    capstone.x86.X86_EFLAGS_TEST_AF: reven2.arch.x64.af,
+}
+
+for flag, reg in test_eflags.items():
+    if not insn.capstone_instruction.eflags &amp; flag:
+        # register not present, skip
+        continue
+    print(f&quot;{reg} is affected by the instruction&quot;)
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>
