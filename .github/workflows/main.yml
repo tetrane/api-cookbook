@@ -27,7 +27,7 @@ jobs:
  
       - name: Build the book
         run: |
-          MDBOOK_PREPROCESSOR__TERA__COMMAND="mdbook-tera --toml ./contexts/github.toml" mdbook build
+          MDBOOK_PREPROCESSOR__TERA__COMMAND="mdbook-tera --toml ./contexts/standalone.toml" mdbook build
           cp -r static book/
       
       - name: Disable jekyll
