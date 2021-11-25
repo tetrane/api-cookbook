@@ -17,6 +17,22 @@ This book is a collection of examples that demonstrate good practices to accompl
     If this is not the case, please refer to the <a href="{{ user_doc_root }}/Python-API/Installation.html">installation documentation</a> of the Python API before starting this guide.
 </p>
 {{ bulma::end_message() }}
+{{ bulma::begin_message(header="64-bit examples", class="is-warning") }}
+<p>
+  This book assumes that you are analyzing scenarios in a 64-bit context. If analyzing a scenario in a 32-bit context, then you should read from the 32-bit variants of registers or using 32-bit addresses.
+</p>
+<p>
+  So, if an example use <code>regs.rax</code>, the register should be replaced by <code>regs.eax</code>, like the following example:
+  <br/>
+  <code>
+    ctx.read(regs.rax, U64) # 64-bit
+  </code>
+  <br/>
+  <code>
+    ctx.read(regs.eax, U32) # 32-bit
+  </code>
+</p>
+{{ bulma::end_message() }}
 {{ bulma::end_bulma() }}
 
 ## Common abbreviations and variable names
