@@ -17,7 +17,7 @@ cargo install --version "0.4.0" mdbook-tera
 Then, the book can be built using:
 
 ```
-mdboook build
+mdbook build
 cp -r static/ book/
 ```
 
