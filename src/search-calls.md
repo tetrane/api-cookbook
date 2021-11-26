@@ -12,11 +12,12 @@
 
 ```py
 symbol_name = "CreateProcessW"
+binary_hint = r"kernelbase\.dll"
 try:
     symbol = next(server.ossi.symbols(f"^{symbol_name}$",
-                                      binary_hint=r"kernelbase\.dll"))
+                                      binary_hint=binary_hint))
 except StopIteration:
-    raise RuntimeError(f"Could not find symbol '{symbol_name}'")
+    raise RuntimeError(f"Could not find symbol '{symbol_name}' with binary hint '{binary_hint}'")
 for ctx in server.trace.search.symbol(symbol):
     print(ctx)
 ```
