@@ -14,7 +14,7 @@
 symbol_name = "CreateProcessW"
 try:
     symbol = next(server.ossi.symbols(f"^{symbol_name}$",
-                                      binary_hint='kernelbase\.dll'))
+                                      binary_hint=r'kernelbase\.dll'))
 except StopIteration:
     raise RuntimeError(f"Could not find symbol '{symbol_name}'")
 for ctx in server.trace.search.symbol(symbol):
