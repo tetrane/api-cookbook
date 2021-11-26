@@ -37,6 +37,9 @@ bulma::reven_version(version="v2.2.0")
 If the value you are looking for looks like a string indexed by the strings resource (defaults to strings of printable characters of length 5-128, possibly UTF-16 encoded), then you can use the strings search API, which will be the fastest way:
 
 ```py
+from_tr = server.trace.first_transition
+to_tr = server.trace.last_transition
+
 for string in server.trace.strings("Network"):
     for access in string.memory_accesses(from_tr, to_tr):
         print(access)
@@ -85,6 +88,9 @@ bulma::reven_version(version="v2.6.0")
 {{ bulma::end_bulma() }}
 
 ```py
+from_ctx = server.trace.first_context
+to_ctx = server.trace.last_context
+
 for match in server.trace.search.memory(b"\xc0\xfc\x75\x02", from_ctx, to_ctx).matches():
     print(match)
 ```
