@@ -138,7 +138,7 @@ class Disassembler:
 {{ bulma::end_bulma() }}
 
 ```py
-dsm = Disassembler
+dsm = Disassembler()
 insn = dsm.disassemble(tr)
 # Access the capstone instruction
 insn.capstone_instruction
