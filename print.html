@@ -1133,7 +1133,7 @@ c:/windows/system32/drivers/intelide.sys
 </div>
 </div>
 <pre><code class="language-py">def find_base_address_in_process(binary: reven2.ossi.ossi.Binary, process: reven2.ossi.process.Process):
-    for ctx_range in server.trace.filter(processes=(process,):
+    for ctx_range in server.trace.filter(processes=(process,)):
         for ctx in server.trace.search.binary(binary, ctx_range.begin, ctx_range.end):
             return ctx.ossi.location().base_address
 </code></pre>
@@ -1988,7 +1988,7 @@ class Disassembler:
 </div>
 </div>
 </div>
-<pre><code class="language-py">dsm = Disassembler
+<pre><code class="language-py">dsm = Disassembler()
 insn = dsm.disassemble(tr)
 # Access the capstone instruction
 insn.capstone_instruction
