@@ -110,7 +110,7 @@ def find_first_base_address(binary: reven2.ossi.ossi.Binary):
 
 ```py
 def find_base_address_in_process(binary: reven2.ossi.ossi.Binary, process: reven2.ossi.process.Process):
-    for ctx_range in server.trace.filter(processes=(process,):
+    for ctx_range in server.trace.filter(processes=(process,)):
         for ctx in server.trace.search.binary(binary, ctx_range.begin, ctx_range.end):
             return ctx.ossi.location().base_address
 ```
