@@ -42,8 +42,8 @@ Sample output:
 {{ bulma::end_bulma() }}
 
 ```py
-for access in server.trace.memory_accesses(from_transition=trace.transition(1000),
-                                    to_transition=trace.transition(1010)):
+for access in server.trace.memory_accesses(from_transition=server.trace.transition(1000),
+                                    to_transition=server.trace.transition(1010)):
     print(access)
 ```
 
