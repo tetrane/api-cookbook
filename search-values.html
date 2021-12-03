@@ -194,7 +194,10 @@ for match_address in ctx.search_in_memory(pattern,
 </div>
 </div>
 <p>If the value you are looking for looks like a string indexed by the strings resource (defaults to strings of printable characters of length 5-128, possibly UTF-16 encoded), then you can use the strings search API, which will be the fastest way:</p>
-<pre><code class="language-py">for string in server.trace.strings(&quot;Network&quot;):
+<pre><code class="language-py">from_tr = server.trace.first_transition
+to_tr = server.trace.last_transition
+
+for string in server.trace.strings(&quot;Network&quot;):
     for access in string.memory_accesses(from_tr, to_tr):
         print(access)
 </code></pre>
@@ -243,7 +246,10 @@ for match_address in ctx.search_in_memory(pattern,
 </div>
 </div>
 </div>
-<pre><code class="language-py">for match in server.trace.search.memory(b&quot;\xc0\xfc\x75\x02&quot;, from_ctx, to_ctx).matches():
+<pre><code class="language-py">from_ctx = server.trace.first_context
+to_ctx = server.trace.last_context
+
+for match in server.trace.search.memory(b&quot;\xc0\xfc\x75\x02&quot;, from_ctx, to_ctx).matches():
     print(match)
 </code></pre>
 <p>Sample output:</p>

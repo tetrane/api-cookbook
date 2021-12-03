@@ -159,11 +159,12 @@
 </div>
 </div>
 <pre><code class="language-py">symbol_name = &quot;CreateProcessW&quot;
+binary_hint = r&quot;kernelbase\.dll&quot;
 try:
     symbol = next(server.ossi.symbols(f&quot;^{symbol_name}$&quot;,
-                                      binary_hint='kernelbase\.dll'))
+                                      binary_hint=binary_hint))
 except StopIteration:
-    raise RuntimeError(f&quot;Could not find symbol '{symbol_name}'&quot;)
+    raise RuntimeError(f&quot;Could not find symbol '{symbol_name}' with binary hint '{binary_hint}'&quot;)
 for ctx in server.trace.search.symbol(symbol):
     print(ctx)
 </code></pre>
@@ -227,7 +228,7 @@ def first_symbol(symbol_name):
 
 
 binary = &quot;c:/windows/system32/ntoskrnl.exe&quot;
-symbols = ['NtCreateFile', 'NtOpenFile', 'NtOpenDirectoryObject']
+symbols = [&quot;NtCreateFile&quot;, &quot;NtOpenFile&quot;, &quot;NtOpenDirectoryObject&quot;]
 
 symbols_name = [(first_symbol(symbol), symbol) for symbol in symbols]
 
