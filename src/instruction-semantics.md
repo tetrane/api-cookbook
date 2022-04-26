@@ -26,16 +26,15 @@ try:
 except ImportError:
     print("Could not find capstone, attempting to install it from pip")
     import sys
+    import subprocess
 
-    output = !{sys.executable} -m pip install capstone; echo $?  # noqa
-    success = output[-1]
+    command = [f"{sys.executable}", "-m", "pip", "install", "capstone"]
+    p = subprocess.run(command)
 
-    for line in output[0:-1]:
-        print(line)
-
-    if int(success) != 0:
+    if int(p.returncode) != 0:
         raise RuntimeError("Error installing capstone")
-    import capstone
+
+    import capstone  # noqa
     print("Successfully installed capstone")
 ```
 
