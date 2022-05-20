@@ -58,6 +58,12 @@
 {{ self::tag(name="OS", value=value, name_class="is-dark", value_class="is-primary") }}
 {% endmacro windows_tag %}
 
+{% macro windows_32_tag() %}
+{% set value = '<span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 32-bit</span>' %}
+{{ self::tag(name="OS", value=value, name_class="is-dark", value_class="is-primary") }}
+{% endmacro windows_tag %}
+
 {% macro linux_tag() %}
 {% set value = '<span class="icon"><i class="fa fa-linux" aria-hidden="true"></i></span>
 <span>Linux 64-bit</span>' %}
