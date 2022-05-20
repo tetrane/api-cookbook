@@ -57,7 +57,7 @@ u'Network Store Interface Service'
 ### Array
 
 ```py
-ctx.read(LogicalAddress(0xffffe00041cac2ea), Array(U8, 4))
+list(ctx.read(LogicalAddress(0xffffe00041cac2ea), Array(U8, 4)))
 ```
 
 Sample output:
@@ -85,6 +85,60 @@ Sample output:
 
 ```py
 10738
+```
+
+### Reading struct values
+
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+    bulma::reven_version(version="v2.11.0"),
+    bulma::windows_tag(),
+    bulma::windows_32_tag(),
+    ])
+}}
+{{ bulma::end_bulma() }}
+
+Getting a `struct` type from a binary:
+
+```py
+object_attributes_ty : Struct = ntoskrnl.exact_type("_OBJECT_ATTRIBUTES")
+```
+
+Sample output of printing `object_attributes_ty`:
+
+```
+StructKind.Struct _OBJECT_ATTRIBUTES /* 0x30 */ {
+    /* 0x0 */ Length : U32,
+    /* 0x8 */ RootDirectory : void*,
+    /* 0x10 */ ObjectName : _UNICODE_STRING*,
+    /* 0x18 */ Attributes : U32,
+    /* 0x20 */ SecurityDescriptor : void*,
+    /* 0x28 */ SecurityQualityOfService : void*,
+}
+```
+
+Reading a struct instance from a source (register, memory, etc):
+
+```py
+object_attribute: StructInstance = ctx.deref(regs.r8, types.Pointer(object_attributes_ty))
+# display as bytes
+object_attributes.as_bytes()
+# Read an "int-like" field
+object_attributes.field("Length").read_int()
+# Dereferences a pointer-like field, read it as an inner struct, display its type
+print(object_attributes.field("ObjectName").deref_struct().type)
+```
+
+Sample output:
+
+```py
+b'0\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x98\xd1]\x06\x00\x00\x00\x00B\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+48
+StructKind.Struct _UNICODE_STRING /* 0x10 */ {
+    /* 0x0 */ Length : U16,
+    /* 0x2 */ MaximumLength : U16,
+    /* 0x8 */ Buffer : U16*,
+}
 ```
 
 ### Parsing a raw buffer as a type
