@@ -1,6 +1,6 @@
 {% import "templates/bulma.tera" as bulma %}
 
-# Reading values from registers or memory
+# Reading values or structs from registers or memory
 
 {{ bulma::begin_bulma() }}
 {{ bulma::tags(tags=[bulma::reven_version(version="v2.2.0")]) }}
@@ -101,7 +101,7 @@ Sample output:
 Getting a `struct` type from a binary:
 
 ```py
-object_attributes_ty : Struct = ntoskrnl.exact_type("_OBJECT_ATTRIBUTES")
+object_attributes_ty = next(server.ossi.executed_binaries("ntoskrnl")).exact_type("_OBJECT_ATTRIBUTES")
 ```
 
 Sample output of printing `object_attributes_ty`:
@@ -120,11 +120,28 @@ StructKind.Struct _OBJECT_ATTRIBUTES /* 0x30 */ {
 Reading a struct instance from a source (register, memory, etc):
 
 ```py
-object_attribute: StructInstance = ctx.deref(regs.r8, types.Pointer(object_attributes_ty))
-# display as bytes
+# Reading structure from pointer stored in r8
+object_attributes = ctx.read(reven2.address.LogicalAddress(0xffffe00041cac2ea), object_attributes_ty)
+
+# Read one field according to declared type
+object_attributes.field("Length").read()
+```
+
+Sample output:
+
+```py
+48
+```
+
+You can also:
+
+```py
+# Read one field, forcing its type to int-like. Useful for IDE type hints
+object_attributes.field("Attributes").read_int()
+
+# Get whole struct content as bytes
 object_attributes.as_bytes()
-# Read an "int-like" field
-object_attributes.field("Length").read_int()
+
 # Dereferences a pointer-like field, read it as an inner struct, display its type
 print(object_attributes.field("ObjectName").deref_struct().type)
 ```
@@ -132,8 +149,8 @@ print(object_attributes.field("ObjectName").deref_struct().type)
 Sample output:
 
 ```py
+0
 b'0\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x98\xd1]\x06\x00\x00\x00\x00B\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-48
 StructKind.Struct _UNICODE_STRING /* 0x10 */ {
     /* 0x0 */ Length : U16,
     /* 0x2 */ MaximumLength : U16,

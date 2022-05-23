@@ -4,7 +4,7 @@
 
 - [Connecting to a server](./server.md)
 - [Manipulating transitions and contexts](./iterating.md)
-- [Reading values from registers or memory](./context-read.md)
+- [Reading values or structs from registers or memory](./context-read.md)
 - [Moving to the beginning, end of a function](./start-end.md)
 - [Searching for function calls](./search-calls.md)
 - [Looking for a crash](./crash.md)
