@@ -62,7 +62,7 @@ Sample output:
 {{ bulma::begin_bulma() }}
 {{ bulma::begin_message(header="This is the only recommended path", class="is-note") }}
 <p>
-    As mentionned above, it is easy to get the translation wrong: while translating a virtual address into physical address is valid, translating a whole buffer is more complex. Please use the MemoryRange object for this purpose.
+    As mentioned above, it is easy to get the translation wrong: while translating a virtual address into physical address is valid, translating a whole buffer is more complex. Please use the MemoryRange object for this purpose.
 </p>
 {{ bulma::end_message() }}
 {{ bulma::end_bulma() }}
@@ -98,9 +98,9 @@ Maps of ranges are useful to associate data with these memory ranges. For exampl
 
 ```py
 mem_map = mr.MemoryRangeMap(items=((r1, "from r1"), (r2, "from r2"), (r3, "from r3")),
-                            # Do not handle substraction:
+                            # Do not handle subtraction:
                             subtract=lambda a: None,        
-                            # Concatenate string on merge:
+                            # Concatenate strings on merge:
                             merge=lambda a, b: a + ", " + b)
 for r, source in mem_map: print(r, source)
 ```
