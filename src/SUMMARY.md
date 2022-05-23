@@ -18,3 +18,5 @@
 - [Exporting tabular data to work with reporting tools](./tabular.md)
 - [Managing bookmarks](./bookmarks.md)
 - [Finding more about the semantics of an instruction](./instruction-semantics.md)
+- [Accessing handles](./handles.md)
+- [Managing ranges of memory](./memory-ranges.md)
