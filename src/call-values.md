@@ -28,7 +28,7 @@ call_tr = tr.step_out(is_forward=False)
 import reven2.preview.prototypes
 prototypes = reven2.preview.prototypes.RevenPrototypes(server)
 call_conv = prototypes.calling_conventions.Ms64
-prototype = "char * __cdecl OaGetEnv(char const *)"
+prototype = "char * __cdecl OaGetEnv(char const *);"
 f = prototypes.parse_one_function(prototype, call_conv)
 call = f.call_site_values(call_tr)
 call.arg_n(0)
