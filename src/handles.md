@@ -13,14 +13,17 @@
 ## Listing the file handles owned by the process
 
 ```py
+import reven2.preview.windows as windows
+ctx = windows.Context(ctx)
+
 # Focus on process handles, ignore the rest
-for h in ctx.handles(kernel_handles = False, special_handles = False):
+for handle in ctx.handles(kernel_handles = False, special_handles = False):
     try:
         # Request FileObject handles only, otherwise raise exception
-        o = h.object(win.FileObject)
+        obj = handle.object(windows.FileObject)
     except ValueError:
         continue
-    print(f"{h}: {o.filename_with_device}")
+    print(f"{handle}: {obj.filename_with_device}")
 ```
 
 Sample output:
@@ -38,8 +41,11 @@ Handle 0xa4 (object: lin:0xffffc8016f8e3b00): \Device\HarddiskVolume2\reven\outp
 ## Getting a handle by value
 
 ```py
-h = ctx.handle(0xa4)
-print(h.object())
+import reven2.preview.windows as windows
+ctx = windows.Context(ctx)
+
+handle = ctx.handle(0xa4)
+print(handle.object())
 ```
 
 Sample output:
