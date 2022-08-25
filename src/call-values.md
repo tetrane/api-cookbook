@@ -19,15 +19,38 @@
 {{ bulma::end_bulma() }}
 ## When the prototype is known
 
-### Windows 64-bit
+### Automatically detecting the calling convention from the OS
 
-Use the `Ms64` calling convention.
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.12.0"),
+]) }}
+{{ bulma::end_bulma() }}
+
+```py
+from typing import Optional
+
+
+def auto_calling_convention(
+    server: reven2.RevenServer,
+) -> Optional[reven2.preview.prototypes.callconv_helper.CallConvHelper]:
+    prototypes = reven2.preview.prototypes.RevenPrototypes(server)
+    if server.ossi.os().architecture != reven2.ossi.Architecture.X64:
+        return None
+    if server.ossi.os().family == reven2.ossi.OsFamily.Windows:
+        return prototypes.calling_conventions.Ms64
+    elif server.ossi.os().family == reven2.ossi.OsFamily.Linux:
+        return prototypes.calling_conventions.Sysv64
+    return None
+```
+
+### Windows 64-bit example
 
 ```py
 call_tr = tr.step_out(is_forward=False)
 import reven2.preview.prototypes
 prototypes = reven2.preview.prototypes.RevenPrototypes(server)
-call_conv = prototypes.calling_conventions.Ms64
+call_conv = auto_calling_convention(server)
 prototype = "char * __cdecl OaGetEnv(char const *);"
 f = prototypes.parse_one_function(prototype, call_conv)
 call = f.call_site_values(call_tr)
@@ -42,7 +65,7 @@ Sample output:
 0
 ```
 
-### Linux 64-bit
+### Linux 64-bit example
 
 Use the `Sysv64` calling convention.
 
@@ -50,7 +73,7 @@ Use the `Sysv64` calling convention.
 call_tr = tr.step_out(is_forward=False)
 import reven2.preview.prototypes
 prototypes = reven2.preview.prototypes.RevenPrototypes(server)
-call_conv = prototypes.calling_conventions.Sysv64
+call_conv = auto_calling_convention(server)
 prototype = "struct FILE; FILE* fopen64(const char *filename, const char *mode);"
 f = prototypes.parse_one_function(prototype, call_conv)
 call = f.call_site_values(call_tr)
