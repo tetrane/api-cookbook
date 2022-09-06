@@ -42,6 +42,24 @@ Sample output:
 
 ![Synchronization links](img/jupyter_display.png)
 
+## Displaying a screenshot from the trace
+
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+    bulma::reven_version(version="v2.12.0"),
+    bulma::jupyter_tag(),
+]) }}
+{{ bulma::end_bulma() }}
+
+```py
+ctx = server.trace.first_context
+display(ctx.framebuffer.image())
+```
+
+Sample output:
+
+![Trace screenshot](img/jupyter_framebuffer_display.png)
+
 ## Displaying in tables
 
 ```py
