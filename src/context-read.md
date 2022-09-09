@@ -173,3 +173,27 @@ Sample output:
 4128
 [16, 32]
 ```
+
+### Accessing the framebuffer memory to take a screenshot
+
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+    bulma::reven_version(version="v2.12.0"),
+]) }}
+{{ bulma::end_bulma() }}
+
+```py
+image = ctx.framebuffer.image()
+
+# save the screenshot as a png file
+image.save("/tmp/framebuffer.png")
+
+# display the screenshot in the default image viewer
+image.show()
+
+# display the screenshot in a Jupyter Notebook
+display(image)
+
+# access RGB values from a pixel as a tuple
+image.getpixel((123, 42))
+```

@@ -79,3 +79,26 @@ Sample output:
 [MemoryAccess(transition=Transition(id=42), physical_address=PhysicalAddress(offset=0x7fc03eb8), size=8,
     operation=MemoryAccessOperation.Write, virtual_address=LinearAddress(offset=0xffff88007fc03eb8))]
 ```
+
+
+## Getting all the memory accesses on the framebuffer
+
+{{ bulma::begin_bulma() }}
+{{ bulma::tags(tags=[
+  bulma::reven_version(version="v2.12.0"),
+]) }}
+{{ bulma::end_bulma() }}
+
+```py
+framebuffer_memory = server.trace.first_context.framebuffer.memory_range
+for access in server.trace.memory_accesses(address_range=framebuffer_memory):
+    print(access)
+```
+
+Sample output:
+
+```
+[#462107 mov dword ptr ds:[rax-0x4], ecx]Write access at @phy:0xfd31d404 (virtual address: lin:0x7fd74fb16404) of size 4
+[#462116 mov dword ptr ds:[rax-0x4], ecx]Write access at @phy:0xfd31d408 (virtual address: lin:0x7fd74fb16408) of size 4
+[#462125 mov dword ptr ds:[rax-0x4], ecx]Write access at @phy:0xfd31d40c (virtual address: lin:0x7fd74fb1640c) of size 4
+```
