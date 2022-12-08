@@ -37,7 +37,7 @@
 {% endmacro info_tag %}
 
 {% macro reven_version(version) %}
-{{ self::info_tag(name="REVEN", value=version) }}
+{{ self::info_tag(name="Reven", value=version) }}
 {% endmacro reven_version %}
 
 {% macro dependency_tag(name) %}

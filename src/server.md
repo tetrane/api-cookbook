@@ -6,7 +6,7 @@
 {{ bulma::begin_bulma() }}
 {{ bulma::begin_message(header="Server variable", class="is-info") }}
 <p>
-    The other examples of this book assume that your Python environment contains a <code>server</code> variable that represents a connection to a REVEN server.
+    The other examples of this book assume that your Python environment contains a <code>server</code> variable that represents a connection to a Reven server.
 </p>
 {{ bulma::end_message() }}
 {{ bulma::end_bulma() }}
@@ -42,7 +42,7 @@ From the CLI:
 
 ```py
 from reven2.preview.project_manager import ProjectManager
-pm = ProjectManager("http://localhost:8880")  # URL to the REVEN Project Manager
+pm = ProjectManager("http://localhost:8880")  # URL to the Reven Project Manager
 connection = pm.connect("cve-2016-7255")  # No need to specify "13370"
 server = connection.server
 ```
@@ -83,7 +83,7 @@ Scenario 'CVE-2021-21166-Chrome' on localhost:13370
 ]) }}
 {{ bulma::end_bulma() }}
 
-Starting with REVEN 2.12, the server provides information on the OS of the running scenario:
+Starting with Reven 2.12, the server provides information on the OS of the running scenario:
 
 ```py
 print(server.ossi.os())

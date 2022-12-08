@@ -1,7 +1,7 @@
-Contributing to the REVEN API cookbook
+Contributing to the Reven API cookbook
 ======================================
 
-Thanks for your interest in contributing to the REVEN API cookbook! Whether you're interested in adding new recipes, improving existing ones, or fixing typos, all contributions are welcome!
+Thanks for your interest in contributing to the Reven API cookbook! Whether you're interested in adding new recipes, improving existing ones, or fixing typos, all contributions are welcome!
 
 Reporting an issue with an existing recipe
 ------------------------------------------
@@ -9,7 +9,7 @@ Reporting an issue with an existing recipe
 Got something not working for you, or that was unclear? Here are some contributions you can make:
 
 - Opening an issue describing your problem. Even if you don't know how to fix the issue, you're certainly not alone encountering it! Feel free to open an issue on the cookbook repository describing your problem, what you tried and what went wrong.
-- The issue is with REVEN rather than with the recipe? If the issue looks like the API is not behaving as expected, you can send an email to [support@tetrane.com](mailto:support@tetrane.com) for getting help.
+- The issue is with Reven rather than with the recipe? If the issue looks like the API is not behaving as expected, you can send an email to [support.esreven@eshard.com](mailto:support.esreven@eshard.com) for getting help.
 - Got an idea for a fix? Feel free to fork the cookbook repository on GitHub, push your fix in your fork, and then propose it as a Pull Request (PR). It will then be reviewed by members of the team for inclusion in the cookbook!
 
 New recipes
