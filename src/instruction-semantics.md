@@ -127,7 +127,7 @@ class Disassembler:
         return DisassembledInstruction(tr, cs_insn)
 ```
 
-## Disassembling REVEN instructions
+## Disassembling Reven instructions
 
 {{ bulma::begin_bulma() }}
 {{ bulma::tags(tags=[
@@ -164,7 +164,7 @@ Sample output:
 '0xfffff8024cfacfb0'
 ```
 
-## Convert capstone flags to REVEN register flags
+## Convert capstone flags to Reven register flags
 
 {{ bulma::begin_bulma() }}
 {{ bulma::tags(tags=[

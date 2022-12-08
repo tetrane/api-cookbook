@@ -1,10 +1,10 @@
 {% import "templates/bulma.tera" as bulma %}
 
-# REVEN API Cookbook
+# Reven API Cookbook
 
-Welcome to the REVEN API Cookbook.
+Welcome to the Reven API Cookbook.
 
-This book is a collection of examples that demonstrate good practices to accomplish common tasks using the REVEN API.
+This book is a collection of examples that demonstrate good practices to accomplish common tasks using the Reven API.
 
 {{ bulma::begin_bulma() }}
 {{ bulma::begin_message(header="Pre-requisites", class="is-info") }}
@@ -37,11 +37,11 @@ This book is a collection of examples that demonstrate good practices to accompl
 
 ## Common abbreviations and variable names
 
-REVEN scripts tend to re-use the same abbreviations and variable names for common objects.
+Reven scripts tend to re-use the same abbreviations and variable names for common objects.
 
 |Abbreviation|Description|
 |------------|-----------|
-|`server`|A `reven2.RevenServer` instance representing a connection to a REVEN server|
+|`server`|A `reven2.RevenServer` instance representing a connection to a Reven server|
 |`pm`|A `reven2.preview.project_manager.ProjectManager` instance representing a connection to the Project Manager|
 |`trace`|A `reven2.trace.Trace` instance, usually obtained from `server.trace`|
 |`tr`|A `reven2.trace.Transition` instance, usually obtained from `trace.transition(tr_id)`|

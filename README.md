@@ -1,4 +1,4 @@
-REVEN API Cookbook
+Reven API Cookbook
 ==================
 
 [Rendered Cookbook](https://tetrane.github.io/api-cookbook/)

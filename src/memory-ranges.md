@@ -9,9 +9,9 @@
 }}
 {{ bulma::end_bulma() }}
 
-A range of memory is a very common concept. Storing, updating, merging or iterating on such ranges are operations that are likely to be necessary to users of the REVEN API. 
+A range of memory is a very common concept. Storing, updating, merging or iterating on such ranges are operations that are likely to be necessary to users of the Reven API. 
 
-REVEN provides a "canonical" implementation in the API that spares users from having to deal with multiple reimplementations.
+Reven provides a "canonical" implementation in the API that spares users from having to deal with multiple reimplementations.
 
 ## Creating & updating memory ranges
 
