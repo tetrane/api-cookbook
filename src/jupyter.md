@@ -23,25 +23,6 @@ def in_notebook():
     return True
 ```
 
-## Displaying a transition, address as a synchronization link
-
-{{ bulma::begin_bulma() }}
-{{ bulma::tags(tags=[
-    bulma::reven_version(version="v2.5.0"),
-    bulma::jupyter_tag(),
-]) }}
-{{ bulma::end_bulma() }}
-
-```py
-display(tr)
-display(address)
-display(bookmark)
-```
-
-Sample output:
-
-![Synchronization links](img/jupyter_display.png)
-
 ## Displaying a screenshot from the trace
 
 {{ bulma::begin_bulma() }}
