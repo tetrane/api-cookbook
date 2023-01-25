@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>REVEN API Cookbook</title>
+        <title>Reven API Cookbook</title>
         <meta name="robots" content="noindex" />
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -11,7 +11,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
         <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
 	<link rel="stylesheet" href="bulma.css">
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
@@ -77,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="server.html"><strong aria-hidden="true">2.</strong> Connecting to a server</a></li><li class="chapter-item expanded "><a href="iterating.html"><strong aria-hidden="true">3.</strong> Manipulating transitions and contexts</a></li><li class="chapter-item expanded "><a href="context-read.html"><strong aria-hidden="true">4.</strong> Reading values from registers or memory</a></li><li class="chapter-item expanded "><a href="start-end.html"><strong aria-hidden="true">5.</strong> Moving to the beginning, end of a function</a></li><li class="chapter-item expanded "><a href="search-calls.html"><strong aria-hidden="true">6.</strong> Searching for function calls</a></li><li class="chapter-item expanded "><a href="crash.html"><strong aria-hidden="true">7.</strong> Looking for a crash</a></li><li class="chapter-item expanded "><a href="memhist.html"><strong aria-hidden="true">8.</strong> Finding out when a memory location is accessed</a></li><li class="chapter-item expanded "><a href="call-values.html"><strong aria-hidden="true">9.</strong> Displaying the value of arguments and return value of a call</a></li><li class="chapter-item expanded "><a href="search-values.html"><strong aria-hidden="true">10.</strong> Searching for values in memory</a></li><li class="chapter-item expanded "><a href="listing-ossi.html"><strong aria-hidden="true">11.</strong> Listing the processes, binaries in the trace</a></li><li class="chapter-item expanded "><a href="filters.html"><strong aria-hidden="true">12.</strong> Focusing on a portion of the trace</a></li><li class="chapter-item expanded "><a href="taint.html"><strong aria-hidden="true">13.</strong> Following the dataflow</a></li><li class="chapter-item expanded "><a href="jupyter.html"><strong aria-hidden="true">14.</strong> Displaying data nicely in Jupyter notebooks</a></li><li class="chapter-item expanded "><a href="tabular.html"><strong aria-hidden="true">15.</strong> Exporting tabular data to work with reporting tools</a></li><li class="chapter-item expanded "><a href="bookmarks.html"><strong aria-hidden="true">16.</strong> Managing bookmarks</a></li><li class="chapter-item expanded "><a href="instruction-semantics.html"><strong aria-hidden="true">17.</strong> Finding more about the semantics of an instruction</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="server.html"><strong aria-hidden="true">2.</strong> Connecting to a server</a></li><li class="chapter-item expanded "><a href="iterating.html"><strong aria-hidden="true">3.</strong> Manipulating transitions and contexts</a></li><li class="chapter-item expanded "><a href="context-read.html"><strong aria-hidden="true">4.</strong> Reading values or structs from registers or memory</a></li><li class="chapter-item expanded "><a href="start-end.html"><strong aria-hidden="true">5.</strong> Moving to the beginning, end of a function</a></li><li class="chapter-item expanded "><a href="search-calls.html"><strong aria-hidden="true">6.</strong> Searching for function calls</a></li><li class="chapter-item expanded "><a href="crash.html"><strong aria-hidden="true">7.</strong> Looking for a crash</a></li><li class="chapter-item expanded "><a href="memhist.html"><strong aria-hidden="true">8.</strong> Finding out when a memory location is accessed</a></li><li class="chapter-item expanded "><a href="call-values.html"><strong aria-hidden="true">9.</strong> Displaying the value of arguments and return value of a call</a></li><li class="chapter-item expanded "><a href="search-values.html"><strong aria-hidden="true">10.</strong> Searching for values in memory</a></li><li class="chapter-item expanded "><a href="listing-ossi.html"><strong aria-hidden="true">11.</strong> Listing the processes, binaries in the trace</a></li><li class="chapter-item expanded "><a href="filters.html"><strong aria-hidden="true">12.</strong> Focusing on a portion of the trace</a></li><li class="chapter-item expanded "><a href="taint.html"><strong aria-hidden="true">13.</strong> Following the dataflow</a></li><li class="chapter-item expanded "><a href="jupyter.html"><strong aria-hidden="true">14.</strong> Displaying data nicely in Jupyter notebooks</a></li><li class="chapter-item expanded "><a href="tabular.html"><strong aria-hidden="true">15.</strong> Exporting tabular data to work with reporting tools</a></li><li class="chapter-item expanded "><a href="bookmarks.html"><strong aria-hidden="true">16.</strong> Managing bookmarks</a></li><li class="chapter-item expanded "><a href="instruction-semantics.html"><strong aria-hidden="true">17.</strong> Finding more about the semantics of an instruction</a></li><li class="chapter-item expanded "><a href="handles.html"><strong aria-hidden="true">18.</strong> Accessing handles</a></li><li class="chapter-item expanded "><a href="memory-ranges.html"><strong aria-hidden="true">19.</strong> Managing ranges of memory</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -106,11 +105,11 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">REVEN API Cookbook</h1>
+                    <h1 class="menu-title">Reven API Cookbook</h1>
 
                     <div class="right-buttons">
-                        <a href="https://www.tetrane.com" title="Go to main site" aria-label="Go to main site">
-                            <img src=".//static/logo.png" alt="Tetrane logo" style="width:28px;height:28px;vertical-align:middle"></i>
+                        <a href="https://www.eshard.com" title="Go to eShard" aria-label="Go to eShard">
+                            <img src=".//static/eshard_icon.svg" alt="eShard logo" style="width:40px;height:40px;vertical-align:middle"></i>
                         </a>
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
@@ -139,9 +138,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="reven-api-cookbook"><a class="header" href="#reven-api-cookbook">REVEN API Cookbook</a></h1>
-<p>Welcome to the REVEN API Cookbook.</p>
-<p>This book is a collection of examples that demonstrate good practices to accomplish common tasks using the REVEN API.</p>
+                        <h1 id="reven-api-cookbook"><a class="header" href="#reven-api-cookbook">Reven API Cookbook</a></h1>
+<p>Welcome to the Reven API Cookbook.</p>
+<p>This book is a collection of examples that demonstrate good practices to accomplish common tasks using the Reven API.</p>
 <div class="bulma">
 <div class="message is-info">
     <div class="message-header">
@@ -181,9 +180,9 @@
 </div>
 </div>
 <h2 id="common-abbreviations-and-variable-names"><a class="header" href="#common-abbreviations-and-variable-names">Common abbreviations and variable names</a></h2>
-<p>REVEN scripts tend to re-use the same abbreviations and variable names for common objects.</p>
+<p>Reven scripts tend to re-use the same abbreviations and variable names for common objects.</p>
 <table><thead><tr><th>Abbreviation</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>server</code></td><td>A <code>reven2.RevenServer</code> instance representing a connection to a REVEN server</td></tr>
+<tr><td><code>server</code></td><td>A <code>reven2.RevenServer</code> instance representing a connection to a Reven server</td></tr>
 <tr><td><code>pm</code></td><td>A <code>reven2.preview.project_manager.ProjectManager</code> instance representing a connection to the Project Manager</td></tr>
 <tr><td><code>trace</code></td><td>A <code>reven2.trace.Trace</code> instance, usually obtained from <code>server.trace</code></td></tr>
 <tr><td><code>tr</code></td><td>A <code>reven2.trace.Transition</code> instance, usually obtained from <code>trace.transition(tr_id)</code></td></tr>
@@ -197,7 +196,7 @@
     </div>
 <div class="message-body content">
 <p>
-    The other examples of this book assume that your Python environment contains a <code>server</code> variable that represents a connection to a REVEN server.
+    The other examples of this book assume that your Python environment contains a <code>server</code> variable that represents a connection to a Reven server.
 </p>
 </div>
 </div>
@@ -207,7 +206,7 @@
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.0.0</span>
     </div>
 </div>
@@ -223,7 +222,7 @@ server = reven2.RevenServer(hostname, port)
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.3.0</span>
     </div>
 </div>
@@ -244,7 +243,7 @@ server = reven2.RevenServer(hostname, port)
 <p>You can use a feature of the Workflow API to get a connection to a server from the scenario's name, rather than by specifying a port.</p>
 <p>From the CLI:</p>
 <pre><code class="language-py">from reven2.preview.project_manager import ProjectManager
-pm = ProjectManager(&quot;http://localhost:8880&quot;)  # URL to the REVEN Project Manager
+pm = ProjectManager(&quot;http://localhost:8880&quot;)  # URL to the Reven Project Manager
 connection = pm.connect(&quot;cve-2016-7255&quot;)  # No need to specify &quot;13370&quot;
 server = connection.server
 </code></pre>
@@ -255,13 +254,70 @@ server = connection.server
 </code></pre>
 <p>This is useful, as the server port will typically change at each reopening of the scenario, while the scenario name remains the same.</p>
 <p>If no server is open for that particular scenario when executing the <code>ProjectManager.connect</code> method call, then a new one will be started.</p>
+<h1 id="checking-server-information"><a class="header" href="#checking-server-information">Checking server information</a></h1>
+<h2 id="getting-basic-server-information"><a class="header" href="#getting-basic-server-information">Getting basic server information</a></h2>
+<pre><code class="language-py">print(f&quot;Scenario '{server.scenario_name}' on {server.host}:{server.port}&quot;)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>Scenario 'CVE-2021-21166-Chrome' on localhost:13370
+</code></pre>
+<h2 id="server-os-information"><a class="header" href="#server-os-information">Server OS information</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.12.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 64-bit</span></span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-linux" aria-hidden="true"></i></span>
+<span>Linux 64-bit</span></span>
+    </div>
+</div>
+</div>
+</div>
+<p>Starting with Reven 2.12, the server provides information on the OS of the running scenario:</p>
+<pre><code class="language-py">print(server.ossi.os())
+</code></pre>
+<p>Sample output:</p>
+<pre><code>Windows x64 10.0 (Windows 10)
+</code></pre>
+<h3 id="checking-that-we-are-on-the-supported-perimeter-of-the-current-script"><a class="header" href="#checking-that-we-are-on-the-supported-perimeter-of-the-current-script">Checking that we are on the supported perimeter of the current script</a></h3>
+<pre><code class="language-py">server.ossi.os().expect(reven2.ossi.Os(windows_version=reven2.ossi.WindowsVersion.Windows7),
+                        reven2.ossi.Os(windows_version=reven2.ossi.WindowsVersion.Windows8))
+</code></pre>
+<p>Sample output:</p>
+<pre><code>reven2.ossi.os.OsError: Got 'Windows x64 10.0.18362 (Windows 10)', expected one of: 'Windows 7', 'Windows 8'
+</code></pre>
+<h3 id="doing-something-different-depending-on-the-os"><a class="header" href="#doing-something-different-depending-on-the-os">Doing something different depending on the OS</a></h3>
+<pre><code class="language-py">os = server.ossi.os()
+os.expect(reven2.ossi.Os(family=reven2.ossi.OsFamily.Linux))
+if os.kernel_version.major == 4:
+   # do something with a kernel 4.x
+   pass
+elif os.kernel_version.major == 5:
+   # do something with a kernel 5.x
+   pass
+else:
+   raise reven2.ossi.OsError(got=os, message=&quot;Expected kernel major version 4 or 5&quot;)
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="manipulating-transitions-and-contexts"><a class="header" href="#manipulating-transitions-and-contexts">Manipulating transitions and contexts</a></h1>
 <h2 id="getting-a-transition-or-context-from-a-transition-id"><a class="header" href="#getting-a-transition-or-context-from-a-transition-id">Getting a transition or context from a transition id</a></h2>
 <div class="bulma">
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -277,7 +333,7 @@ ctx_after = server.trace.context_after(1234)
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -291,7 +347,7 @@ ctx_after = tr.context_after()
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.6.0</span>
     </div>
 </div>
@@ -306,7 +362,7 @@ if ctx != server.trace.last_context:
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -360,7 +416,7 @@ next_next_tr = tr + 2
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -377,7 +433,7 @@ for ctx in server.trace.contexts():
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.6.0</span>
     </div>
 </div>
@@ -392,7 +448,7 @@ last_ctx = server.trace.last_context
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -403,12 +459,12 @@ last_tr = server.trace.transition(server.trace.transition_count - 1)
 first_ctx = server.trace.context_before(0)
 last_ctx = server.trace.context_after(server.trace.transition_count - 1)
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="reading-values-from-registers-or-memory"><a class="header" href="#reading-values-from-registers-or-memory">Reading values from registers or memory</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reading-values-or-structs-from-registers-or-memory"><a class="header" href="#reading-values-or-structs-from-registers-or-memory">Reading values or structs from registers or memory</a></h1>
 <div class="bulma">
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -444,7 +500,7 @@ ctx.read(regs.rax, BigEndian(U16))
 <pre><code class="language-py">u'Network Store Interface Service'
 </code></pre>
 <h3 id="array"><a class="header" href="#array">Array</a></h3>
-<pre><code class="language-py">ctx.read(LogicalAddress(0xffffe00041cac2ea), Array(U8, 4))
+<pre><code class="language-py">list(ctx.read(LogicalAddress(0xffffe00041cac2ea), Array(U8, 4)))
 </code></pre>
 <p>Sample output:</p>
 <pre><code class="language-py">[78, 0, 101, 0]
@@ -460,6 +516,73 @@ ctx.read(addr, U64)
 <p>Sample output:</p>
 <pre><code class="language-py">10738
 </code></pre>
+<h3 id="reading-struct-values"><a class="header" href="#reading-struct-values">Reading struct values</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.11.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 64-bit</span></span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 32-bit</span></span>
+    </div>
+</div>
+</div>
+</div>
+<p>Getting a <code>struct</code> type from a binary:</p>
+<pre><code class="language-py">object_attributes_ty = next(server.ossi.executed_binaries(&quot;ntoskrnl&quot;)).exact_type(&quot;_OBJECT_ATTRIBUTES&quot;)
+</code></pre>
+<p>Sample output of printing <code>object_attributes_ty</code>:</p>
+<pre><code>StructKind.Struct _OBJECT_ATTRIBUTES /* 0x30 */ {
+    /* 0x0 */ Length : U32,
+    /* 0x8 */ RootDirectory : void*,
+    /* 0x10 */ ObjectName : _UNICODE_STRING*,
+    /* 0x18 */ Attributes : U32,
+    /* 0x20 */ SecurityDescriptor : void*,
+    /* 0x28 */ SecurityQualityOfService : void*,
+}
+</code></pre>
+<p>Reading a struct instance from a source (register, memory, etc):</p>
+<pre><code class="language-py"># Reading structure from pointer stored in r8
+object_attributes = ctx.read(reven2.address.LogicalAddress(0xffffe00041cac2ea), object_attributes_ty)
+
+# Read one field according to declared type
+object_attributes.field(&quot;Length&quot;).read()
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">48
+</code></pre>
+<p>You can also:</p>
+<pre><code class="language-py"># Read one field, forcing its type to int-like. Useful for IDE type hints
+object_attributes.field(&quot;Attributes&quot;).read_int()
+
+# Get whole struct content as bytes
+object_attributes.as_bytes()
+
+# Dereferences a pointer-like field, read it as an inner struct, display its type
+print(object_attributes.field(&quot;ObjectName&quot;).deref_struct().type)
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">0
+b'0\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x98\xd1]\x06\x00\x00\x00\x00B\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+StructKind.Struct _UNICODE_STRING /* 0x10 */ {
+    /* 0x0 */ Length : U16,
+    /* 0x2 */ MaximumLength : U16,
+    /* 0x8 */ Buffer : U16*,
+}
+</code></pre>
 <h3 id="parsing-a-raw-buffer-as-a-type"><a class="header" href="#parsing-a-raw-buffer-as-a-type">Parsing a raw buffer as a type</a></h3>
 <pre><code class="language-py">U16.parse(b&quot;\x10\x20&quot;)
 BigEndian(U16).parse(b&quot;\x10\x20&quot;)
@@ -470,12 +593,37 @@ Array(U8, 2).parse(b&quot;\x10\x20&quot;)
 4128
 [16, 32]
 </code></pre>
+<h3 id="accessing-the-framebuffer-memory-to-take-a-screenshot"><a class="header" href="#accessing-the-framebuffer-memory-to-take-a-screenshot">Accessing the framebuffer memory to take a screenshot</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.12.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">image = ctx.framebuffer.image()
+
+# save the screenshot as a png file
+image.save(&quot;/tmp/framebuffer.png&quot;)
+
+# display the screenshot in the default image viewer
+image.show()
+
+# display the screenshot in a Jupyter Notebook
+display(image)
+
+# access RGB values from a pixel as a tuple
+image.getpixel((123, 42))
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="moving-to-the-beginning-of-a-function"><a class="header" href="#moving-to-the-beginning-of-a-function">Moving to the beginning of a function</a></h1>
 <div class="bulma">
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.9.0</span>
     </div>
 </div>
@@ -498,7 +646,7 @@ def call_bounds(tr: Transition) -&gt; Tuple[Optional[Transition], Optional[Trans
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -560,7 +708,7 @@ for ctx in server.trace.search.symbol(symbol):
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -623,7 +771,7 @@ NtOpenFile: Context before #43450170
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -661,7 +809,7 @@ for ctx in server.trace.search.symbol(crash_symbol):
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.3.0</span>
     </div>
 </div>
@@ -701,7 +849,7 @@ for ctx in server.trace.search.symbol(crash_symbol):
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -730,7 +878,7 @@ for ctx in server.trace.search.symbol(crash_symbol):
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.9.0</span>
     </div>
 </div>
@@ -755,7 +903,7 @@ for ctx in server.trace.search.symbol(crash_symbol):
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -768,12 +916,32 @@ for ctx in server.trace.search.symbol(crash_symbol):
 <pre><code>[MemoryAccess(transition=Transition(id=42), physical_address=PhysicalAddress(offset=0x7fc03eb8), size=8,
     operation=MemoryAccessOperation.Write, virtual_address=LinearAddress(offset=0xffff88007fc03eb8))]
 </code></pre>
+<h2 id="getting-all-the-memory-accesses-on-the-framebuffer"><a class="header" href="#getting-all-the-memory-accesses-on-the-framebuffer">Getting all the memory accesses on the framebuffer</a></h2>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.12.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">framebuffer_memory = server.trace.first_context.framebuffer.memory_range
+for access in server.trace.memory_accesses(address_range=framebuffer_memory):
+    print(access)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[#462107 mov dword ptr ds:[rax-0x4], ecx]Write access at @phy:0xfd31d404 (virtual address: lin:0x7fd74fb16404) of size 4
+[#462116 mov dword ptr ds:[rax-0x4], ecx]Write access at @phy:0xfd31d408 (virtual address: lin:0x7fd74fb16408) of size 4
+[#462125 mov dword ptr ds:[rax-0x4], ecx]Write access at @phy:0xfd31d40c (virtual address: lin:0x7fd74fb1640c) of size 4
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="displaying-the-value-of-arguments-and-return-value-of-a-call"><a class="header" href="#displaying-the-value-of-arguments-and-return-value-of-a-call">Displaying the value of arguments and return value of a call</a></h1>
 <div class="bulma">
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.10.0</span>
     </div>
 </div>
@@ -815,13 +983,38 @@ for ctx in server.trace.search.symbol(crash_symbol):
 </div>
 </div>
 <h2 id="when-the-prototype-is-known"><a class="header" href="#when-the-prototype-is-known">When the prototype is known</a></h2>
-<h3 id="windows-64-bit"><a class="header" href="#windows-64-bit">Windows 64-bit</a></h3>
-<p>Use the <code>Ms64</code> calling convention.</p>
+<h3 id="automatically-detecting-the-calling-convention-from-the-os"><a class="header" href="#automatically-detecting-the-calling-convention-from-the-os">Automatically detecting the calling convention from the OS</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.12.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">from typing import Optional
+
+
+def auto_calling_convention(
+    server: reven2.RevenServer,
+) -&gt; Optional[reven2.preview.prototypes.callconv_helper.CallConvHelper]:
+    prototypes = reven2.preview.prototypes.RevenPrototypes(server)
+    if server.ossi.os().architecture != reven2.ossi.Architecture.X64:
+        return None
+    if server.ossi.os().family == reven2.ossi.OsFamily.Windows:
+        return prototypes.calling_conventions.Ms64
+    elif server.ossi.os().family == reven2.ossi.OsFamily.Linux:
+        return prototypes.calling_conventions.Sysv64
+    return None
+</code></pre>
+<h3 id="windows-64-bit-example"><a class="header" href="#windows-64-bit-example">Windows 64-bit example</a></h3>
 <pre><code class="language-py">call_tr = tr.step_out(is_forward=False)
 import reven2.preview.prototypes
 prototypes = reven2.preview.prototypes.RevenPrototypes(server)
-call_conv = prototypes.calling_conventions.Ms64
-prototype = &quot;char * __cdecl OaGetEnv(char const *)&quot;
+call_conv = auto_calling_convention(server)
+prototype = &quot;char * __cdecl OaGetEnv(char const *);&quot;
 f = prototypes.parse_one_function(prototype, call_conv)
 call = f.call_site_values(call_tr)
 call.arg_n(0)
@@ -831,12 +1024,12 @@ call.ret()
 <pre><code class="language-py">'OACACHEPARAMS'
 0
 </code></pre>
-<h3 id="linux-64-bit"><a class="header" href="#linux-64-bit">Linux 64-bit</a></h3>
+<h3 id="linux-64-bit-example"><a class="header" href="#linux-64-bit-example">Linux 64-bit example</a></h3>
 <p>Use the <code>Sysv64</code> calling convention.</p>
 <pre><code class="language-py">call_tr = tr.step_out(is_forward=False)
 import reven2.preview.prototypes
 prototypes = reven2.preview.prototypes.RevenPrototypes(server)
-call_conv = prototypes.calling_conventions.Sysv64
+call_conv = auto_calling_convention(server)
 prototype = &quot;struct FILE; FILE* fopen64(const char *filename, const char *mode);&quot;
 f = prototypes.parse_one_function(prototype, call_conv)
 call = f.call_site_values(call_tr)
@@ -888,7 +1081,7 @@ call.ret()
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.6.0</span>
     </div>
 </div>
@@ -923,7 +1116,7 @@ for match_address in ctx.search_in_memory(pattern,
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -976,7 +1169,7 @@ for string in server.trace.strings(&quot;Network&quot;):
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.6.0</span>
     </div>
 </div>
@@ -1027,7 +1220,7 @@ id: 15 | @lin:0x29fe946 (mapped at Context before #6360440) | [Context before #6
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.10.0</span>
     </div>
 </div>
@@ -1058,7 +1251,7 @@ conhost.exe (2596)
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -1081,7 +1274,7 @@ c:/windows/system32/drivers/intelide.sys
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -1110,7 +1303,7 @@ c:/windows/system32/drivers/intelide.sys
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -1125,7 +1318,7 @@ c:/windows/system32/drivers/intelide.sys
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.10.0</span>
     </div>
 </div>
@@ -1142,7 +1335,7 @@ c:/windows/system32/drivers/intelide.sys
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.10.0</span>
     </div>
 </div>
@@ -1165,7 +1358,7 @@ for ctx_range in server.trace.filter(processes, reven2.filter.RingPolicy.R3Only)
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.6.0</span>
     </div>
 </div>
@@ -1414,13 +1607,13 @@ chat_client.exe (2816): kernelbase!StrRetToStrW
         return False
     return True
 </code></pre>
-<h2 id="displaying-a-transition-address-as-a-synchronization-link"><a class="header" href="#displaying-a-transition-address-as-a-synchronization-link">Displaying a transition, address as a synchronization link</a></h2>
+<h2 id="displaying-a-screenshot-from-the-trace"><a class="header" href="#displaying-a-screenshot-from-the-trace">Displaying a screenshot from the trace</a></h2>
 <div class="bulma">
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
-        <span class="tag is-info">v2.5.0</span>
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.12.0</span>
     </div>
 </div>
 <div class="control">
@@ -1431,12 +1624,11 @@ chat_client.exe (2816): kernelbase!StrRetToStrW
 </div>
 </div>
 </div>
-<pre><code class="language-py">display(tr)
-display(address)
-display(bookmark)
+<pre><code class="language-py">ctx = server.trace.first_context
+display(ctx.framebuffer.image())
 </code></pre>
 <p>Sample output:</p>
-<p><img src="img/jupyter_display.png" alt="Synchronization links" /></p>
+<p><img src="img/jupyter_framebuffer_display.png" alt="Trace screenshot" /></p>
 <h2 id="displaying-in-tables"><a class="header" href="#displaying-in-tables">Displaying in tables</a></h2>
 <pre><code class="language-py"># helper functions to output html tables
 def table_line(cells):
@@ -1458,7 +1650,7 @@ def display_table(title, headers, html_lines):
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.7.0</span>
     </div>
 </div>
@@ -1480,7 +1672,7 @@ display(HTML(f&quot;&lt;strong&gt;{tr.format_as_html()}&lt;/strong&gt;&quot;))
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.5.0</span>
     </div>
 </div>
@@ -1572,7 +1764,7 @@ def pretty_print_tr(tr, show_context=False, show_symbol=False):
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.5.0</span>
     </div>
 </div>
@@ -1667,7 +1859,7 @@ def pretty_print_addr(ctx, address, size):
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.9.0</span>
     </div>
 </div>
@@ -1704,7 +1896,7 @@ except ImportError:
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.10.0</span>
     </div>
 </div>
@@ -1734,7 +1926,7 @@ df = pandas.DataFrame.from_records(res, columns=header)
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.9.0</span>
     </div>
 </div>
@@ -1775,7 +1967,7 @@ display(df)
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.10.0</span>
     </div>
 </div>
@@ -1796,7 +1988,7 @@ display(df)
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.5.0</span>
     </div>
 </div>
@@ -1969,12 +2161,12 @@ class Disassembler:
 
         return DisassembledInstruction(tr, cs_insn)
 </code></pre>
-<h2 id="disassembling-reven-instructions"><a class="header" href="#disassembling-reven-instructions">Disassembling REVEN instructions</a></h2>
+<h2 id="disassembling-reven-instructions"><a class="header" href="#disassembling-reven-instructions">Disassembling Reven instructions</a></h2>
 <div class="bulma">
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.10.0</span>
     </div>
 </div>
@@ -1997,7 +2189,7 @@ insn.capstone_instruction
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -2014,12 +2206,12 @@ insn.capstone_instruction
 <p>Sample output:</p>
 <pre><code>'0xfffff8024cfacfb0'
 </code></pre>
-<h2 id="convert-capstone-flags-to-reven-register-flags"><a class="header" href="#convert-capstone-flags-to-reven-register-flags">Convert capstone flags to REVEN register flags</a></h2>
+<h2 id="convert-capstone-flags-to-reven-register-flags"><a class="header" href="#convert-capstone-flags-to-reven-register-flags">Convert capstone flags to Reven register flags</a></h2>
 <div class="bulma">
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -2050,6 +2242,145 @@ for flag, reg in test_eflags.items():
         # register not present, skip
         continue
     print(f&quot;{reg} is affected by the instruction&quot;)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="accessing-handles"><a class="header" href="#accessing-handles">Accessing handles</a></h1>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.11.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 64-bit</span></span>
+    </div>
+</div>
+</div>
+</div>
+<h2 id="listing-the-file-handles-owned-by-the-process"><a class="header" href="#listing-the-file-handles-owned-by-the-process">Listing the file handles owned by the process</a></h2>
+<pre><code class="language-py">import reven2.preview.windows as windows
+ctx = windows.Context(ctx)
+
+# Focus on process handles, ignore the rest
+for handle in ctx.handles(kernel_handles = False, special_handles = False):
+    try:
+        # Request FileObject handles only, otherwise raise exception
+        obj = handle.object(windows.FileObject)
+    except ValueError:
+        continue
+    print(f&quot;{handle}: {obj.filename_with_device}&quot;)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>Handle 0x4 (object: lin:0xffffc8016fc2c760): \Device\ConDrv\Reference
+Handle 0x44 (object: lin:0xffffc8016fa92810): \Device\HarddiskVolume2\reven
+Handle 0x48 (object: lin:0xffffc8016fa94a70): \Device\ConDrv\Connect
+Handle 0x50 (object: lin:0xffffc8016fa921d0): \Device\ConDrv\Input
+Handle 0x54 (object: lin:0xffffc8016fa91eb0): \Device\ConDrv\Output
+Handle 0x58 (object: lin:0xffffc8016fa91eb0): \Device\ConDrv\Output
+Handle 0xa4 (object: lin:0xffffc8016f8e3b00): \Device\HarddiskVolume2\reven\output
+</code></pre>
+<h2 id="getting-a-handle-by-value"><a class="header" href="#getting-a-handle-by-value">Getting a handle by value</a></h2>
+<pre><code class="language-py">import reven2.preview.windows as windows
+ctx = windows.Context(ctx)
+
+handle = ctx.handle(0xa4)
+print(handle.object())
+</code></pre>
+<p>Sample output:</p>
+<pre><code>File object &quot;\Device\HarddiskVolume2\reven\output&quot; (lin:0xffffc8016f8e3b00)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="managing-ranges-of-memory"><a class="header" href="#managing-ranges-of-memory">Managing ranges of memory</a></h1>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.11.0</span>
+    </div>
+</div>
+</div>
+</div>
+<p>A range of memory is a very common concept. Storing, updating, merging or iterating on such ranges are operations that are likely to be necessary to users of the Reven API. </p>
+<p>Reven provides a &quot;canonical&quot; implementation in the API that spares users from having to deal with multiple reimplementations.</p>
+<h2 id="creating--updating-memory-ranges"><a class="header" href="#creating--updating-memory-ranges">Creating &amp; updating memory ranges</a></h2>
+<pre><code class="language-py">import reven2.memory_range as mr
+
+# First range
+r1 = mr.MemoryRange(reven2.address.LogicalAddress(0x1000), 0x1000)
+# This range will overlap with previous one
+r2 = mr.MemoryRange(reven2.address.LogicalAddress(0x1500), 0x1000)
+# This range does not overlap
+r3 = mr.MemoryRange(reven2.address.LogicalAddress(0x5000), 0x1000)
+
+print(r1)
+# Union is non-empty
+print(r1.union(r2))
+# Union is empty
+print(r1.union(r2).union(r3))
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[ds:0x1000; 4096]
+[ds:0x1000; 5376]
+None
+</code></pre>
+<h2 id="translating-a-range-of-virtual-addresses"><a class="header" href="#translating-a-range-of-virtual-addresses">Translating a range of virtual addresses</a></h2>
+<p>Users might need to access the physical addresses of a buffer. However, a range of memory may be mapped onto non-contiguous physical pages, rendering the conversion error-prone.</p>
+<p>The <code>MemoryRange</code> object offers a translation method that is guaranteed to be correct.</p>
+<pre><code class="language-py">virtual_range = mr.MemoryRange(reven2.address.LogicalAddress(0x10000), 0x2000)
+for phy in virtual_range.translate(ctx): print(phy)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[phy:0x59ce000; 4096]
+[phy:0x764f000; 4096]
+</code></pre>
+<div class="bulma">
+<div class="message is-note">
+    <div class="message-header">
+      This is the only recommended path
+    </div>
+<div class="message-body content">
+<p>
+    As mentioned above, it is easy to get the translation wrong: while translating a virtual address into physical address is valid, translating a whole buffer is more complex. Please use the MemoryRange object for this purpose.
+</p>
+</div>
+</div>
+</div>
+<h2 id="working-with-mulitple-ranges"><a class="header" href="#working-with-mulitple-ranges">Working with mulitple ranges</a></h2>
+<p>The API provides object to manage mutiple ranges, depending on the situation</p>
+<h3 id="set-of-ranges"><a class="header" href="#set-of-ranges">Set of ranges</a></h3>
+<pre><code class="language-py"># First range
+r1 = mr.MemoryRange(reven2.address.LogicalAddress(0x1000), 0x1000)
+# This range will overlap with previous one
+r2 = mr.MemoryRange(reven2.address.LogicalAddress(0x1500), 0x1000)
+# This range does not overlap
+r3 = mr.MemoryRange(reven2.address.LogicalAddress(0x5000), 0x1000)
+
+# Range that overlap are merged
+s = mr.MemoryRangeSet([r1, r2, r3])
+for r in s: print(r)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[ds:0x1000; 5376]
+[ds:0x5000; 4096]
+</code></pre>
+<h3 id="map-of-ranges"><a class="header" href="#map-of-ranges">Map of ranges</a></h3>
+<p>Maps of ranges are useful to associate data with these memory ranges. For example, you might want to associate buffers with a particular named source.</p>
+<pre><code class="language-py">mem_map = mr.MemoryRangeMap(items=((r1, &quot;from r1&quot;), (r2, &quot;from r2&quot;), (r3, &quot;from r3&quot;)),
+                            # Do not handle subtraction:
+                            subtract=lambda a: None,        
+                            # Concatenate strings on merge:
+                            merge=lambda a, b: a + &quot;, &quot; + b)
+for r, source in mem_map: print(r, source)
+</code></pre>
+<p>Sample output:</p>
+<pre><code>[ds:0x1000; 1280] from r1
+[ds:0x1500; 2816] from r1, from r2
+[ds:0x2000; 1280] from r2
+[ds:0x5000; 4096] from r3
 </code></pre>
 
                     </main>

@@ -3,14 +3,13 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Reading values from registers or memory - REVEN API Cookbook</title>
+        <title>Reading values or structs from registers or memory - Reven API Cookbook</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
         <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
 	<link rel="stylesheet" href="bulma.css">
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
@@ -76,7 +75,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="server.html"><strong aria-hidden="true">2.</strong> Connecting to a server</a></li><li class="chapter-item expanded "><a href="iterating.html"><strong aria-hidden="true">3.</strong> Manipulating transitions and contexts</a></li><li class="chapter-item expanded "><a href="context-read.html" class="active"><strong aria-hidden="true">4.</strong> Reading values from registers or memory</a></li><li class="chapter-item expanded "><a href="start-end.html"><strong aria-hidden="true">5.</strong> Moving to the beginning, end of a function</a></li><li class="chapter-item expanded "><a href="search-calls.html"><strong aria-hidden="true">6.</strong> Searching for function calls</a></li><li class="chapter-item expanded "><a href="crash.html"><strong aria-hidden="true">7.</strong> Looking for a crash</a></li><li class="chapter-item expanded "><a href="memhist.html"><strong aria-hidden="true">8.</strong> Finding out when a memory location is accessed</a></li><li class="chapter-item expanded "><a href="call-values.html"><strong aria-hidden="true">9.</strong> Displaying the value of arguments and return value of a call</a></li><li class="chapter-item expanded "><a href="search-values.html"><strong aria-hidden="true">10.</strong> Searching for values in memory</a></li><li class="chapter-item expanded "><a href="listing-ossi.html"><strong aria-hidden="true">11.</strong> Listing the processes, binaries in the trace</a></li><li class="chapter-item expanded "><a href="filters.html"><strong aria-hidden="true">12.</strong> Focusing on a portion of the trace</a></li><li class="chapter-item expanded "><a href="taint.html"><strong aria-hidden="true">13.</strong> Following the dataflow</a></li><li class="chapter-item expanded "><a href="jupyter.html"><strong aria-hidden="true">14.</strong> Displaying data nicely in Jupyter notebooks</a></li><li class="chapter-item expanded "><a href="tabular.html"><strong aria-hidden="true">15.</strong> Exporting tabular data to work with reporting tools</a></li><li class="chapter-item expanded "><a href="bookmarks.html"><strong aria-hidden="true">16.</strong> Managing bookmarks</a></li><li class="chapter-item expanded "><a href="instruction-semantics.html"><strong aria-hidden="true">17.</strong> Finding more about the semantics of an instruction</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="server.html"><strong aria-hidden="true">2.</strong> Connecting to a server</a></li><li class="chapter-item expanded "><a href="iterating.html"><strong aria-hidden="true">3.</strong> Manipulating transitions and contexts</a></li><li class="chapter-item expanded "><a href="context-read.html" class="active"><strong aria-hidden="true">4.</strong> Reading values or structs from registers or memory</a></li><li class="chapter-item expanded "><a href="start-end.html"><strong aria-hidden="true">5.</strong> Moving to the beginning, end of a function</a></li><li class="chapter-item expanded "><a href="search-calls.html"><strong aria-hidden="true">6.</strong> Searching for function calls</a></li><li class="chapter-item expanded "><a href="crash.html"><strong aria-hidden="true">7.</strong> Looking for a crash</a></li><li class="chapter-item expanded "><a href="memhist.html"><strong aria-hidden="true">8.</strong> Finding out when a memory location is accessed</a></li><li class="chapter-item expanded "><a href="call-values.html"><strong aria-hidden="true">9.</strong> Displaying the value of arguments and return value of a call</a></li><li class="chapter-item expanded "><a href="search-values.html"><strong aria-hidden="true">10.</strong> Searching for values in memory</a></li><li class="chapter-item expanded "><a href="listing-ossi.html"><strong aria-hidden="true">11.</strong> Listing the processes, binaries in the trace</a></li><li class="chapter-item expanded "><a href="filters.html"><strong aria-hidden="true">12.</strong> Focusing on a portion of the trace</a></li><li class="chapter-item expanded "><a href="taint.html"><strong aria-hidden="true">13.</strong> Following the dataflow</a></li><li class="chapter-item expanded "><a href="jupyter.html"><strong aria-hidden="true">14.</strong> Displaying data nicely in Jupyter notebooks</a></li><li class="chapter-item expanded "><a href="tabular.html"><strong aria-hidden="true">15.</strong> Exporting tabular data to work with reporting tools</a></li><li class="chapter-item expanded "><a href="bookmarks.html"><strong aria-hidden="true">16.</strong> Managing bookmarks</a></li><li class="chapter-item expanded "><a href="instruction-semantics.html"><strong aria-hidden="true">17.</strong> Finding more about the semantics of an instruction</a></li><li class="chapter-item expanded "><a href="handles.html"><strong aria-hidden="true">18.</strong> Accessing handles</a></li><li class="chapter-item expanded "><a href="memory-ranges.html"><strong aria-hidden="true">19.</strong> Managing ranges of memory</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -105,11 +104,11 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">REVEN API Cookbook</h1>
+                    <h1 class="menu-title">Reven API Cookbook</h1>
 
                     <div class="right-buttons">
-                        <a href="https://www.tetrane.com" title="Go to main site" aria-label="Go to main site">
-                            <img src=".//static/logo.png" alt="Tetrane logo" style="width:28px;height:28px;vertical-align:middle"></i>
+                        <a href="https://www.eshard.com" title="Go to eShard" aria-label="Go to eShard">
+                            <img src=".//static/eshard_icon.svg" alt="eShard logo" style="width:40px;height:40px;vertical-align:middle"></i>
                         </a>
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
@@ -138,12 +137,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="reading-values-from-registers-or-memory"><a class="header" href="#reading-values-from-registers-or-memory">Reading values from registers or memory</a></h1>
+                        <h1 id="reading-values-or-structs-from-registers-or-memory"><a class="header" href="#reading-values-or-structs-from-registers-or-memory">Reading values or structs from registers or memory</a></h1>
 <div class="bulma">
 <div class="field is-grouped is-grouped-multiline">
 <div class="control">
     <div class="tags has-addons">
-        <span class="tag is-dark">REVEN</span>
+        <span class="tag is-dark">Reven</span>
         <span class="tag is-info">v2.2.0</span>
     </div>
 </div>
@@ -179,7 +178,7 @@ ctx.read(regs.rax, BigEndian(U16))
 <pre><code class="language-py">u'Network Store Interface Service'
 </code></pre>
 <h3 id="array"><a class="header" href="#array">Array</a></h3>
-<pre><code class="language-py">ctx.read(LogicalAddress(0xffffe00041cac2ea), Array(U8, 4))
+<pre><code class="language-py">list(ctx.read(LogicalAddress(0xffffe00041cac2ea), Array(U8, 4)))
 </code></pre>
 <p>Sample output:</p>
 <pre><code class="language-py">[78, 0, 101, 0]
@@ -195,6 +194,73 @@ ctx.read(addr, U64)
 <p>Sample output:</p>
 <pre><code class="language-py">10738
 </code></pre>
+<h3 id="reading-struct-values"><a class="header" href="#reading-struct-values">Reading struct values</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.11.0</span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 64-bit</span></span>
+    </div>
+</div>
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">OS</span>
+        <span class="tag is-primary"><span class="icon"><i class="fa fa-windows" aria-hidden="true"></i></span>
+<span>Windows 32-bit</span></span>
+    </div>
+</div>
+</div>
+</div>
+<p>Getting a <code>struct</code> type from a binary:</p>
+<pre><code class="language-py">object_attributes_ty = next(server.ossi.executed_binaries(&quot;ntoskrnl&quot;)).exact_type(&quot;_OBJECT_ATTRIBUTES&quot;)
+</code></pre>
+<p>Sample output of printing <code>object_attributes_ty</code>:</p>
+<pre><code>StructKind.Struct _OBJECT_ATTRIBUTES /* 0x30 */ {
+    /* 0x0 */ Length : U32,
+    /* 0x8 */ RootDirectory : void*,
+    /* 0x10 */ ObjectName : _UNICODE_STRING*,
+    /* 0x18 */ Attributes : U32,
+    /* 0x20 */ SecurityDescriptor : void*,
+    /* 0x28 */ SecurityQualityOfService : void*,
+}
+</code></pre>
+<p>Reading a struct instance from a source (register, memory, etc):</p>
+<pre><code class="language-py"># Reading structure from pointer stored in r8
+object_attributes = ctx.read(reven2.address.LogicalAddress(0xffffe00041cac2ea), object_attributes_ty)
+
+# Read one field according to declared type
+object_attributes.field(&quot;Length&quot;).read()
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">48
+</code></pre>
+<p>You can also:</p>
+<pre><code class="language-py"># Read one field, forcing its type to int-like. Useful for IDE type hints
+object_attributes.field(&quot;Attributes&quot;).read_int()
+
+# Get whole struct content as bytes
+object_attributes.as_bytes()
+
+# Dereferences a pointer-like field, read it as an inner struct, display its type
+print(object_attributes.field(&quot;ObjectName&quot;).deref_struct().type)
+</code></pre>
+<p>Sample output:</p>
+<pre><code class="language-py">0
+b'0\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x98\xd1]\x06\x00\x00\x00\x00B\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+StructKind.Struct _UNICODE_STRING /* 0x10 */ {
+    /* 0x0 */ Length : U16,
+    /* 0x2 */ MaximumLength : U16,
+    /* 0x8 */ Buffer : U16*,
+}
+</code></pre>
 <h3 id="parsing-a-raw-buffer-as-a-type"><a class="header" href="#parsing-a-raw-buffer-as-a-type">Parsing a raw buffer as a type</a></h3>
 <pre><code class="language-py">U16.parse(b&quot;\x10\x20&quot;)
 BigEndian(U16).parse(b&quot;\x10\x20&quot;)
@@ -204,6 +270,31 @@ Array(U8, 2).parse(b&quot;\x10\x20&quot;)
 <pre><code class="language-py">8208
 4128
 [16, 32]
+</code></pre>
+<h3 id="accessing-the-framebuffer-memory-to-take-a-screenshot"><a class="header" href="#accessing-the-framebuffer-memory-to-take-a-screenshot">Accessing the framebuffer memory to take a screenshot</a></h3>
+<div class="bulma">
+<div class="field is-grouped is-grouped-multiline">
+<div class="control">
+    <div class="tags has-addons">
+        <span class="tag is-dark">Reven</span>
+        <span class="tag is-info">v2.12.0</span>
+    </div>
+</div>
+</div>
+</div>
+<pre><code class="language-py">image = ctx.framebuffer.image()
+
+# save the screenshot as a png file
+image.save(&quot;/tmp/framebuffer.png&quot;)
+
+# display the screenshot in the default image viewer
+image.show()
+
+# display the screenshot in a Jupyter Notebook
+display(image)
+
+# access RGB values from a pixel as a tuple
+image.getpixel((123, 42))
 </code></pre>
 
                     </main>
